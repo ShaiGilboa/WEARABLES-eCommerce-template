@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
+const items = require('./data/items')
 const PORT = 4000;
 
 express()
