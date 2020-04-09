@@ -9,9 +9,9 @@ const modifyString = (part, whole) => {
 export const typeaheadSuggestion = (input, totalOptions) => {
   const suggestions1 = [];
   totalOptions.forEach(option => {
-    if(option.name.toLowerCase().includes(input.toLowerCase())) suggestions1.push(option.name);
+    if(option.name.toLowerCase().includes(input.toLowerCase())) suggestions1.push({id: option.id, name: option.name});
   });
   const suggestions2 = [];
-  suggestions1.forEach(suggestion=>suggestions2.push(modifyString(input, suggestion)))
+  suggestions1.forEach(suggestion=>suggestions2.push({id: suggestion.id, parts: modifyString(input, suggestion.name)}))
   return suggestions2;
 }

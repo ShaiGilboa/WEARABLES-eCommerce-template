@@ -1,11 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
-import items from './items.json';
+import { Link } from 'react-router-dom';
+
 import test from './items-Dev';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
-const Typeahead = ({ itemsArr }) => {
+const Typeahead = ({ items }) => {
   const [searchInputVal, setSearchInputVal] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([])
@@ -15,7 +16,7 @@ const Typeahead = ({ itemsArr }) => {
     setSearchValue(searchInputVal)
   }
   React.useEffect(()=> {
-    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,items))
+    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,test))
   },[searchInputVal])
   
   return (
@@ -37,9 +38,11 @@ const Typeahead = ({ itemsArr }) => {
       <TypeaheadSuggestions>
         {suggestions.map((suggestion, index)=> (index < MAX_NUMBER_OF_SUGGESTIONS) && 
           <li key={`${index}`}>
-            <Bold>{suggestion[0]}</Bold>
-            <span>{searchInputVal}</span>
-            <Bold>{suggestion[1]}</Bold>
+            <Link to={`/${suggestion.id}`}>
+              <Bold>{suggestion.parts[0]}</Bold>
+              <span>{searchInputVal}</span>
+              <Bold>{suggestion.parts[1]}</Bold>
+            </Link>
           </li>)}
       </TypeaheadSuggestions>
       </Search>
