@@ -5,7 +5,7 @@ import test from './items-Dev';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
-const Typeahead = () => {
+const Typeahead = ({ itemsArr }) => {
   const [searchInputVal, setSearchInputVal] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([])
@@ -35,7 +35,7 @@ const Typeahead = () => {
         </button>
       </div>
       <TypeaheadSuggestions>
-        {suggestions.map((suggestion, index)=> index < MAX_NUMBER_OF_SUGGESTIONS && 
+        {suggestions.map((suggestion, index)=> (index < MAX_NUMBER_OF_SUGGESTIONS) && 
           <li key={`${index}`}>
             <Bold>{suggestion[0]}</Bold>
             <span>{searchInputVal}</span>

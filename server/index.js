@@ -26,7 +26,7 @@ express()
   .use('/', express.static(__dirname + '/'))
 
   // REST endpoints?
-  // .get('/bacon', (req, res) => res.status(200).json('🥓'))
+  .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
   .get('/items', (req, res) => {
     return res.json({ itemsDev });
@@ -34,11 +34,15 @@ express()
   .get('/items/:itemId', (req, res) => {
     const { itemId } = req.params;
     const parsedId = parseInt(itemId);
+    console.log('id');
+    
     const item = itemsDev.find(item => item.id === parsedId);
     return res.json({ item });
   })
   .get('/items/:itemCategory', (req, res) => {
     const { itemCategory } = req.params;
+    console.log('cat');
+
     const itemsByCat = itemsDev.filter(item => item.category === itemCategory);
     return res.json({ itemsByCat })
   })
