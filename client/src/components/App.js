@@ -9,7 +9,11 @@ function App() {
       .then(data => setBacon(data));
   }, []);
 
+<<<<<<< Updated upstream
   return <div>{bacon ? bacon : `...where's my stuff?.....`}</div>;
+=======
+  return <div>{bacon ? bacon : `...where's my stuff?....`}</div>;
+>>>>>>> Stashed changes
 }
 
 export default App;
