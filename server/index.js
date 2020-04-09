@@ -3,11 +3,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const items = require('./data/items')
+const items = require('./data/items');
+const itemsDev = require('./data/items-Dev');
 const PORT = 4000;
 
 express()
-  .use(function(req, res, next) {
+  .use(function (req, res, next) {
     res.header(
       'Access-Control-Allow-Methods',
       'OPTIONS, HEAD, GET, PUT, POST, DELETE'
@@ -25,6 +26,21 @@ express()
   .use('/', express.static(__dirname + '/'))
 
   // REST endpoints?
-  .get('/bacon', (req, res) => res.status(200).json('🥓'))
+  // .get('/bacon', (req, res) => res.status(200).json('🥓'))
+
+  .get('/items', (req, res) => {
+    return res.json({ itemsDev });
+  })
+  .get('/items/:itemId', (req, res) => {
+    const { itemId } = req.params;
+    const parsedId = parseInt(itemId);
+    const item = itemsDev.find(item => item.id === parsedId);
+    return res.json({ item });
+  })
+  .get('/items/:itemCategory', (req, res) => {
+    const { itemCategory } = req.params;
+    const itemsByCat = itemsDev.filter(item => item.category === itemCategory);
+    return res.json({ itemsByCat })
+  })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
