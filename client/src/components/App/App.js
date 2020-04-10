@@ -26,9 +26,9 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
-      <Cart />
       <Navbar />
       <BannerPromo/>
+      <Cart />
       <Switch>
         <Route path='/' exact>
           {/*HomePage: Banner, categories...*/}

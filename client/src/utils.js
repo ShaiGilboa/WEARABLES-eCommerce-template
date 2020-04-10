@@ -16,6 +16,15 @@ export const typeaheadSuggestion = (input, totalOptions) => {
   return suggestions2;
 }
 
+const modifyPriceArr = (priceArr) => {
+  return priceArr.map(priceItem => ({priceNumber: priceItem.price.slice(1)*100, quantity: priceItem.quantity}))
+}
+
 export const totalAmount = (items, itemsId) => {
-  // const priceArr = itemsId.map(id=>({price: items[id].price, quantity})) 
+  const priceArr = itemsId.map(id=>({price: items[id].price, quantity: items[id].quantity}));
+  if (priceArr.length) {
+    const modifiedPriceArr = modifyPriceArr(priceArr);
+    const totalSum = modifiedPriceArr.reduce((temporarySum, priceItem) => temporarySum + (priceItem.priceNumber*priceItem.quantity), 0)
+    return totalSum/100
+  } else return -1;
 }

@@ -15,12 +15,12 @@ const Cart = () => {
   const cart = useSelector(state=>state.cart);
   const cartIds = Object.keys(cart);
 
-  totalAmount(cart, cartIds);
+  const total = totalAmount(cart, cartIds);
 
   return (
     <Wrapper>
       {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
-      {/* <p>total:  */}
+      <p>total: ${total}</p>
     </Wrapper>
   );
 }
