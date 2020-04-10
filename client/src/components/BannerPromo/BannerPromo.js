@@ -6,13 +6,11 @@ import styled from 'styled-components';
 const BannerPromo = () => {
   return (
   <Wrapper data-css='WrapperBannerPromo'>
-    {/* <div> */}
       <p>Let's stay connected, and active.</p>
       <BtnPromo
         data-css='BtnPromo'
       >Discover
       </BtnPromo>
-    {/* </div> */}
   </Wrapper>
   );
 };
