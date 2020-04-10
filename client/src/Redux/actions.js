@@ -20,3 +20,8 @@ export const changeQuantityOfItem = (id, newQuantity) => ({
   id,
   newQuantity,
 })
+
+export const removeItemFromCart = (id) => ({
+  type: 'REMOVE_ITEM_FROM_CART',
+  id,
+})

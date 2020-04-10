@@ -51,6 +51,13 @@ export default function userReducer(state = initialState, action) {
       return {
         ...newState,
       }
+
+    case 'REMOVE_ITEM_FROM_CART':
+    delete newState.cart[action.id];
+    return {
+      ...newState,
+    }
+    
     default:
       return state;
   };

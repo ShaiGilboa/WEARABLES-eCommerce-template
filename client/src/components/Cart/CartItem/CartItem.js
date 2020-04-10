@@ -6,7 +6,10 @@ import {
 
 import {
   changeQuantityOfItem,
+  removeItemFromCart,
 } from '../../../Redux/actions';
+
+import RemoveButton from '../../UnstyledButton';
 
 const CartItem = ({item}) => {
   const {
@@ -29,6 +32,9 @@ const CartItem = ({item}) => {
         value={quantity}
         onChange={(event)=>handleInput(event)}
       />
+      <RemoveButton
+      onClick={()=>dispatch(removeItemFromCart(id))}
+      >X</RemoveButton>
     </Wrapper>
   );
 }
