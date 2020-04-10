@@ -2,7 +2,11 @@ import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+<<<<<<< Updated upstream
 
+=======
+// import test from '../../temp/items-Dev';
+>>>>>>> Stashed changes
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
@@ -40,10 +44,11 @@ const Typeahead = (
   },[searchInputVal])
   
   return (
-    <Wrapper>
-      <Search onSubmit={(event)=>submitHandler(event)}>
+    <Wrapper data-css='Typehead-Wrapper'>
+      <Search data-css='SearchForm' onSubmit={(event)=>submitHandler(event)}>
       <ContainerSearch data-css='ContainerSearch'>
-        <InputField
+        <InputField 
+          data-css='InputField'
           value={searchInputVal}
           placeholder={'what are looking for?'}
           onChange={(event)=>setSearchInputVal(event.target.value)}
@@ -77,24 +82,35 @@ const Typeahead = (
 export default Typeahead;
 
 const Wrapper = styled.div`
- margin: 0 30px;
+ margin: 0 0 0 30px;
+ padding: 0 20px 0 30PX;
+ height: 80px;
+ border-left: 1px solid #e6ecf0;
+ display: flex;
+ align-items: center;
 `;
 
 const InputField = styled.input`
- width: 170px;
+ width: 400px;
  font-size: 1em;
  border: none;
  background-color: #F4F7F6;
- border-radius: 4px;
+ /* border-radius: 4px; */
  padding-left: 10px;
  outline: none;
  height : 40px;
  transition: all .2s ease-in;
   &:focus{
-    width: 300px;
+    width: 800px;
   }
   ::placeholder {
   color: #D3D3D3;
+}
+@media (max-width: 1425px) {
+  margin-left: 6px;
+  &:focus{
+    width: 400px;
+  }
 }
 `
 
@@ -114,6 +130,7 @@ const SearchButton = styled.button`
 background-color: white;
 border: none;
 cursor: pointer;
+margin-left: 10px;
 `;
 
 const TypeaheadSuggestions = styled.ul`

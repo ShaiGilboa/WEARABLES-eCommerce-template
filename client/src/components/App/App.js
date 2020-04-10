@@ -12,7 +12,11 @@ import GlobalStyles from '../GlobalStyles';
 import Navbar from '../Navbar';
 import Feed from '../Feed';
 import { BigItem } from '../Items';
+<<<<<<< Updated upstream
 import Cart from '../Cart';
+=======
+import BannerPromo from '../BannerPromo'
+>>>>>>> Stashed changes
 
 function App() {
   const [anItem, setAnItem] = useState(null)
@@ -25,8 +29,13 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
+<<<<<<< Updated upstream
       <Navbar /> 
       <Cart />
+=======
+      <Navbar />
+      <BannerPromo/>
+>>>>>>> Stashed changes
       <Switch>
         <Route path='/items'>
           {anItem?<Feed />:<div>not yet</div>}
