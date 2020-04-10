@@ -33,14 +33,14 @@ express()
 
   // REST endpoints?
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
-  // use the queries as vlues to filter the array with
+  // use the queries as values to filter the array with
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', (req, res) => {
     let filtered = itemsDev;
     let value = null;
-    // this function does not allwo to check for an item that is 
+    // this function does not allow to check for an item that is 
     // BOTH: 'Wrist' and 'Arms'
-    //TO DO: run over the req,query to check the filter values before 
+    // TO DO: run over the req,query to check the filter values before 
     // filtering, then have a function that checks for item[key]===key||key2||key3
     for (let key in req.query) {
       value = req.query[key];

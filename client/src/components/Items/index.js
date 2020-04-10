@@ -1,2 +1,5 @@
-export SmallItem from "./SmallItem";
-export BigItem from './BigItem';
+import SmallItem from "./SmallItem";
+import BigItem from './BigItem';
+
+
+export { SmallItem, BigItem };

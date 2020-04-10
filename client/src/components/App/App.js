@@ -1,5 +1,5 @@
 import React, {
-  // useState,
+  useState,
   useEffect,
   } from 'react';
 import {
@@ -10,22 +10,25 @@ import {
 
 import GlobalStyles from '../GlobalStyles';
 import Navbar from '../Navbar';
+import Feed from '../Feed';
+import { BigItem } from '../Items';
 
 
 function App() {
-
+  const [anItem, setAnItem] = useState(null)
   useEffect(() => {
-
+    fetch('/items')
+      .then(res=>res.json())
+      .then(res=>setAnItem(res.filtered))
   }, []);
 
   return (
     <Router>
       <GlobalStyles />
-      <div>App</div>
       <Navbar /> 
       <Switch>
-        <Route path=''>
-          {/* Componenet */}
+        <Route path='/items'>
+          {anItem?<Feed />:<div>not yet</div>}
         </Route>
       </Switch>
     </Router>

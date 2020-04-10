@@ -2,7 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import test from '../../temp/items-Dev';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
@@ -18,7 +17,7 @@ const Typeahead = ({ items }) => {
 
 // when ever there is a change in the input search, the state get updated and we look for suggestions
   React.useEffect(()=> {
-    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,test)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
+    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,items)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
   },[searchInputVal])
   
   return (
