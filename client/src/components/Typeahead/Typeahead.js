@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import test from './items-Dev';
+import test from '../../temp/items-Dev';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
