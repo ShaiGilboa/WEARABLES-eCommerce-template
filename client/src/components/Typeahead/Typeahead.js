@@ -2,11 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-<<<<<<< Updated upstream
-
-=======
-// import test from '../../temp/items-Dev';
->>>>>>> Stashed changes
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
