@@ -1,19 +1,33 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-<<<<<<< Updated upstream
-
-=======
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import test from '../../temp/items-Dev';
->>>>>>> Stashed changes
+
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
+import {
+  useDispatch,
+  useSelector,
+  } from 'react-redux';
+import {
+    addItemsReduxStore,
+} from '../../Redux/actions';
+
 // the prop is the array of items that we will search in
-const Typeahead = ({ items }) => {
+const Typeahead = (
+  // { items }
+  ) => {
   const [searchInputVal, setSearchInputVal] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([])
+  const items = useSelector(state=>state.items)
+  const dispatch = useDispatch();
+
+  React.useEffect(()=>{
+    fetch('/items')
+      .then(res=>res.json())
+      .then(res=>dispatch(addItemsReduxStore(res.filtered)))
+  },[])
 
 // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
   const submitHandler = (event) => { 
@@ -22,7 +36,7 @@ const Typeahead = ({ items }) => {
 
 // when ever there is a change in the input search, the state get updated and we look for suggestions
   React.useEffect(()=> {
-    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,items)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
+    if(searchInputVal&&items) setSuggestions(typeaheadSuggestion(searchInputVal,items)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
   },[searchInputVal])
   
   return (

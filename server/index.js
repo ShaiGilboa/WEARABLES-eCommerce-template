@@ -7,11 +7,11 @@ const items = require('./data/items');
 const itemsDev = require('./data/items-Dev');
 const PORT = 4000;
 
-const filterFunction = (array, property, value) => {
-    let ret = [];
-    ret = array.filter(item=>item.property===value);
-    return ret;
-  }
+// const filterFunction = (array, property, value) => {
+//     let ret = [];
+//     ret = array.filter(item=>item.property===value);
+//     return ret;
+//   }
 
 express()
   .use(function (req, res, next) {

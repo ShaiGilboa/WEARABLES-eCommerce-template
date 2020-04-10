@@ -41,6 +41,11 @@ export default function userReducer(state = initialState, action) {
       }
       break;
   
+    case 'ADD_ITEMS_TO_REDUX':
+    state.items = action.items;
+    return {
+      ...state,
+    }
     default:
       return state;
   };
