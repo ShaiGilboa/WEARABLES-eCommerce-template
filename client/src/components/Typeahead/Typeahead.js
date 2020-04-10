@@ -6,21 +6,23 @@ import test from './items-Dev';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
+// the prop is the array of items that we will search in
 const Typeahead = ({ items }) => {
   const [searchInputVal, setSearchInputVal] = React.useState('');
-  const [searchValue, setSearchValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([])
 
-  const submitHandler = (event) => {
+// the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
+  const submitHandler = (event) => { 
     event.preventDefault();
-    setSearchValue(searchInputVal)
   }
+
+// when ever there is a change in the input search, the state get updated and we look for suggestions
   React.useEffect(()=> {
-    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,test))
+    if(searchInputVal) setSuggestions(typeaheadSuggestion(searchInputVal,test)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
   },[searchInputVal])
   
   return (
-    <>
+    <Wrapper>
       <div>Typeahead</div>
       <Search onSubmit={(event)=>submitHandler(event)}>
       <div>
@@ -35,7 +37,10 @@ const Typeahead = ({ items }) => {
           Search
         </button>
       </div>
-      <TypeaheadSuggestions>
+      {/*this is an ul*/}
+      <TypeaheadSuggestions> 
+      {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
+      {/*there is a maximum number of results shown, it is set in `constants.js`*/}
         {suggestions.map((suggestion, index)=> (index < MAX_NUMBER_OF_SUGGESTIONS) && 
           <li key={`${index}`}>
             <Link to={`/${suggestion.id}`}>
@@ -46,12 +51,16 @@ const Typeahead = ({ items }) => {
           </li>)}
       </TypeaheadSuggestions>
       </Search>
-      <p>search value: {searchValue} </p>
-    </>
+      <p>search value: {searchInputVal} </p>
+    </Wrapper>
   )
 }
 
 export default Typeahead;
+
+const Wrapper = styled.div`
+
+`;
 
 const Search = styled.form`
   display: flex;
