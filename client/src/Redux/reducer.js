@@ -25,27 +25,32 @@ const initialState = {
 }
 
 export default function userReducer(state = initialState, action) {
+  const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'ADD_ITEM':
-      const newState = JSON.parse(JSON.stringify(state));
       if(newState.cart[action.item.id]){
-        newState.cart[action.item.id].quantity = newState.cart[action.item.id].quantity + 1;
+        newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) + 1;
       } else {
         newState.cart[action.item.id] = {
           ...action.item,
-          quantity: 0,
+          quantity: 1,
         }
       }
       return {
         ...newState,
-      }
-      break;
+      };
   
     case 'ADD_ITEMS_TO_REDUX':
-    state.items = action.items;
-    return {
-      ...state,
-    }
+      state.items = action.items;
+      return {
+        ...state,
+      };
+
+    case 'CHANGE_QUANTITY_OF_ITEM':    
+      newState.cart[action.id].quantity = action.newQuantity;
+      return {
+        ...newState,
+      }
     default:
       return state;
   };

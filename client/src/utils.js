@@ -15,3 +15,7 @@ export const typeaheadSuggestion = (input, totalOptions) => {
   suggestions1.forEach(suggestion=>suggestions2.push({id: suggestion.id, parts: modifyString(input, suggestion.name)}))
   return suggestions2;
 }
+
+export const totalAmount = (items) => {
+  
+}

@@ -12,7 +12,7 @@ import GlobalStyles from '../GlobalStyles';
 import Navbar from '../Navbar';
 import Feed from '../Feed';
 import { BigItem } from '../Items';
-
+import Cart from '../Cart';
 
 function App() {
   const [anItem, setAnItem] = useState(null)
@@ -26,6 +26,7 @@ function App() {
     <Router>
       <GlobalStyles />
       <Navbar /> 
+      <Cart />
       <Switch>
         <Route path='/items'>
           {anItem?<Feed />:<div>not yet</div>}

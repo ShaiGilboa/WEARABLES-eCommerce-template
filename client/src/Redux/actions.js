@@ -14,3 +14,9 @@ export const addItemsReduxStore = (items) => ({
   type: 'ADD_ITEMS_TO_REDUX',
   items,
 })
+
+export const changeQuantityOfItem = (id, newQuantity) => ({
+  type: 'CHANGE_QUANTITY_OF_ITEM',
+  id,
+  newQuantity,
+})
