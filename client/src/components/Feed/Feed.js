@@ -19,7 +19,7 @@ const Feed = ({
     },[])
     return (
       <Wrapper>
-        {items.map((item, index)=><SmallItem key={item.id+index} {...item} />)}
+        {items.map((item, index)=><SmallItem key={item.id+index} item={item} />)}
       </Wrapper>
     );
 }

@@ -1,18 +1,28 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import Button from '../../UnstyledButton';
+
+import {
+    addItemToCart,
+} from '../../../Redux/actions';
 
 const SmallItem = ({
-    id,
-    name,
-    price,
-    body_location,
-    category,
-    imageSrc,
-    numInStock,
-    companyId,
+    item
 }) => {
-    
+    const {
+        id,
+        name,
+        price,
+        body_location,
+        category,
+        imageSrc,
+        numInStock,
+        companyId,
+        } = item;
+    const dispatch = useDispatch();
     return (
         <Wrapper>
             <ItemImage src={imageSrc} />
@@ -25,6 +35,9 @@ const SmallItem = ({
                 <Link to={`/items/companyId=${companyId}`}>{companyId}</Link>
                 <p>amount in stock: {numInStock}</p>
             </ItemInfo>
+            <Button
+                onClick={()=>dispatch(addItemToCart(item))}
+            > add to cart </Button>
         </Wrapper>
     );
 }

@@ -6,7 +6,7 @@ const initialState = {
                         -'error'
                         -ANY MORE?
                       */
-  cart: null, /*an array of item objects.
+  cart: {}, /*an object of item objects.
                 we will add to each object a 'quantity' key.
               */
   userInfo: null, /* this is an object that holds:
@@ -26,8 +26,19 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case 'value':
-      
+    case 'ADD_ITEM':
+      const newState = JSON.parse(JSON.stringify(state));
+      if(newState.cart[action.item.id]){
+        newState.cart[action.item.id].quantity = newState.cart[action.item.id].quantity + 1;
+      } else {
+        newState.cart[action.item.id] = {
+          ...action.item,
+          quantity: 0,
+        }
+      }
+      return {
+        ...newState,
+      }
       break;
   
     default:

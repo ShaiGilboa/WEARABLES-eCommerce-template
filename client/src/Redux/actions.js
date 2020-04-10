@@ -4,3 +4,8 @@
   removeItemFromCart
   changeUserInfo
 */
+
+export const addItemToCart = (item) => ({
+  type: 'ADD_ITEM',
+  item,
+})
