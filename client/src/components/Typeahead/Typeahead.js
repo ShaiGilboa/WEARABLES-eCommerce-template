@@ -1,7 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+<<<<<<< Updated upstream
 
+=======
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import test from '../../temp/items-Dev';
+>>>>>>> Stashed changes
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 
@@ -22,20 +27,20 @@ const Typeahead = ({ items }) => {
   
   return (
     <Wrapper>
-      <div>Typeahead</div>
       <Search onSubmit={(event)=>submitHandler(event)}>
-      <div>
-        <input
+      <ContainerSearch data-css='ContainerSearch'>
+        <InputField
           value={searchInputVal}
           placeholder={'what are looking for?'}
           onChange={(event)=>setSearchInputVal(event.target.value)}
         />
-        <button
+        <SearchButton
           type='submit'
+          data-css='SearchButton'
         >
-          Search
-        </button>
-      </div>
+        <SearchOutlinedIcon/>
+        </SearchButton>
+      </ContainerSearch>
       {/*this is an ul*/}
       <TypeaheadSuggestions> 
       {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
@@ -50,7 +55,7 @@ const Typeahead = ({ items }) => {
           </li>)}
       </TypeaheadSuggestions>
       </Search>
-      <p>search value: {searchInputVal} </p>
+      {/* <p>search value: {searchInputVal} </p> */}
     </Wrapper>
   )
 }
@@ -58,18 +63,59 @@ const Typeahead = ({ items }) => {
 export default Typeahead;
 
 const Wrapper = styled.div`
-
+ margin: 0 30px;
 `;
+
+const InputField = styled.input`
+ width: 170px;
+ font-size: 1em;
+ border: none;
+ background-color: #F4F7F6;
+ border-radius: 4px;
+ padding-left: 10px;
+ outline: none;
+ height : 40px;
+ transition: all .2s ease-in;
+  &:focus{
+    width: 300px;
+  }
+  ::placeholder {
+  color: #D3D3D3;
+}
+`
 
 const Search = styled.form`
   display: flex;
   flex-direction: column;
   justify-content:flex-start;
+  position: relative;
+
+`;
+
+const ContainerSearch = styled.div`
+  display: flex;
+`;
+
+const SearchButton = styled.button`
+background-color: white;
+border: none;
+cursor: pointer;
 `;
 
 const TypeaheadSuggestions = styled.ul`
   margin: 0;
   padding: 0;
+  position: absolute;
+  top:50px;
+  left:0;
+  width: 700px;
+  background-color: white;
+    a{
+      color: black;
+    }
+    li{
+      padding-bottom: 10px;
+    }
 `;
 
 const Bold = styled.span`
