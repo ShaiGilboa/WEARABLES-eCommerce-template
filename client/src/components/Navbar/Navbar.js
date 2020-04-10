@@ -9,7 +9,7 @@ const Navbar = () => {
     <>
       <Wrapper data-css='Wrapper'>
         <ContainerLeft data-css='ContainerLeft'>
-          <p style={{fontSize: '2em'}}>WEARABLES</p>
+          <p style={{fontSize: '2em'}}>S.A.D. WEARABLES</p>
           
         </ContainerLeft>
         <ContainerRigth data-css='ContainerRigth'>
