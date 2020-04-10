@@ -7,6 +7,12 @@ const items = require('./data/items');
 const itemsDev = require('./data/items-Dev');
 const PORT = 4000;
 
+const filterFunction = (array, property, value) => {
+    let ret = [];
+    ret = array.filter(item=>item.property===value);
+    return ret;
+  }
+
 express()
   .use(function (req, res, next) {
     res.header(
@@ -27,9 +33,20 @@ express()
 
   // REST endpoints?
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
-
+  // use the queries as vlues to filter the array with
+  // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', (req, res) => {
-    return res.json({ itemsDev });
+    let filtered = itemsDev;
+    let value = null;
+    // this function does not allwo to check for an item that is 
+    // BOTH: 'Wrist' and 'Arms'
+    //TO DO: run over the req,query to check the filter values before 
+    // filtering, then have a function that checks for item[key]===key||key2||key3
+    for (let key in req.query) {
+      value = req.query[key];
+        filtered = filtered.filter(item=>item[key]===value);
+    }
+    return res.json({ filtered });
   })
   .get('/items/:itemId', (req, res) => {
     const { itemId } = req.params;
@@ -38,13 +55,6 @@ express()
     
     const item = itemsDev.find(item => item.id === parsedId);
     return res.json({ item });
-  })
-  .get('/items/:itemCategory', (req, res) => {
-    const { itemCategory } = req.params;
-    console.log('cat');
-
-    const itemsByCat = itemsDev.filter(item => item.category === itemCategory);
-    return res.json({ itemsByCat })
   })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
