@@ -30,10 +30,18 @@ function App() {
       <Navbar />
       <BannerPromo/>
       <Switch>
-        <Route path='/items'>
+        <Route path='/' exact>
+          {/*HomePage: Banner, categories...*/}
+        </Route>
+        <Route path='/items' exact>
           {anItem?<Feed />:<div>not yet</div>}
         </Route>
+        <Route path='/items/:itemId' >
+          {/*render the page component*/}
+          <BigItem />
+        </Route>
       </Switch>
+      {/*Footer*/}
     </Router>
     );
 }

@@ -6,11 +6,16 @@ import {
 } from 'react-redux';
 
 import CartItem from './CartItem';
+import {
+  totalAmount,
+} from '../../utils';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state=>state.cart);
   const cartIds = Object.keys(cart);
+
+  totalAmount(cart, cartIds);
 
   return (
     <Wrapper>

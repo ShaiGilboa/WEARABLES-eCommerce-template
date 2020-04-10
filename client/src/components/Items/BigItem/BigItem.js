@@ -1,6 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import {
+    Link,
+    useParams,
+    } from 'react-router-dom';
 
 const BigItem = ({
     id,
@@ -12,7 +15,12 @@ const BigItem = ({
     numInStock,
     companyId,
 }) => {
-    
+    const { itemId } = useParams();
+    React.useEffect(() => {
+        fetch(`/item/${itemId}`)
+        .then(res=>res.json())
+        .then(res=>console.log('res',res))
+    },[])
     return (
         <Wrapper>
             <ItemImage src={imageSrc} />

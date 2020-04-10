@@ -35,7 +35,7 @@ const Typeahead = (
 
 // when ever there is a change in the input search, the state get updated and we look for suggestions
   React.useEffect(()=> {
-    if(searchInputVal&&items) setSuggestions(typeaheadSuggestion(searchInputVal,items)) // receives an object that has the structure of the suggested strings, and the id of each suggestion
+    (searchInputVal&&items) ? setSuggestions(typeaheadSuggestion(searchInputVal,items)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
   },[searchInputVal])
   
   return (
@@ -61,7 +61,7 @@ const Typeahead = (
       {/*there is a maximum number of results shown, it is set in `constants.js`*/}
         {suggestions.map((suggestion, index)=> (index < MAX_NUMBER_OF_SUGGESTIONS) && 
           <li key={`${index}`}>
-            <Link to={`/${suggestion.id}`}>
+            <Link to={`/items/${suggestion.id}`}>
               <Bold>{suggestion.parts[0]}</Bold>
               <span>{searchInputVal}</span>
               <Bold>{suggestion.parts[1]}</Bold>

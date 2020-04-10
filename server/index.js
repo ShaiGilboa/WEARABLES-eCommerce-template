@@ -44,11 +44,12 @@ express()
     // filtering, then have a function that checks for item[key]===key||key2||key3
     for (let key in req.query) {
       value = req.query[key];
-        filtered = filtered.filter(item=>item[key]===value);
+        filtered = filtered.filter(item=>key==='id'? parseInt(item[key])===value : item[key]===value);
     }
     return res.json({ filtered });
   })
   .get('/items/:itemId', (req, res) => {
+    console.log('yes!');
     const { itemId } = req.params;
     const parsedId = parseInt(itemId);    
     const item = itemsDev.find(item => item.id === parsedId);

@@ -16,6 +16,6 @@ export const typeaheadSuggestion = (input, totalOptions) => {
   return suggestions2;
 }
 
-export const totalAmount = (items) => {
-  
+export const totalAmount = (items, itemsId) => {
+  // const priceArr = itemsId.map(id=>({price: items[id].price, quantity})) 
 }
