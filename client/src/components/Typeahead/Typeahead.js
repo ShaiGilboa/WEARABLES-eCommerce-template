@@ -62,7 +62,6 @@ const Typeahead = (
     ev.stopPropagation();
     history.push(`/items/${suggestion.id}`);
     setSearchInputVal('');  
-
   }
 
   return (
