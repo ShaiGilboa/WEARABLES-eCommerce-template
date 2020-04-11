@@ -17,11 +17,17 @@ export const typeaheadSuggestion = (input, totalOptions) => {
 }
 
 const modifyPriceArr = (priceArr) => {
-  return priceArr.map(priceItem => ({priceNumber: priceItem.price.slice(1)*100, quantity: priceItem.quantity}))
+  return priceArr.map(priceItem => ({
+    priceNumber: priceItem.price.slice(1)*100,
+    quantity: priceItem.quantity,
+    }))
 }
 
 export const totalAmount = (items, itemsId) => {
-  const priceArr = itemsId.map(id=>({price: items[id].price, quantity: items[id].quantity}));
+  const priceArr = itemsId.map(id=>({
+    price: items[id].price,
+    quantity: items[id].quantity,
+    }));
   if (priceArr.length) {
     const modifiedPriceArr = modifyPriceArr(priceArr);
     const totalSum = modifiedPriceArr.reduce((temporarySum, priceItem) => temporarySum + (priceItem.priceNumber*priceItem.quantity), 0)

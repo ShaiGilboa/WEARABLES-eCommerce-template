@@ -41,9 +41,9 @@ export default function userReducer(state = initialState, action) {
       };
   
     case 'ADD_ITEMS_TO_REDUX':
-      state.items = action.items;
+      newState.items = action.items;
       return {
-        ...state,
+        ...newState,
       };
 
     case 'CHANGE_QUANTITY_OF_ITEM':    
