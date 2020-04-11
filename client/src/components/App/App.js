@@ -38,7 +38,7 @@ function App() {
         </Route>
         <Route path='/items/:itemId' >
           {/*render the page component*/}
-          <BigItem />
+          <BigItem/>
         </Route>
       </Switch>
       {/*Footer*/}

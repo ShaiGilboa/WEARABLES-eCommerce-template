@@ -1,40 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import {
-    Link,
-    useParams,
-    } from 'react-router-dom';
+  Link,
+  useParams,
+} from 'react-router-dom';
 
 const BigItem = ({
-    id,
-    name,
-    price,
-    body_location,
-    category,
-    imageSrc,
-    numInStock,
-    companyId,
+  // id,
+  // name,
+  // price,
+  // body_location,
+  // category,
+  // imageSrc,
+  // numInStock,
+  // companyId,
 }) => {
-    const { itemId } = useParams();
-    React.useEffect(() => {
-        fetch(`/item/${itemId}`)
-        .then(res=>res.json())
-        .then(res=>console.log('res',res))
-    },[])
-    return (
+  const { itemId } = useParams();
+  const [item, setItem] = useState(null)
+  React.useEffect(() => {
+    fetch(`/items/${itemId}`)
+      .then(res => res.json())
+      .then(payload => setItem(payload))
+  }, [])
+  let product;
+  if(item && item.item){
+  product = item.item
+}
+
+  return (
+    <>
+      {item && item.item ? (
         <Wrapper>
-            <ItemImage src={imageSrc} />
-            <ItemInfo>
-                <h2>{name}</h2>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <p>{price}</p>
-                    <p>{category}</p>
-                </div>
-                <Link to={`/items/companyId=${companyId}`}>{companyId}</Link>
-                <p>amount in stock: {numInStock}</p>
-            </ItemInfo>
+          <ItemImage src={product.imageSrc} />
+          <ItemInfo>
+            <h2>{product.name}</h2>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <p>{product.price}</p>
+              <p>{product.category}</p>
+            </div>
+            <Link to={`/items/companyId=${product.companyId}`}>{product.companyId}</Link>
+            <p>amount in stock: {product.numInStock}</p>
+          </ItemInfo>
         </Wrapper>
-    );
+        ) : (
+          <div>Hello</div>
+        )
+      }
+    </>
+  );
 }
 
 export default BigItem;

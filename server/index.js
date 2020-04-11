@@ -53,6 +53,7 @@ express()
     const { itemId } = req.params;
     const parsedId = parseInt(itemId);    
     const item = itemsDev.find(item => item.id === parsedId);
+    console.log({item})
     return res.json({ item });
   })
 
