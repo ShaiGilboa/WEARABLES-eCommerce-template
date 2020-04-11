@@ -47,7 +47,7 @@ const Typeahead = (
     return (() => {
       document.removeEventListener("mousedown", handleClickOutside)
     })
-  }, []);
+  }, [searchInputVal]);
 
   const handleClickOutside = event => {
     const { current: wrap } = wrapperRef;
@@ -59,8 +59,10 @@ const Typeahead = (
   // 
   const handleSubmit = (ev, suggestion) => {
     ev.preventDefault();
-    setSearchInputVal('');  
+    ev.stopPropagation();
     history.push(`/items/${suggestion.id}`);
+    setSearchInputVal('');  
+
   }
 
   return (
@@ -125,7 +127,7 @@ const Wrapper = styled.div`
 `;
 
 const InputField = styled.input`
- width: 400px;
+ width: 800px;
  font-size: 1em;
  border: none;
  background-color: #F4F7F6;
@@ -175,6 +177,10 @@ const TypeaheadSuggestions = styled.ul`
   background-color:rgba(255, 255, 255, 0.99);
   display: flex;
   flex-direction: column;
+  @media (max-width: 1425px) {
+  margin-left: 6px;
+  width: 411px;
+}
     a{
       color: black;
       transition: all .2s ease-in;

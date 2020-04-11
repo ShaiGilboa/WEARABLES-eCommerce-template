@@ -1,3 +1,4 @@
+
 const modifyString = (part, whole) => {
   const indexOfPart = whole.toLowerCase().indexOf(part);
   const part1 = whole.slice(0,indexOfPart)

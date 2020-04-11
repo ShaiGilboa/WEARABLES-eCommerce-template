@@ -4,14 +4,21 @@ import Typeahead from '../Typeahead';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
+import { Link } from 'react-router-dom';
+
+
 const Navbar = () => {
   return (
     <>
       <Wrapper data-css='Wrapper'>
-        <ContainerLeft data-css='ContainerLeft'>
+        <Link to={'/'}>
+        <ContainerLeft 
+          data-css='ContainerLeft'
+          >
           <p style={{fontSize: '2em'}}>WEARABLES</p>
           
         </ContainerLeft>
+        </Link>
         <ContainerRigth data-css='ContainerRigth'>
         <div>
             <Typeahead />
@@ -53,11 +60,12 @@ const IconNav = styled.div`
 const ContainerLeft = styled.div`
 display: flex;
 align-items: center;
+cursor:pointer;
 `;
 const ContainerRigth = styled.div`
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: flex-end;
 height: 80px;
 `;
 

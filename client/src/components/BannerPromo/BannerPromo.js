@@ -3,6 +3,7 @@ import bannerEcomm from '../assets/bannerEcomm.jpg';
 import bannerEcomm2 from '../assets/bannerEcomm2.jpg';
 import styled from 'styled-components';
 
+
 const BannerPromo = () => {
   return (
   <Wrapper data-css='WrapperBannerPromo'>
@@ -12,6 +13,7 @@ const BannerPromo = () => {
       >Discover
       </BtnPromo>
   </Wrapper>
+
   );
 };
 
@@ -32,18 +34,18 @@ const Wrapper = styled.div`
 `;
 
 const BtnPromo = styled.button`
-  background-color: white;
-  color: black;
+  background-color: Transparent;
+  color: white;
   padding: 10px 30px;
-  border-radius: 25px;
-  border: none;
+  border: 1px solid white;
   font-size: 1em;
   margin-top: 20px;
   cursor: pointer;
-  transition: background-color .2s ease-in;
+  transition: all .2s ease-in;
     &:hover{
-      background-color: #F4F7F6;
-      /* color: black; */
+      background-color: white;
+      border: 1px solid white;
+      color: black;
     }
 `
 

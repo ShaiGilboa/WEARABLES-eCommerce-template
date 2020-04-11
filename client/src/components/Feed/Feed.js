@@ -12,6 +12,7 @@ const Feed = ({
   }) => {
     const [items, setItems] = React.useState([]);
     const location = useLocation()
+
     React.useEffect(()=>{
       fetch(`/items${location.search}`)
       .then(res=>res.json())

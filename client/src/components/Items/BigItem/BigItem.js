@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import {
   Link,
@@ -17,15 +17,16 @@ const BigItem = ({
 }) => {
   const { itemId } = useParams();
   const [item, setItem] = useState(null)
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(`/items/${itemId}`)
       .then(res => res.json())
       .then(payload => setItem(payload))
   }, [])
+
   let product;
-  if(item && item.item){
-  product = item.item
-}
+  if (item && item.item) {
+    product = item.item
+  }
 
   return (
     <>
@@ -42,7 +43,7 @@ const BigItem = ({
             <p>amount in stock: {product.numInStock}</p>
           </ItemInfo>
         </Wrapper>
-        ) : (
+      ) : (
           <div>Hello</div>
         )
       }

@@ -53,6 +53,8 @@ table {
 
 ol, ul { margin-bottom: 1em; }
 
+a { color: black; }
+
 :root{
   --global-font-size: 0.8rem;
   --global-text-color: black;
