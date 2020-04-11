@@ -14,13 +14,23 @@ import Feed from '../Feed';
 import { BigItem } from '../Items';
 import Cart from '../Cart';
 import HomePage from '../HomePage';
+import BannerPromo from '../BannerPromo';
+
 function App() {
-  const [anItem, setAnItem] = useState(null)
+  const [anItem, setAnItem] = useState(null);
+  const [aCompany, setACompany] = useState(null);
+
   useEffect(() => {
     fetch('/items')
       .then(res => res.json())
-      .then(res => setAnItem(res.filtered))
+      .then(res => setAnItem(res.filtered));
+
+    fetch('/company')
+      .then(res => res.json())
+      .then(data => (setACompany(data)))
+      .then(console.log(aCompany));
   }, []);
+
 
   return (
     <Router>
@@ -38,6 +48,10 @@ function App() {
           {/*render the page component*/}
           <BigItem />
         </Route>
+        <Route path='/company'>
+
+        </Route>
+        <BannerPromo />
       </Switch>
       {/*Footer*/}
     </Router>
