@@ -5,8 +5,6 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 import { useHistory } from "react-router-dom";
-
-
 import {
   useDispatch,
   useSelector,
@@ -70,7 +68,10 @@ const Typeahead = (
       ref={wrapperRef}
       data-css='Typehead-Wrapper'
     >
-      <Search data-css='SearchForm' onSubmit={(event) => submitHandler(event)}>
+      <Search 
+        data-css='SearchForm' 
+        onSubmit={(event) => submitHandler(event)}
+      >
         <ContainerSearch data-css='ContainerSearch'>
           <InputField
             data-css='InputField'
@@ -108,7 +109,6 @@ const Typeahead = (
 
         </TypeaheadSuggestions>
       </Search>
-      {/* <p>search value: {searchInputVal} </p> */}
     </Wrapper>
   )
 }
@@ -146,7 +146,7 @@ const InputField = styled.input`
     width: 400px;
   }
 }
-`
+`;
 
 const Search = styled.form`
   display: flex;
