@@ -2,16 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
-const imgCategories = [
-  { id: 'fitness', src: '/assets/imgCategories/fitness.jpg', title: 'Fitness', description: 'Fitness' },
-  { id: 'gaming', src: '/assets/imgCategories/gaming.jpg', title: 'Gaming', description: 'Gaming' },
-  { id: 'industrial', src: '/assets/imgCategories/industrial.jpg', title: 'Industrial', description: 'Industrial' },
-  { id: 'medical', src: '/assets/imgCategories/medical.jpg', title: 'Medical', description: 'Medical' },
-  { id: 'lifestyle', src: '/assets/imgCategories/lifestyle.jpg', title: 'Lifestyle', description: 'Lifestyle' },
-  { id: 'Entertainement', src: '/assets/imgCategories/entertainement.jpg', title: 'Entertainement', description: 'Entertainement' },
-  { id: 'pets', src: '/assets/imgCategories/pets.jpg', title: ' Pets and Animals ', description: 'Pets and Animals' },
-];
-
+import { imgCategories } from '../../constants';
 
 const Categories = () => {
   return (

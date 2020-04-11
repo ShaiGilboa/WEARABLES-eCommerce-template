@@ -57,12 +57,11 @@ const Typeahead = (
   }
 
   // 
-  const handleSubmit = (ev, suggestion) => {
+  const handleClickOnItemInSuggestionDropdown = (ev, suggestion) => {
     ev.preventDefault();
     ev.stopPropagation();
     history.push(`/items/${suggestion.id}`);
     setSearchInputVal('');  
-
   }
 
   return (
@@ -72,6 +71,7 @@ const Typeahead = (
     >
       <Search 
         data-css='SearchForm' 
+        //at the moment this doesn't do anything
         onSubmit={(event) => submitHandler(event)}
       >
         <ContainerSearch data-css='ContainerSearch'>
@@ -93,20 +93,18 @@ const Typeahead = (
           {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
           {/*there is a maximum number of results shown, it is set in `constants.js`*/}
           {suggestions.map((suggestion, index) => (index < MAX_NUMBER_OF_SUGGESTIONS) &&
-            <Link 
-              // to={`/items/${suggestion.id}`}
-              onClick = {(ev) => handleSubmit(ev, suggestion )}  
+            <DropDownItem
+              onClick = {(ev) => handleClickOnItemInSuggestionDropdown(ev, suggestion)}  
             >
               <li
                 key={`${index}`}
               >
-
                 <img src={items.imageSrc} />
                 <span>{suggestion.parts[0]}</span>
                 <Bold>{searchInputVal}</Bold>
                 <span>{suggestion.parts[1]}</span>
               </li>
-            </Link>
+            </DropDownItem>
           )}
 
         </TypeaheadSuggestions>
@@ -181,14 +179,6 @@ const TypeaheadSuggestions = styled.ul`
   margin-left: 6px;
   width: 411px;
 }
-    a{
-      color: black;
-      transition: all .2s ease-in;
-      border-bottom: 1px solid #e6ecf0;
-      &:hover{
-        background-color: #F4F7F6;
-      }
-    }
     li{
       padding: 20px 10px  20px 10px;
     }
@@ -196,4 +186,14 @@ const TypeaheadSuggestions = styled.ul`
 
 const Bold = styled.span`
   font-weight: bold;
+`;
+
+const DropDownItem = styled.p`
+  color: black;
+  transition: all .2s ease-in;
+  border-bottom: 1px solid #e6ecf0;
+  &:hover{
+    background-color: #F4F7F6;
+    cursor: pointer;
+  } 
 `;
