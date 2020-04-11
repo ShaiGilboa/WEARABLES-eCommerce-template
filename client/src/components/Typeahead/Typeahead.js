@@ -1,73 +1,112 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
+import { useHistory } from "react-router-dom";
+
 
 import {
   useDispatch,
   useSelector,
-  } from 'react-redux';
+} from 'react-redux';
 import {
-    addItemsReduxStore,
+  addItemsReduxStore,
 } from '../../Redux/actions';
 
 // the prop is the array of items that we will search in
 const Typeahead = (
   // { items }
-  ) => {
-  const [searchInputVal, setSearchInputVal] = React.useState('');
-  const [suggestions, setSuggestions] = React.useState([])
-  const items = useSelector(state=>state.items)
+) => {
+  const [searchInputVal, setSearchInputVal] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const items = useSelector(state => state.items)
   const dispatch = useDispatch();
+  const wrapperRef = useRef(null);
+  let history = useHistory();
 
-  React.useEffect(()=>{
+  useEffect(() => {
     fetch('/items')
-      .then(res=>res.json())
-      .then(res=>dispatch(addItemsReduxStore(res.filtered)))
-  },[])
+      .then(res => res.json())
+      .then(res => dispatch(addItemsReduxStore(res.filtered)))
+  }, [])
 
-// the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
-  const submitHandler = (event) => { 
+  // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
+  const submitHandler = (event) => {
     event.preventDefault();
   }
 
-// when ever there is a change in the input search, the state get updated and we look for suggestions
-  React.useEffect(()=> {
-    (searchInputVal&&items) ? setSuggestions(typeaheadSuggestion(searchInputVal,items)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
-  },[searchInputVal])
-  
+  // when ever there is a change in the input search, the state get updated and we look for suggestions
+  useEffect(() => {
+    (searchInputVal && items) ? setSuggestions(typeaheadSuggestion(searchInputVal, items)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
+  }, [searchInputVal])
+
+  // on mousedown outside of the search, close the results using the wrapperRef / event.target
+  //Doesn't reload the component 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return (() => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    })
+  }, []);
+
+  const handleClickOutside = event => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setSearchInputVal('');
+    }
+  }
+
+  // 
+  const handleSubmit = (ev, suggestion) => {
+    ev.preventDefault();
+    setSearchInputVal('');  
+    history.push(`/items/${suggestion.id}`);
+  }
+
   return (
-    <Wrapper data-css='Typehead-Wrapper'>
-      <Search data-css='SearchForm' onSubmit={(event)=>submitHandler(event)}>
-      <ContainerSearch data-css='ContainerSearch'>
-        <InputField 
-          data-css='InputField'
-          value={searchInputVal}
-          placeholder={'what are looking for?'}
-          onChange={(event)=>setSearchInputVal(event.target.value)}
-        />
-        <SearchButton
-          type='submit'
-          data-css='SearchButton'
-        >
-        <SearchOutlinedIcon/>
-        </SearchButton>
-      </ContainerSearch>
-      {/*this is an ul*/}
-      <TypeaheadSuggestions> 
-      {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
-      {/*there is a maximum number of results shown, it is set in `constants.js`*/}
-        {suggestions.map((suggestion, index)=> (index < MAX_NUMBER_OF_SUGGESTIONS) && 
-          <li key={`${index}`}>
-            <Link to={`/items/${suggestion.id}`}>
-              <Bold>{suggestion.parts[0]}</Bold>
-              <span>{searchInputVal}</span>
-              <Bold>{suggestion.parts[1]}</Bold>
+    <Wrapper
+      ref={wrapperRef}
+      data-css='Typehead-Wrapper'
+    >
+      <Search data-css='SearchForm' onSubmit={(event) => submitHandler(event)}>
+        <ContainerSearch data-css='ContainerSearch'>
+          <InputField
+            data-css='InputField'
+            value={searchInputVal}
+            placeholder={'Search...'}
+            onChange={(event) => setSearchInputVal(event.target.value)}
+          />
+          <SearchButton
+            type='submit'
+            data-css='SearchButton'
+          >
+            <SearchOutlinedIcon />
+          </SearchButton>
+        </ContainerSearch>
+        {/*this is an ul*/}
+        <TypeaheadSuggestions>
+          {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
+          {/*there is a maximum number of results shown, it is set in `constants.js`*/}
+          {suggestions.map((suggestion, index) => (index < MAX_NUMBER_OF_SUGGESTIONS) &&
+            <Link 
+              // to={`/items/${suggestion.id}`}
+              onClick = {(ev) => handleSubmit(ev, suggestion )}  
+            >
+              <li
+                key={`${index}`}
+              >
+
+                <img src={items.imageSrc} />
+                <span>{suggestion.parts[0]}</span>
+                <Bold>{searchInputVal}</Bold>
+                <span>{suggestion.parts[1]}</span>
+              </li>
             </Link>
-          </li>)}
-      </TypeaheadSuggestions>
+          )}
+
+        </TypeaheadSuggestions>
       </Search>
       {/* <p>search value: {searchInputVal} </p> */}
     </Wrapper>
@@ -129,18 +168,23 @@ margin-left: 10px;
 `;
 
 const TypeaheadSuggestions = styled.ul`
-  margin: 0;
-  padding: 0;
   position: absolute;
   top:50px;
   left:0;
-  width: 700px;
-  background-color: white;
+  width: 812px;
+  background-color:rgba(255, 255, 255, 0.99);
+  display: flex;
+  flex-direction: column;
     a{
       color: black;
+      transition: all .2s ease-in;
+      border-bottom: 1px solid #e6ecf0;
+      &:hover{
+        background-color: #F4F7F6;
+      }
     }
     li{
-      padding-bottom: 10px;
+      padding: 20px 10px  20px 10px;
     }
 `;
 

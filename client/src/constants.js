@@ -1,1 +1,1 @@
-export const MAX_NUMBER_OF_SUGGESTIONS = 8;
+export const MAX_NUMBER_OF_SUGGESTIONS = 6;
