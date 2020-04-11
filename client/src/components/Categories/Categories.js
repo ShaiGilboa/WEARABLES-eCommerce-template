@@ -8,16 +8,18 @@ const Categories = () => {
   return (
     <>
       <Title>Products categories</Title>
-        
+
       <Wrapper data-css='wrapper-categories'>
         {imgCategories.map(({ id, src, title, description }) =>
-          <Link to={`/items?category=${title}`}>
+         
             <div
               key={id}>
+              <Link to={`/items?category=${title}`}>
               <img src={window.location.origin + src} alt={description} />
+              </Link>
               <p>{title}</p>
             </div>
-          </Link>
+         
         )}
       </Wrapper>
     </>

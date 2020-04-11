@@ -21,7 +21,7 @@ const BigItem = ({
     fetch(`/items/${itemId}`)
       .then(res => res.json())
       .then(payload => setItem(payload))
-  }, [])
+  }, [itemId])
 
   let product;
   if (item && item.item) {
