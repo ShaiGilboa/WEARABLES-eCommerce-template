@@ -25,7 +25,7 @@ const initialState = {
 }
 
 export default function userReducer(state = initialState, action) {
-  const newState = JSON.parse(JSON.stringify(state));
+  const newState = JSON.parse(JSON.stringify(state)); // this creates a 'Deep Copy' of the state
   switch (action.type) {
     case 'ADD_ITEM':
       if(newState.cart[action.item.id]){
@@ -53,12 +53,12 @@ export default function userReducer(state = initialState, action) {
       }
 
     case 'REMOVE_ITEM_FROM_CART':
-    delete newState.cart[action.id];
-    return {
-      ...newState,
-    }
+      delete newState.cart[action.id];
+      return {
+        ...newState,
+      }
     
     default:
-      return state;
+      return newState;
   };
 };

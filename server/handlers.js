@@ -2,7 +2,7 @@
 const items = require('./data/items');
 const itemsDev = require('./data/items-Dev');
 
-const handleitemId = (req, res) => {
+const handleItemId = (req, res) => {
   const { itemId } = req.params;
   const parsedId = parseInt(itemId);
   const item = itemsDev.find(item => item.id === parsedId);
@@ -27,6 +27,6 @@ const handleQueries = (req, res) => {
 }
 
 module.exports = {
-  handleitemId,
+  handleItemId,
   handleQueries,
 }

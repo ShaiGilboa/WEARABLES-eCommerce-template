@@ -25,10 +25,10 @@ function App() {
       .then(res => res.json())
       .then(res => setAnItem(res.filtered));
 
-    fetch('/company')
-      .then(res => res.json())
-      .then(data => (setACompany(data)))
-      .then(console.log(aCompany));
+    // fetch('/company')
+    //   .then(res => res.json())
+    //   .then(data => (setACompany(data)))
+    //   .then(console.log(aCompany));
   }, []);
 
 
