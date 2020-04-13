@@ -19,7 +19,7 @@ const Typeahead = (
 ) => {
   const [searchInputVal, setSearchInputVal] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const typaheadItems = useSelector(state => state.typaheadItems)
+  const typaheadItems = useSelector(state => state.data.typaheadItems)
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
   let history = useHistory();

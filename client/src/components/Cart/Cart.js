@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import { 
+import {
   useSelector,
   useDispatch,
 } from 'react-redux';
@@ -12,7 +12,7 @@ import {
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(state=>state.cart);
+  const cart = useSelector(state => state.cart.cart);
   const cartIds = Object.keys(cart);
 
   const total = totalAmount(cart, cartIds);

@@ -1,10 +1,9 @@
 import { createStore } from 'redux';
+import combineReducers from '../Redux/reducers';
 
-import reducer from './reducer';
-
-export default function configureStore(initialState) {
+export default function configureStore(initialState ) {
   const store = createStore(
-    reducer,
+    combineReducers,
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   );

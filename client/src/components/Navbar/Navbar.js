@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
 
   // adding quantity display in the shopping cart 
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.cart);
   const qtyItem = Object.values(cart)
   const allQty = qtyItem.reduce((total, cart)  => {
     return total + cart.quantity;
@@ -71,7 +71,7 @@ align-items: center;
 padding: 20px 0 20px 30px;
 width: 100%;
 height: 80px;
-background-color: var(--global-color-secondary);
+background-color: white;
 border-bottom: 1px solid #e6ecf0;
 `;
 
