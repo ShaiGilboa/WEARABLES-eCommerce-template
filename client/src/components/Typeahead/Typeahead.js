@@ -136,7 +136,7 @@ const InputField = styled.input`
  height : 40px;
  transition: all .2s ease-in;
   &:focus{
-    width: 800px;
+    width: 600px;
   }
   ::placeholder {
   color: #D3D3D3;
@@ -197,6 +197,7 @@ const Bold = styled.span`
 
 const DropDownItem = styled.p`
   color: black;
+  /* width:100%; */
   transition: all .2s ease-in;
   border-bottom: 1px solid #e6ecf0;
   &:hover{

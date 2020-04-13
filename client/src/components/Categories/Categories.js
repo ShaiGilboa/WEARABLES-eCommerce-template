@@ -88,6 +88,8 @@ const WrapperNav = styled.div`
   border-right: 1px solid #e6ecf0;
 
 `;
+export default Categories;
+
 
 const WrapperCarousel = styled.div`
   display: flex;
@@ -183,4 +185,3 @@ const Title = styled.h2`
       
 `
 
-export default Categories;

@@ -5,12 +5,9 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { Link } from 'react-router-dom';
-<<<<<<< Updated upstream
 
 import Cart from '../Cart';
-=======
 import { useSelector } from 'react-redux';
->>>>>>> Stashed changes
 
 const Navbar = () => {
 
@@ -20,6 +17,7 @@ const Navbar = () => {
   const allQty = qtyItem.reduce((total, cart)  => {
     return total + cart.quantity;
   }, 0)
+  const [cartModalOpenFlag, setCartModalOpenFlag] = React.useState(false);
 
   return (
     <>
@@ -29,8 +27,7 @@ const Navbar = () => {
             data-css='ContainerLeft'
           >
             <p style={{ fontSize: '2em' }}>WEARABLES</p>
-
-          </ContainerLeft>
+        </ContainerLeft>
         </Link>
         <ContainerRigth data-css='ContainerRigth'>
           <div>
@@ -40,7 +37,11 @@ const Navbar = () => {
             <LanguageOutlinedIcon />
           </IconNav >
           <IconNav data-css='IconNav'><AccountCircleOutlinedIcon /></IconNav>
-          <IconNav data-css='IconNav' style={{ position: 'relative' }}>
+          <IconNav
+          data-css='IconNav'
+          style={{ position: 'relative' }}
+          onClick={()=>setCartModalOpenFlag(!cartModalOpenFlag)}
+          >
             <ShoppingCartOutlinedIcon />
             {allQty >= 1 &&
               <NumItemCart>{allQty}</NumItemCart>
@@ -48,7 +49,7 @@ const Navbar = () => {
           </IconNav>
         </ContainerRigth>
       </Wrapper>
-      <CartModal>
+      <CartModal open={cartModalOpenFlag}>
         <Cart />
       </CartModal>
     </>
@@ -56,13 +57,15 @@ const Navbar = () => {
 }
 
 const Wrapper = styled.div`
+position:sticky;
+top:0;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 20px 0 20px 30px;
-width: 100vw;
+width: 100%;
 height: 80px;
-/* background-color: var(--global-color-secondary); */
+background-color: var(--global-color-secondary);
 border-bottom: 1px solid #e6ecf0;
 `;
 
@@ -104,14 +107,17 @@ height: 80px;
 `;
 
 const CartModal = styled.div`
-  position: sticky;
-  display: none;
+  position: fixed;
+  display:none;
+  z-index:5;
   background: #e6ecf0;
-  /* right: 20x; */
-  top:80px;
-  border: 1px solid #e6ecf0;
-  /* width:15vw; */
-  height: 100%;
+  right: -16vw;
+  width:15vw;
+  height:100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: ease-in-out 0.5s all;
+  ${props=>props.open ? 'display: block; right: 0;' : null};
 `;
 
 export default Navbar;
