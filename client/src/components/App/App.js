@@ -39,7 +39,7 @@ function App() {
       <Route path='/' exact>
         <HomePage />
       </Route>
-      <Cart />
+      {/* <Cart /> */}
       <Switch>
         <Route path='/items' exact>
           {anItem ? <Feed /> : <div>not yet</div>}

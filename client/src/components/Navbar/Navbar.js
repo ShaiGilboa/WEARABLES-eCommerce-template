@@ -6,6 +6,7 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { Link } from 'react-router-dom';
 
+import Cart from '../Cart';
 
 const Navbar = () => {
   return (
@@ -30,6 +31,9 @@ const Navbar = () => {
           <IconNav data-css='IconNav'><ShoppingCartOutlinedIcon /></IconNav>
         </ContainerRigth>
       </Wrapper>
+      <CartModal>
+        <Cart />
+      </CartModal>
     </>
   )
 }
@@ -67,6 +71,17 @@ display: flex;
 align-items: center;
 justify-content: flex-end;
 height: 80px;
+`;
+
+const CartModal = styled.div`
+  position: sticky;
+  display: none;
+  background: #e6ecf0;
+  /* right: 20x; */
+  top:80px;
+  border: 1px solid #e6ecf0;
+  /* width:15vw; */
+  height: 100%;
 `;
 
 export default Navbar;
