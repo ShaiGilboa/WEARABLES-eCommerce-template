@@ -19,8 +19,13 @@ const Cart = () => {
 
   return (
     <Wrapper>
-      {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
-      <p>total: ${total}</p>
+      <Header>Here is your cart:</Header>
+      <ItemsContainer>
+        {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
+      </ItemsContainer>
+      <Footer>
+        <p>total: ${total}</p>
+      </Footer>
     </Wrapper>
   );
 }
@@ -28,5 +33,25 @@ const Cart = () => {
 export default Cart;
 
 const Wrapper = styled.div`
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 1fr 8fr 1fr;
+  height: 100%;
+  grid-template-areas:
+    'header'
+    'items-container'
+    'footer';
+`;
 
+const Header = styled.h2`
+  grid-area: header;
+`;
+
+const ItemsContainer = styled.div`
+  grid-area: items-container;
+  overflow-y:auto;
+`;
+
+const Footer = styled.div`
+  grid-area: footer;
 `;

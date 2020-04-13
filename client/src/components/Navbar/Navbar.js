@@ -5,11 +5,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { Link } from 'react-router-dom';
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-import Cart from '../Cart';
+import CartModal from '../CartModal';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
@@ -21,6 +17,10 @@ const Navbar = () => {
     return total + cart.quantity;
   }, 0)
   const [cartModalOpenFlag, setCartModalOpenFlag] = React.useState(false);
+
+  const ToggleModal = () => {
+    setCartModalOpenFlag(!cartModalOpenFlag)
+  }
 
   return (
     <>
@@ -43,7 +43,7 @@ const Navbar = () => {
           <IconNav
           data-css='IconNav'
           style={{ position: 'relative' }}
-          onClick={()=>setCartModalOpenFlag(!cartModalOpenFlag)}
+          onClick={()=>ToggleModal()}
           >
             <ShoppingCartOutlinedIcon />
             {allQty >= 1 &&
@@ -52,12 +52,15 @@ const Navbar = () => {
           </IconNav>
         </ContainerRigth>
       </Wrapper>
-      <CartModal open={cartModalOpenFlag}>
-        <Cart />
-      </CartModal>
+      <CartModal
+        open={cartModalOpenFlag}
+        toggle={ToggleModal}
+      />
     </>
   )
 }
+
+export default Navbar;
 
 const Wrapper = styled.div`
 position:sticky;
@@ -108,19 +111,3 @@ align-items: center;
 justify-content: flex-end;
 height: 80px;
 `;
-
-const CartModal = styled.div`
-  position: fixed;
-  display:none;
-  z-index:5;
-  background: #e6ecf0;
-  right: -16vw;
-  width:15vw;
-  height:100%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  transition: ease-in-out 0.5s all;
-  ${props=>props.open ? 'display: block; right: 0;' : null};
-`;
-
-export default Navbar;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   useDispatch,
 } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import {
   changeQuantityOfItem,
@@ -18,15 +19,31 @@ const CartItem = ({item}) => {
     price,
     quantity,
   } = item;
+  const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false)
+
   const dispatch = useDispatch()
+  let history = useHistory();
 
   const handleInput = (event) => {
-    if(event.target.value>0)dispatch(changeQuantityOfItem(id,event.target.value));
+    if(event.target.value>=0)dispatch(changeQuantityOfItem(id,Number(event.target.value)));
+  }
+
+  const handleClickOnItem = (ev, id) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    history.push(`/items/${id}`);
   }
 
   return (
-    <Wrapper>
-      <h2>{name}</h2>
+    <Wrapper
+      onClick={()=>setLongFormOfNameFlag(!longFormOfNameFlag)}
+    >
+      <Name 
+        onClick = {(event) =>handleClickOnItem(event, id)}
+        long={longFormOfNameFlag?true:false}
+      >
+        <h2>{name}</h2>
+      </Name>
       <p>{price}</p>
       <input
         value={quantity}
@@ -42,5 +59,20 @@ const CartItem = ({item}) => {
 export default CartItem;
 
 const Wrapper = styled.div`
+  &:hover{
+    cursor: pointer;
+  }
+`;
 
+const Name = styled.div`
+  &:hover{
+    text-decoration: underline;
+  }
+  h2{
+    ${props=>props.long?null:(
+      `overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;`
+    )}
+  }
 `;
