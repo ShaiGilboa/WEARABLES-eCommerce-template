@@ -1,46 +1,112 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
 import { imgCategories } from '../../constants';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+
 
 const Categories = () => {
+  let categories = useHistory();
+
+  useEffect(() => {
+    document.getElementById('prev').onclick = function () {
+      scrollLeft(document.getElementById('wrapperCarousel'), -300, 500);   
+    }
+    document.getElementById('next').onclick = function () {
+      scrollLeft(document.getElementById('wrapperCarousel'), 300, 500);   
+    }
+    
+    function scrollLeft(element, change, duration) {
+       var start = element.scrollLeft,
+           currentTime = 0,
+           increment = 20;       
+       var animateScroll = function(){        
+           currentTime += increment;
+           var val = Math.easeInOutQuad(currentTime, start, change, duration);
+           element.scrollLeft = val;
+           if(currentTime < duration) {
+               setTimeout(animateScroll, increment);
+           }
+       };
+       animateScroll();
+    }
+    
+    //t = current time
+    //b = start value
+    //c = change in value
+    //d = duration
+    Math.easeInOutQuad = function (t, b, c, d) {
+     t /= d/2;
+     if (t < 1) return c/2*t*t + b;
+     t--;
+     return -c/2 * (t*(t-2) - 1) + b;
+    };
+  }, [])
+
+
   return (
     <>
-      <Title>Products categories</Title>
+    <Title>Products categories</Title>
+      <WrapperNav>
+        <NavCategories>
+          <IconNav id={'prev'} data-css='IconNav'><NavigateBeforeIcon /></IconNav>
+          <IconNav id={'next'} data-css='IconNav'><NavigateNextIcon /></IconNav>
+        </NavCategories>
+      </WrapperNav>
 
-      <Wrapper data-css='wrapper-categories'>
+      <WrapperCarousel id={'wrapperCarousel'} data-css='wrapper-categories'>
         {imgCategories.map(({ id, src, title, description }) =>
-         
-            <div
-              key={id}>
-              <Link to={`/items?category=${title}`}>
-              <img src={window.location.origin + src} alt={description} />
-              </Link>
-              <p>{title}</p>
-            </div>
-         
+
+          <CatContainer onClick={(ev) => {
+            ev.preventDefault();
+            categories.push(`/items?category=${title}`);
+          }}
+            key={id}>
+            {/* <Link to={`/items?category=${title}`}> */}
+            <img src={window.location.origin + src} 
+                 alt={description}
+                 id= {id} />
+            {/* </Link> */}
+            <p>{title}</p>
+          </CatContainer>
         )}
-      </Wrapper>
+      </WrapperCarousel>
     </>
   );
 };
 
-
-const Wrapper = styled.div`
+const NavCategories = styled.div`
   display: flex;
-  overflow-x: auto;
+  text-align: right;
+`;
+
+const WrapperNav = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  border-right: 1px solid #e6ecf0;
+
+`;
+
+const WrapperCarousel = styled.div`
+  display: flex;
+  cursor: ew-resize;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
 width: 100%;
 /* height: auto; */
 overflow: auto;
-/* scroll-snap-type: x proximity; */
 &::-webkit-scrollbar {
     display: none;
   }
     div{
-      height: 350px;
+      scroll-snap-align: center;
+
+      /* height: 350px; */
       margin: 30px;
       position: relative;
+      cursor: pointer;
         p{
         opacity: 0;
         position: absolute;
@@ -58,6 +124,7 @@ overflow: auto;
       &:hover{
         p{
         display: block;
+        padding: 60px;
         position: absolute;
         height: 10px;
         top:0;
@@ -88,6 +155,25 @@ overflow: auto;
       
     }
 `;
+
+const IconNav = styled.div`
+  padding: 0 30px;
+  border-left: 1px solid #e6ecf0;
+  border-top: 1px solid #e6ecf0;
+  border-bottom: 1px solid #e6ecf0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+  transition: all .2s ease-in;
+    &:hover{
+      background-color: #F4F7F6;
+    }
+`;
+
+const CatContainer = styled.div`
+white-space: nowrap;
+`
 
 const Title = styled.h2`
       margin: 80px 0 50px 0;

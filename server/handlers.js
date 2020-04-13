@@ -1,6 +1,7 @@
 
-const items = require('./data/items');
+// const items = require('./data/items');
 const itemsDev = require('./data/items-Dev');
+const companies = require('./data/companies');
 
 const handleItemId = (req, res) => {
   const { itemId } = req.params;
@@ -26,7 +27,15 @@ const handleQueries = (req, res) => {
   return res.json({ filtered });
 }
 
+const handleCompagny = (req, res) => {
+  const payload = companies;
+  // payload = payload.map(item => item  )
+  return res.json({ payload });
+}
+// 
+
 module.exports = {
   handleItemId,
   handleQueries,
+  handleCompagny
 }

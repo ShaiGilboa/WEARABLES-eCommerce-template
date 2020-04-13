@@ -14,7 +14,6 @@ import Feed from '../Feed';
 import { BigItem } from '../Items';
 import Cart from '../Cart';
 import HomePage from '../HomePage';
-import BannerPromo from '../BannerPromo';
 
 function App() {
   // const [anItem, setAnItem] = useState(null);
@@ -48,10 +47,8 @@ function App() {
           {/*render the page component*/}
           <BigItem />
         </Route>
-        <Route path='/company'>
-
+        <Route path='/companies' exact>
         </Route>
-        <BannerPromo />
       </Switch>
       {/*Footer*/}
     </Router>

@@ -126,7 +126,7 @@ const Wrapper = styled.div`
 `;
 
 const InputField = styled.input`
- width: 800px;
+ width: 400px;
  font-size: 1em;
  border: none;
  background-color: #F4F7F6;
@@ -142,6 +142,7 @@ const InputField = styled.input`
   color: #D3D3D3;
 }
 @media (max-width: 1425px) {
+  width: 400px;
   margin-left: 6px;
   &:focus{
     width: 400px;
@@ -158,7 +159,12 @@ const Search = styled.form`
 `;
 
 const ContainerSearch = styled.div`
+  /* width: 800px; */
   display: flex;
+  /* justify-content: flex-end; */
+  @media (max-width: 1425px) {
+  width: 400px;
+}
 `;
 
 const SearchButton = styled.button`
@@ -172,7 +178,7 @@ const TypeaheadSuggestions = styled.ul`
   position: absolute;
   top:50px;
   left:0;
-  width: 812px;
+  width: 100%;
   background-color:rgba(255, 255, 255, 0.99);
   display: flex;
   flex-direction: column;

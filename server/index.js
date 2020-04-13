@@ -3,15 +3,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const items = require('./data/items');
-const itemsDev = require('./data/items-Dev');
-const company = require('./data/companies.json');
-
+// const items = require('./data/items');
 const PORT = 4000;
-const {
-  handleItemId,
-  handleQueries,
-  } = require('./handlers');
+const { handleitemId, handleQueries, handleCompagny } = require('./handlers');
+// 
 
 // const filterFunction = (array, property, value) => {
 //     let ret = [];
@@ -36,16 +31,11 @@ express()
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
   .use('/', express.static(__dirname + '/'))
-  
+
   // use the queries as values to filter the array with
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', handleQueries)
-  .get('/items/:itemId', handleItemId)
-
-  .get('/company/:companyId', (req, res) => {
-    console.log("hi");
-
-    return res.json({ company });
-  })
-
+  .get('/items/:itemId', handleitemId)
+  // .get('/compagnies', handleCompagny)
+  .get('/companies', handleCompagny)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
