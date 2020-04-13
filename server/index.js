@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 // const items = require('./data/items');
 const PORT = 4000;
-const { handleitemId, handleQueries, handleCompagny } = require('./handlers');
+const { handleItemId, handleQueries, handleCompagny } = require('./handlers');
 // 
 
 // const filterFunction = (array, property, value) => {
@@ -35,7 +35,7 @@ express()
   // use the queries as values to filter the array with
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', handleQueries)
-  .get('/items/:itemId', handleitemId)
+  .get('/items/:itemId', handleItemId)
   // .get('/compagnies', handleCompagny)
-  .get('/companies', handleCompagny)
+  // .get('/companies', handleCompagny)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

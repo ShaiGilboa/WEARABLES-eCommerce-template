@@ -5,7 +5,10 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { Link } from 'react-router-dom';
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import Cart from '../Cart';
 import { useSelector } from 'react-redux';
 

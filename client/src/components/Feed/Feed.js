@@ -14,7 +14,10 @@ const Feed = () => {
     React.useEffect(()=>{
       fetch(`/items${location.search}`)
       .then(res=>res.json())
-      .then(res=>setItems(res.filtered))
+      .then(res=> {
+        console.log(res)
+        setItems(res.filtered)
+      })
     },[])
     return (
       <Wrapper>

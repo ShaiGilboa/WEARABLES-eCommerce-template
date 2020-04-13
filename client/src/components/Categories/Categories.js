@@ -31,7 +31,6 @@ const Categories = () => {
        };
        animateScroll();
     }
-    
     //t = current time
     //b = start value
     //c = change in value
