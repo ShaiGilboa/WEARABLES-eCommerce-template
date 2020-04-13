@@ -7,9 +7,7 @@ import {
 
 import { SmallItem } from '../Items';
 
-const Feed = ({
-  // items,
-  }) => {
+const Feed = () => {
     const [items, setItems] = React.useState([]);
     const location = useLocation()
 

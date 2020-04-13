@@ -17,13 +17,13 @@ import HomePage from '../HomePage';
 import BannerPromo from '../BannerPromo';
 
 function App() {
-  const [anItem, setAnItem] = useState(null);
-  const [aCompany, setACompany] = useState(null);
+  // const [anItem, setAnItem] = useState(null);
+  // const [aCompany, setACompany] = useState(null);
 
   useEffect(() => {
-    fetch('/items')
-      .then(res => res.json())
-      .then(res => setAnItem(res.filtered));
+    // fetch('/items')
+    //   .then(res => res.json())
+    //   .then(res => setAnItem(res.filtered));
 
     // fetch('/company')
     //   .then(res => res.json())
@@ -42,7 +42,7 @@ function App() {
       {/* <Cart /> */}
       <Switch>
         <Route path='/items' exact>
-          {anItem ? <Feed /> : <div>not yet</div>}
+          <Feed />
         </Route>
         <Route path='/items/:itemId' >
           {/*render the page component*/}

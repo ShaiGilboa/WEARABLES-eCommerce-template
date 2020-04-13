@@ -22,12 +22,13 @@ const initialState = {
                         - label (optional): string ('home', 'work', 'parents'....)
                         - ANY MORE?
                   */
+  typaheadItems: null, /*the items array brought back form the server for the typeahead*/
 }
 
 export default function userReducer(state = initialState, action) {
   const newState = JSON.parse(JSON.stringify(state)); // this creates a 'Deep Copy' of the state
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_ITEM_TO_CART':
       if(newState.cart[action.item.id]){
         newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) + 1;
       } else {
@@ -40,8 +41,8 @@ export default function userReducer(state = initialState, action) {
         ...newState,
       };
   
-    case 'ADD_ITEMS_TO_REDUX':
-      newState.items = action.items;
+    case 'ADD_ITEMS_TO_TYPEAHEAD':
+      newState.typaheadItems = action.items;
       return {
         ...newState,
       };

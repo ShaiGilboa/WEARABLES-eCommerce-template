@@ -10,7 +10,7 @@ import {
   useSelector,
 } from 'react-redux';
 import {
-  addItemsReduxStore,
+  addItemsToTypeahead,
 } from '../../Redux/actions';
 
 // the prop is the array of items that we will search in
@@ -19,7 +19,7 @@ const Typeahead = (
 ) => {
   const [searchInputVal, setSearchInputVal] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const items = useSelector(state => state.items)
+  const typaheadItems = useSelector(state => state.typaheadItems)
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
   let history = useHistory();
@@ -27,7 +27,7 @@ const Typeahead = (
   useEffect(() => {
     fetch('/items')
       .then(res => res.json())
-      .then(res => dispatch(addItemsReduxStore(res.filtered)))
+      .then(res => dispatch(addItemsToTypeahead(res.filtered)))
   }, [])
 
   // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
@@ -37,7 +37,7 @@ const Typeahead = (
 
   // when ever there is a change in the input search, the state get updated and we look for suggestions
   useEffect(() => {
-    (searchInputVal && items) ? setSuggestions(typeaheadSuggestion(searchInputVal, items)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
+    (searchInputVal && typaheadItems) ? setSuggestions(typeaheadSuggestion(searchInputVal, typaheadItems)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
   }, [searchInputVal])
 
   // on mousedown outside of the search, close the results using the wrapperRef / event.target
@@ -94,12 +94,13 @@ const Typeahead = (
           {/*there is a maximum number of results shown, it is set in `constants.js`*/}
           {suggestions.map((suggestion, index) => (index < MAX_NUMBER_OF_SUGGESTIONS) &&
             <DropDownItem
+              key={`item-dropdown#${index}`}
               onClick = {(ev) => handleClickOnItemInSuggestionDropdown(ev, suggestion)}  
             >
               <li
                 key={`${index}`}
               >
-                <img src={items.imageSrc} />
+                <img src={suggestion.imageSrc} />
                 <span>{suggestion.parts[0]}</span>
                 <Bold>{searchInputVal}</Bold>
                 <span>{suggestion.parts[1]}</span>

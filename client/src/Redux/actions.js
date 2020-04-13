@@ -6,12 +6,12 @@
 */
 
 export const addItemToCart = (item) => ({
-  type: 'ADD_ITEM',
+  type: 'ADD_ITEM_TO_CART',
   item,
 })
 
-export const addItemsReduxStore = (items) => ({
-  type: 'ADD_ITEMS_TO_REDUX',
+export const addItemsToTypeahead = (items) => ({
+  type: 'ADD_ITEMS_TO_TYPEAHEAD',
   items,
 })
 
