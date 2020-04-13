@@ -24,7 +24,13 @@ const Navbar = () => {
 
   return (
     <>
-      <Wrapper data-css='Wrapper'>
+      <Wrapper
+      data-css='Wrapper'
+      onClick={()=>{
+        if(cartModalOpenFlag)setCartModalOpenFlag(false)
+        }
+      }
+      >
         <Link to={'/'}>
           <ContainerLeft
             data-css='ContainerLeft'
