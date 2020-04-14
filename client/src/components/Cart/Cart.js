@@ -4,15 +4,25 @@ import {
   useSelector,
   useDispatch,
 } from 'react-redux';
+import {
+  useHistory,
+} from 'react-router-dom';
+
+
+import {
+  addTotalToCart,
+} from '../../Redux/actions';
 
 import CartItem from './CartItem';
+import Button from '../UnstyledButton';
 import {
   totalAmount,
 } from '../../utils';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.cart);
+  const history = useHistory();
+  const cart = useSelector(state => state.userInfo.cart);
   const cartIds = Object.keys(cart);
 
   const total = totalAmount(cart, cartIds);
@@ -25,6 +35,10 @@ const Cart = () => {
       </ItemsContainer>
       <Footer>
         <p>total: ${total}</p>
+        <CheckoutBtn
+          onClick={()=>history.push('/checkout')}
+        >Checkout
+        </CheckoutBtn>
       </Footer>
     </Wrapper>
   );
@@ -54,4 +68,8 @@ const ItemsContainer = styled.div`
 
 const Footer = styled.div`
   grid-area: footer;
+`;
+
+const CheckoutBtn = styled(Button)`
+
 `;

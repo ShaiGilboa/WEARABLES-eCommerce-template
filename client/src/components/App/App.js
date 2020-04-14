@@ -11,6 +11,7 @@ import {
 import GlobalStyles from '../GlobalStyles';
 import Navbar from '../Navbar';
 import Feed from '../Feed';
+import Checkout from '../Checkout';
 import { BigItem } from '../Items';
 import Cart from '../Cart';
 import HomePage from '../HomePage';
@@ -48,6 +49,9 @@ function App() {
           <BigItem />
         </Route>
         <Route path='/companies' exact>
+        </Route>
+        <Route path='/checkout' exact>
+          <Checkout />
         </Route>
       </Switch>
       {/*Footer*/}

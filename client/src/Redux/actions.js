@@ -25,3 +25,8 @@ export const removeItemFromCart = (id) => ({
   type: 'REMOVE_ITEM_FROM_CART',
   id,
 })
+
+export const addTotalToCart = (total) => ({
+  type: 'ADD_TOTAL_TO_CART',
+  total,
+})
