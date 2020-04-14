@@ -18,7 +18,7 @@ const BannerPromo = () => {
 };
 
 const Wrapper = styled.div`
-  height: 400px;
+  height: 500px;
   background-image: url(${bannerEcomm2});
   background-size: cover;
   background-position: center;

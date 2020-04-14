@@ -15,16 +15,28 @@ import Checkout from '../Checkout';
 import { BigItem } from '../Items';
 import Cart from '../Cart';
 import HomePage from '../HomePage';
+import { useAuth0 } from "../SignIn/react-auth0-spa";
+import Profile from "../SignIn/Profile";
+import history from "../../utils/history";
+import PrivateRoute from '../SignIn/PrivateRoute';
+
 
 function App() {
+ 
+  // const { loading } = useAuth0();
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
-    <Router>
+    <Router history={history}>
       <GlobalStyles />
       <Navbar />
       <Route path='/' exact>
         <HomePage />
       </Route>
+      <Route path="/profile" component={Profile} />
       {/* <Cart /> */}
       <Switch>
         <Route path='/items' exact>

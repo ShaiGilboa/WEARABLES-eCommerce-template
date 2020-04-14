@@ -168,10 +168,12 @@ const ContainerSearch = styled.div`
 `;
 
 const SearchButton = styled.button`
-background-color: white;
+background-color: #F4F7F6;
 border: none;
 cursor: pointer;
-margin-left: 10px;
+outline: none;
+margin-right: 10px;
+/* margin-left: 10px; */
 `;
 
 const TypeaheadSuggestions = styled.ul`
