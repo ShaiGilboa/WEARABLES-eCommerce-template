@@ -1,3 +1,8 @@
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+} from '../../helpers-localStorage';
+
 const initialState = {
   userInfo: null, /* this is an object that holds:
                       name - string
@@ -19,7 +24,7 @@ const initialState = {
                               -'fetching'
                               -?
                             */
-  cart: {}, /*an object of item objects.
+  cart: getFromLocalStorage('cart') || {}, /*an object of item objects.
                 we will add to each object a 'quantity' key.
               */
 }
@@ -36,23 +41,27 @@ export default function cartReducer(state = initialState, action) {
           quantity: 1,
         }
       }
+      saveToLocalStorage('cart', newState.cart);
       return {
         ...newState,
       };
 
     case 'CHANGE_QUANTITY_OF_ITEM':    
       newState.cart[action.id].quantity = action.newQuantity;
+      saveToLocalStorage('cart', newState.cart);
       return {
         ...newState,
       }
 
     case 'REMOVE_ITEM_FROM_CART':
       delete newState.cart[action.id];
+      saveToLocalStorage('cart', newState.cart);
       return {
         ...newState,
       }
     case 'ADD_TOTAL_TO_CART':
       newState.cart.total = action.total;
+      saveToLocalStorage('cart', newState.cart);
       return {
         ...newState,
       }

@@ -6,6 +6,8 @@ import {
 } from 'react-redux';
 
 import CartItem from './CartItem';
+import Cart from '../Cart';
+
 
 import {
   totalAmount,
@@ -21,7 +23,8 @@ const Checkout = () => {
     <Wrapper>
       <div>Checkout: {total}</div>
       <ItemsContainer>
-        {cartIds.map(itemId=><CartItem key={itemId} item={cart[itemId]} />)}
+        {/* {cartIds.map(itemId=><CartItem key={itemId} item={cart[itemId]} />)} */}
+        {/* <Cart /> */}
       </ItemsContainer>
     </Wrapper>
   );

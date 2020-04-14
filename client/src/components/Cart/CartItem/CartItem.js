@@ -45,7 +45,7 @@ const CartItem = ({item}) => {
         <h2>{name}</h2>
       </Name>
       <p>{price}</p>
-      <input
+      <ItemQuantityInput
         value={quantity}
         onChange={(event)=>handleInput(event)}
       />
@@ -75,4 +75,8 @@ const Name = styled.div`
       white-space: nowrap;`
     )}
   }
+`;
+
+const ItemQuantityInput = styled.input`
+
 `;

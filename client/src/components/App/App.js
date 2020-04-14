@@ -17,20 +17,6 @@ import Cart from '../Cart';
 import HomePage from '../HomePage';
 
 function App() {
-  // const [anItem, setAnItem] = useState(null);
-  // const [aCompany, setACompany] = useState(null);
-
-  useEffect(() => {
-    // fetch('/items')
-    //   .then(res => res.json())
-    //   .then(res => setAnItem(res.filtered));
-
-    // fetch('/company')
-    //   .then(res => res.json())
-    //   .then(data => (setACompany(data)))
-    //   .then(console.log(aCompany));
-  }, []);
-
 
   return (
     <Router>
