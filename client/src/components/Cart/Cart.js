@@ -19,7 +19,7 @@ import {
   totalAmount,
 } from '../../utils';
 
-const Cart = () => {
+const Cart = ({toggle}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const cart = useSelector(state => state.userInfo.cart);
@@ -36,7 +36,10 @@ const Cart = () => {
       <Footer>
         <p>total: ${total}</p>
         <CheckoutBtn
-          onClick={()=>history.push('/checkout')}
+          onClick={()=>{
+            toggle();
+            history.push('/checkout');
+          }}
         >Checkout
         </CheckoutBtn>
       </Footer>

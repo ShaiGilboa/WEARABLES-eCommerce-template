@@ -15,7 +15,9 @@ const CartModal = ({open, toggle}) => {
         <CloseBtn onClick={()=>toggle()}>
           X
         </CloseBtn>
-        <Cart />
+        <Cart 
+          toggle={toggle}
+        />
       </Wrapper>
       </>
     );
