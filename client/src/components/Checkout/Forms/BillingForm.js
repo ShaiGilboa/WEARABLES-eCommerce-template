@@ -8,6 +8,9 @@ const Form = ({formNumber}) => {
     return (
       <Wrapper>
         <div>billing</div>
+        <input type="text" id="username" name="username" required>
+        </input>
+
       </Wrapper>
     );
   } else {
@@ -17,6 +20,6 @@ const Form = ({formNumber}) => {
 
 export default Form;
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
 
 `;

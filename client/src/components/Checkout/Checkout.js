@@ -16,7 +16,9 @@ import {
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const [formNumber, setFormNumber] = React.useState(1)
+
+  const [formNumber, setFormNumber] = React.useState(1);
+
   const cart = useSelector(state=>state.userInfo.cart);
   const cartIds = Object.keys(cart);
   const subtotal = totalAmount(cart, cartIds);
@@ -32,7 +34,6 @@ const Checkout = () => {
   return (
     <Wrapper>
       <Forms formNumber={formNumber} setFormNumber={setFormNumber}/>
-      <div>Checkout</div>
       <SummaryContainer>
         <h2>Order Summary</h2>
         <Details>
