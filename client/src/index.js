@@ -23,17 +23,16 @@ const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-  
+   <Provider store={store}>
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
-    <Provider store={store}>
       <App />
-    </Provider>
     </Auth0Provider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

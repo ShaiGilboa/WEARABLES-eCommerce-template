@@ -17,7 +17,7 @@ import CartItem from './CartItem';
 import Button from '../UnstyledButton';
 import {
   totalAmount,
-} from '../../../utils';
+} from '../../utils';
 
 const Cart = ({toggle}) => {
   const dispatch = useDispatch();

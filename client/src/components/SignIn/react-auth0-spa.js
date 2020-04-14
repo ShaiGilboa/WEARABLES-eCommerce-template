@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
+import { useDispatch } from 'react-redux';
+import { addUserInfoLogin } from '../../Redux/actions';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
@@ -40,8 +42,13 @@ export const Auth0Provider = ({
       setLoading(false);
     };
     initAuth0();
-    // eslint-disable-next-line
   }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(user){
+    dispatch(addUserInfoLogin(user));
+    }
+  }, [user]);
 
   const loginWithPopup = async (params = {}) => {
     setPopupOpen(true);

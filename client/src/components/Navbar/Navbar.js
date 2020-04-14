@@ -19,8 +19,9 @@ const Navbar = () => {
 
   // adding quantity display in the shopping cart 
   const cart = useSelector(state => state.userInfo.cart);
+  const userInfo = useSelector(state => state.userInfo);
   const qtyItem = Object.values(cart)
-  const allQty = qtyItem.reduce((total, cart)  => {
+  const allQty = qtyItem.reduce((total, cart) => {
     return total + cart.quantity;
   }, 0)
   const [cartModalOpenFlag, setCartModalOpenFlag] = React.useState(false);
@@ -29,21 +30,25 @@ const Navbar = () => {
     setCartModalOpenFlag(!cartModalOpenFlag)
   }
 
+  // if (userInfo.userInfo) {
+  //   console.log(userInfo.userInfo.picture)
+  // }
+
   return (
     <>
       <Wrapper
-      data-css='Wrapper'
-      onClick={()=>{
-        if(cartModalOpenFlag)setCartModalOpenFlag(false)
+        data-css='Wrapper'
+        onClick={() => {
+          if (cartModalOpenFlag) setCartModalOpenFlag(false)
         }
-      }
+        }
       >
         <Link to={'/'}>
           <ContainerLeft
             data-css='ContainerLeft'
           >
             <p style={{ fontSize: '2em' }}>WEARABLES</p>
-        </ContainerLeft>
+          </ContainerLeft>
         </Link>
         <ContainerRigth data-css='ContainerRigth'>
           <div>
@@ -53,25 +58,28 @@ const Navbar = () => {
             <LanguageOutlinedIcon />
           </IconNav >
           {!isAuthenticated ? (
-          <IconNav 
-            onClick={() => loginWithRedirect({})}
-            data-css='IconNav'><AccountCircleOutlinedIcon /></IconNav>
-          ) : ( <IconNav 
-                  onClick={() => logout()}
-                  data-css='IconNav'><ExitToAppOutlinedIcon />
-                </IconNav>
-          )}
-          {isAuthenticated && (
-            <Link to="/profile">
-            <IconNav 
-            data-css='IconNav'><AssignmentIndOutlinedIcon />
+            <IconNav
+              onClick={() => loginWithRedirect({})}
+              data-css='IconNav'><AccountCircleOutlinedIcon /></IconNav>
+          ) : (<IconNav
+            onClick={() => logout()}
+            data-css='IconNav'><ExitToAppOutlinedIcon />
           </IconNav>
-          </Link>
-          )}
+            )}
+          {isAuthenticated && userInfo.userInfo ? (
+            <Link to="/profile">
+              <IconNav
+                data-css='IconNav'><Avatar src={userInfo.userInfo.picture} alt='avatar'/>
+              </IconNav>
+            </Link>
+          ) : (
+            <p></p>
+          )
+          }
           <IconNav
-          data-css='IconNav'
-          style={{ position: 'relative' }}
-          onClick={()=>ToggleModal()}
+            data-css='IconNav'
+            style={{ position: 'relative' }}
+            onClick={() => ToggleModal()}
           >
             <ShoppingCartOutlinedIcon />
             {allQty >= 1 &&
@@ -119,6 +127,12 @@ text-align: center;
 top: 18px;
 right: 18px;
 `
+const Avatar = styled.img`
+width: 40px;
+height: 40px;
+border-radius: 50%;
+`
+
 
 const IconNav = styled.div`
   padding: 0 30px;

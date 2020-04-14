@@ -30,3 +30,8 @@ export const addTotalToCart = (total) => ({
   type: 'ADD_TOTAL_TO_CART',
   total,
 })
+
+export const addUserInfoLogin = (user) => ({
+  type: 'ADD_USER_INFO_LOGIN',
+  user,
+})

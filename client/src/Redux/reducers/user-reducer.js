@@ -33,7 +33,7 @@ export default function cartReducer(state = initialState, action) {
   const newState = JSON.parse(JSON.stringify(state)); // this creates a 'Deep Copy' of the state
   switch (action.type) {
     case 'ADD_ITEM_TO_CART':
-      if(newState.cart[action.item.id]){
+      if (newState.cart[action.item.id]) {
         newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) + 1;
       } else {
         newState.cart[action.item.id] = {
@@ -46,7 +46,7 @@ export default function cartReducer(state = initialState, action) {
         ...newState,
       };
 
-    case 'CHANGE_QUANTITY_OF_ITEM':    
+    case 'CHANGE_QUANTITY_OF_ITEM':
       newState.cart[action.id].quantity = action.newQuantity;
       saveToLocalStorage('cart', newState.cart);
       return {
@@ -65,6 +65,18 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...newState,
       }
+    case 'ADD_USER_INFO_LOGIN':
+      newState.userInfo = action.user;
+      saveToLocalStorage('userInfo', newState.userInfo);
+      newState.status = 'logged-in'
+      return {
+        ...newState,
+        
+        // fname: action.user.given_name, 
+        // lname: action.user.family_name, 
+        // avatarUrl: action.user.picture
+      }
+
     default:
       return newState;
   };
