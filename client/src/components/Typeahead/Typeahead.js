@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import { typeaheadSuggestion } from '../../utils';
+import { typeaheadSuggestion } from '../../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
 import { useHistory } from "react-router-dom";
 import {
