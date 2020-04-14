@@ -42,3 +42,17 @@ export const totalAmount = (items, itemsId) => {
     return totalSum/100; // need to divide by 100, because we multiplied by 100
   } else return -1; // if there is a problem, returns -1
 }
+
+export const validateString = (string) => {
+  if(typeof string === 'string' && string.length>0){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const validateEmail = (email) => {
+  if(email.includes('@',1) && email.includes('.',3)) return true;
+  return false;
+}
+

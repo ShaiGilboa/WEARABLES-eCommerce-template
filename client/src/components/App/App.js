@@ -23,11 +23,8 @@ import PrivateRoute from '../SignIn/PrivateRoute';
 
 function App() {
  
-  // const { loading } = useAuth0();
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  // check if the user is logged in, or if there is anything in 'cart' in local storage
+  // getFromLocalStorage(id?) || getFromLocalStorage('temp') || 
 
   return (
     <Router history={history}>
