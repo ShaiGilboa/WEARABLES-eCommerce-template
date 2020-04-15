@@ -5,12 +5,13 @@ import {
 
 const initialState = {
   userInfo: null, /* this is an object that holds:
-                      name - string
+                      fname - string
+                      lanme - string
                       email - string
+                      phoneNumber - string
                       location? - optional
                       shippingAddresses  - and array of objects that have:
-                        - street: string
-                        - number: integer
+                        - address: string (street and number)
                         - postalCode: string
                         - default: Boolean (whether this is the default address)
                         - description (optional): string (something like 'there's a dog in the house' or 'end of the court yard to the right')\
@@ -92,7 +93,11 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...newState,
       }
-
+    case 'UPDATE_USER_INFO':
+      newState.userInfo = action.newUserInfo;
+      return {
+        ...newState,
+      }
     default:
       return newState;
   };

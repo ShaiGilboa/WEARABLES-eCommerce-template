@@ -23,9 +23,9 @@ const Footer = () => {
             </div>
             <div style={{borderRight: 'none'}}>
                 <Social>
-                    <li><i class="fab fa-twitter"></i></li>
-                    <li><i class="fab fa-facebook"></i></li>
-                    <li><i class="fas fa-share-alt-square"></i></li>
+                    <li><i className="fab fa-twitter"></i></li>
+                    <li><i className="fab fa-facebook"></i></li>
+                    <li><i className="fas fa-share-alt-square"></i></li>
                 </Social>
             </div>
 

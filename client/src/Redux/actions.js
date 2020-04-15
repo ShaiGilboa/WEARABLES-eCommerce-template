@@ -40,3 +40,8 @@ export const addUserInfoLogin = (user) => ({
   type: 'ADD_USER_INFO_LOGIN',
   user,
 })
+
+export const updateUserInfo = (newUserInfo) => ({
+  type: 'UPDATE_USER_INFO',
+  newUserInfo,
+})

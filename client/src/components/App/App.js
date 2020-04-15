@@ -47,6 +47,9 @@ function App() {
         <Route path='/companies/:companyId'>
           <CompanyFeed />
         </Route>
+        <Route path='/checkout'>
+          <Checkout />
+        </Route>
         <BannerPromo />
       </Switch>
       <Footer/>

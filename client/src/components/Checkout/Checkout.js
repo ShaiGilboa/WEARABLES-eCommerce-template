@@ -18,6 +18,42 @@ const Checkout = () => {
   const dispatch = useDispatch();
 
   const [formNumber, setFormNumber] = React.useState(1);
+  
+  const userInfo = useSelector(state=>state.userInfo.userInfo);
+  // const [personalInformation, setPersonalInformation] = React.state({})
+  // if (userInfo) {
+
+  // }
+  // const [fname, setFname] = React.useState('');
+  // const [lname, setLname] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+
+  // const [shippingAddress, setShippingAddress] = React.useState({
+  //   fname,
+  //   lname,
+  //   // address,
+  //   // city,
+  //   // province,
+  //   // postalCode,
+  // });
+  
+  // const [billingAddress, setBillingAddress] = React.useState('');
+  // const [cardNumber, setCardNumber] = React.useState();
+
+  // const info = {
+  //   fname,
+  //   setFname,
+  //   lname,
+  //   setLname,
+  //   email,
+  //   setEmail,
+  //   shippingAddress,
+  //   setShippingAddress,
+  //   billingAddress,
+  //   setBillingAddress,
+  //   cardNumber,
+  //   setCardNumber,
+  // }
 
   const cart = useSelector(state=>state.userInfo.cart);
   const cartIds = Object.keys(cart);
@@ -33,7 +69,11 @@ const Checkout = () => {
     {/*check to see if signed in, if not we render a 'sign in' or 'continue as guest' page*/}
   return (
     <Wrapper>
-      <Forms formNumber={formNumber} setFormNumber={setFormNumber}/>
+      <Forms
+        formNumber={formNumber}
+        setFormNumber={setFormNumber}
+        userInfo={userInfo}
+      />
       <SummaryContainer>
         <h2>Order Summary</h2>
         <Details>
