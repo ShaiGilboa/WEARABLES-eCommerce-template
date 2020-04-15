@@ -12,12 +12,13 @@ import {
 
 import RemoveButton from '../../UnstyledButton';
 
-const CartItem = ({item}) => {
+const CartItem = ({ item }) => {
   const {
     id,
     name,
     price,
     quantity,
+    imageSrc,
   } = item;
   const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false)
 
@@ -25,7 +26,7 @@ const CartItem = ({item}) => {
   let history = useHistory();
 
   const handleInput = (event) => {
-    if(event.target.value>=0)dispatch(changeQuantityOfItem(id,Number(event.target.value)));
+    if (event.target.value >= 0) dispatch(changeQuantityOfItem(id, Number(event.target.value)));
   }
 
   const handleClickOnItem = (ev, id) => {
@@ -36,21 +37,22 @@ const CartItem = ({item}) => {
 
   return (
     <Wrapper
-      onClick={()=>setLongFormOfNameFlag(!longFormOfNameFlag)}
+      onClick={() => setLongFormOfNameFlag(!longFormOfNameFlag)}
     >
-      <Name 
-        onClick = {(event) =>handleClickOnItem(event, id)}
-        long={longFormOfNameFlag?true:false}
+      <Name
+        onClick={(event) => handleClickOnItem(event, id)}
+        long={longFormOfNameFlag ? true : false}
       >
-        <h2>{name}</h2>
+      
+      <h2>{name}</h2>
       </Name>
       <p>{price}</p>
       <ItemQuantityInput
         value={quantity}
-        onChange={(event)=>handleInput(event)}
+        onChange={(event) => handleInput(event)}
       />
       <RemoveButton
-      onClick={()=>dispatch(removeItemFromCart(id))}
+        onClick={() => dispatch(removeItemFromCart(id))}
       >X</RemoveButton>
     </Wrapper>
   );
@@ -69,11 +71,11 @@ const Name = styled.div`
     text-decoration: underline;
   }
   h2{
-    ${props=>props.long?null:(
-      `overflow: hidden;
+    ${props => props.long ? null : (
+    `overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;`
-    )}
+  )}
   }
 `;
 

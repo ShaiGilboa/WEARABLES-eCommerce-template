@@ -3,25 +3,25 @@ import styled from 'styled-components';
 
 import Cart from '../Cart';
 import Button from '../UnstyledButton';
+import CloseIcon from '@material-ui/icons/Close';
 
-const CartModal = ({open, toggle}) => {
-    return (
-      <>
+const CartModal = ({ open, toggle }) => {
+  return (
+    <>
       <GreyDiv
         open={open}
-        onClick={()=>toggle()}
+        onClick={() => toggle()}
       />
       <Wrapper open={open}>
-        <CloseBtn onClick={()=>toggle()}>
-          X
+        <CloseBtn onClick={() => toggle()}>
+        <CloseIcon style={{ fontSize: 35, margin: '10px' }}/>
         </CloseBtn>
-        <Cart 
+        <Cart
           toggle={toggle}
         />
       </Wrapper>
-      </>
-    );
-
+    </>
+  );
 }
 
 export default CartModal;
@@ -30,16 +30,14 @@ const Wrapper = styled.div`
   position: fixed;
   display:block;
   z-index:5;
-  background: #e6ecf0;
+  background: white;
   right: -301px;
-  width:300px;
+  width:500px;
   height:calc(100vh - 80px);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 100px;
   transition: ease-in-out 0.5s all;
-  ${props=>props.open ? (
+  ${props => props.open ? (
     `transform: translateX(-300px);`
-    ) : (
+  ) : (
       `transform: translateX(300px);`
     )};
 `;
@@ -49,15 +47,15 @@ const GreyDiv = styled.div`
   z-index:4;
   width:100vw;
   height:100vh;
-  background-color: rgb(255,255,255);
+  background-color: rgb(0,0,0);
   transition: ease-in 1s all;
-  ${props=>props.open?(
+  ${props => props.open ? (
     `display: block;
     opacity: 0.5;`
-  ):(
-    `display: none;
+  ) : (
+      `display: none;
     opacity: 0;`
-  )}
+    )}
 `;
 
 const CloseBtn = styled(Button)`

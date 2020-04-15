@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom';
 import CartModal from '../CartModal';
 import { useSelector } from 'react-redux';
 import { useAuth0 } from "../SignIn/react-auth0-spa";
-import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
+// import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
 
 
 const Navbar = () => {
   // Authentification
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, loginWithPopup } = useAuth0();
 
 
   // adding quantity display in the shopping cart 
@@ -59,7 +59,8 @@ const Navbar = () => {
           </IconNav >
           {!isAuthenticated ? (
             <IconNav
-              onClick={() => loginWithRedirect({})}
+              onClick={() => loginWithPopup({})}
+              // onClick={() => loginWithRedirect({})}
               data-css='IconNav'><AccountCircleOutlinedIcon /></IconNav>
           ) : (<IconNav
             onClick={() => logout()}
@@ -69,7 +70,7 @@ const Navbar = () => {
           {isAuthenticated && userInfo.userInfo ? (
             <Link to="/profile">
               <IconNav
-                data-css='IconNav'><Avatar src={userInfo.userInfo.picture} alt='avatar'/>
+                data-css='IconNav'><Avatar src={userInfo.userInfo.avatarUrl} alt='avatar'/>
               </IconNav>
             </Link>
           ) : (

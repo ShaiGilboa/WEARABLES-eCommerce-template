@@ -7,7 +7,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-
+import Footer from '../Footer';
 import GlobalStyles from '../GlobalStyles';
 import Navbar from '../Navbar';
 import Feed from '../Feed';
@@ -49,7 +49,7 @@ function App() {
           <Checkout />
         </Route>
       </Switch>
-      {/*Footer*/}
+      <Footer/>
     </Router>
   );
 }

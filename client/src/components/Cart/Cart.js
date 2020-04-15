@@ -29,7 +29,7 @@ const Cart = ({toggle}) => {
 
   return (
     <Wrapper>
-      <Header>Here is your cart:</Header>
+      <Header>Your shopping cart </Header>
       <ItemsContainer>
         {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
       </ItemsContainer>
