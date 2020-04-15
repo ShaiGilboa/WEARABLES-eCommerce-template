@@ -32,6 +32,7 @@ const Form = ({
         }
       }
       validateForm('Shipping-Address', newUserInfo);
+      setFormNumber(formNumber+1)
     }
 
     React.useEffect(()=>{
@@ -114,12 +115,14 @@ const Form = ({
             </select>
           </div>
           <button
+            type="button"
             onClick={()=>setFormNumber(formNumber-1)}
           >previous</button>
           <button type="submit" id="submit-form"
-            onClick={()=>{
-            handleSubmit();
-            setFormNumber(formNumber+1)}}
+            onClick={(event)=>{
+              event.preventDefault();
+              handleSubmit();
+              }}
           >Next</button>
         </Wrapper>
       );

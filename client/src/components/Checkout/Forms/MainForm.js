@@ -8,6 +8,10 @@ import {
   updateUserInfo,
 } from '../../../Redux/actions';
 
+import {
+  validateEmail,
+} from '../../../utils';
+
 import UserInfoForm from './UserInfoForm';
 import ShippingAddressForm from './ShippingAddressForm';
 import BillingForm from './BillingForm';
@@ -15,12 +19,13 @@ import CheckInformation from './CheckInformation';
 import Button from '../../UnstyledButton';
 
 const Form = ({
-  formNumber,
-  setFormNumber,
   userInfo,
 }) => {
   
   const dispatch = useDispatch();
+
+  const [formNumber, setFormNumber] = React.useState(1);
+
 
   const validateForm = (type, data) => {
     console.log('validateForm', data)
@@ -28,11 +33,12 @@ const Form = ({
     console.log('newUserInfo', newUserInfo);
     switch (type) {
       case 'Personal-Information':
+        console.log('email?',validateEmail(data.email))
         newUserInfo = {
           ...newUserInfo,
           fname: data.fname,
           lname: data.lname,
-          email: data.lname,
+          email: data.email,
         };
         console.log('newUserInfo',newUserInfo)
         dispatch(updateUserInfo(newUserInfo))

@@ -32,6 +32,7 @@ const Form = ({
         }
       }
       validateForm('Billing-info', newUserInfo);
+      setFormNumber(formNumber+1);
     }
 
     const [btnDisplay, setBtnDisplay] = React.useState('block')
@@ -141,12 +142,14 @@ const Form = ({
             </input>
           </div>
           <button
+            type="button"
             onClick={()=>setFormNumber(formNumber-1)}
           >previous</button>
           <button type="submit" id="submit-form"
-            onClick={()=>{
-            handleSubmit();
-            setFormNumber(formNumber+1)}}
+            onClick={(event)=>{
+              event.preventDefault();
+              handleSubmit();
+              }}
           >Next</button>
         </Wrapper>
     );

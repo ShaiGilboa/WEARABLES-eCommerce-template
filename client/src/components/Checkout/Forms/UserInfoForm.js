@@ -24,6 +24,7 @@ const Form = ({
         email,
       }
       validateForm('Personal-Information', newUserInfo);
+      setFormNumber(formNumber+1)
     }
 
     React.useEffect(()=>{
@@ -69,9 +70,10 @@ const Form = ({
             onChange={(event)=>setEmail(event.target.value)}
             ></input>
             <button type="submit" id="submit-form"
-            onClick={()=>{
+            onClick={(event)=>{
+              event.preventDefault();
               handleSubmit();
-              setFormNumber(formNumber+1)}}
+              }}
             >Next</button>
         </Wrapper>
       );

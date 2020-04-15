@@ -17,43 +17,8 @@ import {
 const Checkout = () => {
   const dispatch = useDispatch();
 
-  const [formNumber, setFormNumber] = React.useState(1);
   
   const userInfo = useSelector(state=>state.userInfo.userInfo);
-  // const [personalInformation, setPersonalInformation] = React.state({})
-  // if (userInfo) {
-
-  // }
-  // const [fname, setFname] = React.useState('');
-  // const [lname, setLname] = React.useState('');
-  // const [email, setEmail] = React.useState('');
-
-  // const [shippingAddress, setShippingAddress] = React.useState({
-  //   fname,
-  //   lname,
-  //   // address,
-  //   // city,
-  //   // province,
-  //   // postalCode,
-  // });
-  
-  // const [billingAddress, setBillingAddress] = React.useState('');
-  // const [cardNumber, setCardNumber] = React.useState();
-
-  // const info = {
-  //   fname,
-  //   setFname,
-  //   lname,
-  //   setLname,
-  //   email,
-  //   setEmail,
-  //   shippingAddress,
-  //   setShippingAddress,
-  //   billingAddress,
-  //   setBillingAddress,
-  //   cardNumber,
-  //   setCardNumber,
-  // }
 
   const cart = useSelector(state=>state.userInfo.cart);
   const cartIds = Object.keys(cart);
@@ -70,8 +35,6 @@ const Checkout = () => {
   return (
     <Wrapper>
       <Forms
-        formNumber={formNumber}
-        setFormNumber={setFormNumber}
         userInfo={userInfo}
       />
       <SummaryContainer>
@@ -97,12 +60,12 @@ const Checkout = () => {
             <p>total</p>
             <p>{total}</p>
           </Line>
-          <ContinueBtn
+          {/* <ContinueBtn
             disabled={formNumber<3}
             onClick={()=>console.log('hi')}
-          >
-            Continue
-          </ContinueBtn>
+          > */}
+            {/* Continue
+          </ContinueBtn> */}
         </Details>
       </SummaryContainer>
     </Wrapper>
