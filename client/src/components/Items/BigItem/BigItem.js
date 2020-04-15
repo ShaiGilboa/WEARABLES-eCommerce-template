@@ -21,12 +21,12 @@ const BigItem = ({
     fetch(`/items/${itemId}`)
       .then(res => res.json())
       .then(payload => setItem(payload))
-      // need to add the company info, doing to have to chain the ".then"s, because it is dependent on the company id in the item object
+    // need to add the company info, doing to have to chain the ".then"s, because it is dependent on the company id in the item object
   }, [itemId])
 
   let product;
   if (item && item.item) {
-    product = item.item
+    product = item.item;
   }
 
   return (

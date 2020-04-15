@@ -19,13 +19,10 @@ import { useAuth0 } from "../SignIn/react-auth0-spa";
 import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
-
+import BannerPromo from '../BannerPromo';
+import CompanyFeed from '../CompanyFeed';
 
 function App() {
- 
-  // check if the user is logged in, or if there is anything in 'cart' in local storage
-  // getFromLocalStorage(id?) || getFromLocalStorage('temp') || 
-
   return (
     <Router history={history}>
       <GlobalStyles />
@@ -43,11 +40,10 @@ function App() {
           {/*render the page component*/}
           <BigItem />
         </Route>
-        <Route path='/companies' exact>
+        <Route path='/companies/:companyId'>
+          <CompanyFeed />
         </Route>
-        <Route path='/checkout' exact>
-          <Checkout />
-        </Route>
+        <BannerPromo />
       </Switch>
       <Footer/>
     </Router>

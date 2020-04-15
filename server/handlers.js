@@ -1,4 +1,4 @@
-
+/// HANDLER FILE
 // const items = require('./data/items');
 const itemsDev = require('./data/items-Dev');
 const companies = require('./data/companies');
@@ -9,7 +9,6 @@ const handleItemId = (req, res) => {
   const item = itemsDev.find(item => item.id === parsedId);
   return res.json({ item });
 }
-
 // use the queries as values to filter the array with
 // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
 const handleQueries = (req, res) => {
@@ -26,16 +25,16 @@ const handleQueries = (req, res) => {
   }
   return res.json({ filtered });
 }
-
-const handleCompagny = (req, res) => {
-  const payload = companies;
-  // payload = payload.map(item => item  )
-  return res.json({ payload });
+const handleCompany = (req, res) => {
+  const { companyId } = req.params;
+  const parsedId = parseInt(companyId);
+  const company = companies.find(comp => comp.id === parsedId);
+  console.log(company);
+  return res.json({ company });
 }
 // 
-
 module.exports = {
   handleItemId,
   handleQueries,
-  handleCompagny
+  handleCompany
 }
