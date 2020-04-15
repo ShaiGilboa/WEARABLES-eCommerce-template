@@ -66,28 +66,18 @@ export default function cartReducer(state = initialState, action) {
         ...newState,
       }
     case 'ADD_USER_INFO_LOGIN':
-<<<<<<< Updated upstream
       newState.userInfo = {fname: action.user.given_name, 
                            lname: action.user.family_name,
                            email: action.user.email, 
                            avatarUrl: action.user.picture,
                            id: action.user.sub,
                           }
-=======
-      newState.userInfo = action.user;
->>>>>>> Stashed changes
       saveToLocalStorage('userInfo', newState.userInfo);
       newState.status = 'logged-in'
       return {
         ...newState,
         
-<<<<<<< Updated upstream
         
-=======
-        // fname: action.user.given_name, 
-        // lname: action.user.family_name, 
-        // avatarUrl: action.user.picture
->>>>>>> Stashed changes
       }
 
     default:
