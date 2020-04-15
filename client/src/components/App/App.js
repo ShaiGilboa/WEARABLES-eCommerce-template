@@ -23,6 +23,10 @@ import BannerPromo from '../BannerPromo';
 import CompanyFeed from '../CompanyFeed';
 
 function App() {
+ 
+  // check if the user is logged in, or if there is anything in 'cart' in local storage
+  // getFromLocalStorage(id?) || getFromLocalStorage('temp') || 
+
   return (
     <Router history={history}>
       <GlobalStyles />
