@@ -34,13 +34,13 @@ const Cart = ({toggle}) => {
         {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
       </ItemsContainer>
       <Footer>
-        <p>total: ${total}</p>
+        <p>Total: ${total}</p>
         <CheckoutBtn
           onClick={()=>{
             toggle();
             history.push('/checkout');
           }}
-        >Checkout
+        >Continue to checkout
         </CheckoutBtn>
       </Footer>
     </Wrapper>
@@ -50,9 +50,10 @@ const Cart = ({toggle}) => {
 export default Cart;
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 30px 30px 30px;
   display: grid;
   grid-template-rows: 1fr 8fr 1fr;
+  margin-bottom: 40px;
   height: 100%;
   grid-template-areas:
     'header'
@@ -62,6 +63,9 @@ const Wrapper = styled.div`
 
 const Header = styled.h2`
   grid-area: header;
+  font-size: 1.5em;
+  font-weight: 400;
+  height: 40px;
 `;
 
 const ItemsContainer = styled.div`
@@ -71,8 +75,20 @@ const ItemsContainer = styled.div`
 
 const Footer = styled.div`
   grid-area: footer;
+  margin-bottom: 5rem;
+  p{
+    font-size: 1.2em;
+  }
 `;
 
 const CheckoutBtn = styled(Button)`
-
+outline: none;
+background-color: red;
+color: white;
+padding: 10px 30px;
+  border: 1px solid white;
+font-size: 1em;
+margin-top: 10px;
+cursor: pointer;
+border-radius: 4px;
 `;

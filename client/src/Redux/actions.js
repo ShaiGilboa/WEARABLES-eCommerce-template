@@ -10,6 +10,11 @@ export const addItemToCart = (item) => ({
   item,
 })
 
+export const removeOneItemFromCart = (item) => ({
+  type: 'REMOVE_ONE_ITEM_FROM_CART',
+  item,
+})
+
 export const addItemsToTypeahead = (items) => ({
   type: 'ADD_ITEMS_TO_TYPEAHEAD',
   items,

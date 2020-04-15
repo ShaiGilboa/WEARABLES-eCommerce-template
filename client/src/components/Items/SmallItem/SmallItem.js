@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import Button from '../../UnstyledButton';
-
 import {
   addItemToCart,
 } from '../../../Redux/actions';

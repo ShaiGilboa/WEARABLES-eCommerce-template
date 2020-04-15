@@ -46,6 +46,20 @@ export default function cartReducer(state = initialState, action) {
         ...newState,
       };
 
+    case 'REMOVE_ONE_ITEM_FROM_CART':
+      if (newState.cart[action.item.id]) {
+        newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) - 1;
+      } else {
+        newState.cart[action.item.id] = {
+          ...action.item,
+          quantity: 1,
+        }
+      }
+      saveToLocalStorage('cart', newState.cart);
+      return {
+        ...newState,
+      };
+
     case 'CHANGE_QUANTITY_OF_ITEM':
       newState.cart[action.id].quantity = action.newQuantity;
       saveToLocalStorage('cart', newState.cart);
@@ -66,18 +80,17 @@ export default function cartReducer(state = initialState, action) {
         ...newState,
       }
     case 'ADD_USER_INFO_LOGIN':
-      newState.userInfo = {fname: action.user.given_name, 
-                           lname: action.user.family_name,
-                           email: action.user.email, 
-                           avatarUrl: action.user.picture,
-                           id: action.user.sub,
-                          }
+      newState.userInfo = {
+        fname: action.user.given_name,
+        lname: action.user.family_name,
+        email: action.user.email,
+        avatarUrl: action.user.picture,
+        id: action.user.sub,
+      }
       saveToLocalStorage('userInfo', newState.userInfo);
       newState.status = 'logged-in'
       return {
         ...newState,
-        
-        
       }
 
     default:
