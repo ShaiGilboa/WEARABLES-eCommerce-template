@@ -59,8 +59,12 @@ const Navbar = () => {
           </IconNav >
           {!isAuthenticated ? (
             <IconNav
+<<<<<<< Updated upstream
               onClick={() => loginWithPopup({})}
               // onClick={() => loginWithRedirect({})}
+=======
+              onClick={() => loginWithRedirect({})}
+>>>>>>> Stashed changes
               data-css='IconNav'><AccountCircleOutlinedIcon /></IconNav>
           ) : (<IconNav
             onClick={() => logout()}
@@ -70,7 +74,11 @@ const Navbar = () => {
           {isAuthenticated && userInfo.userInfo ? (
             <Link to="/profile">
               <IconNav
+<<<<<<< Updated upstream
                 data-css='IconNav'><Avatar src={userInfo.userInfo.avatarUrl} alt='avatar'/>
+=======
+                data-css='IconNav'><Avatar src={userInfo.userInfo.picture} alt='avatar'/>
+>>>>>>> Stashed changes
               </IconNav>
             </Link>
           ) : (
