@@ -86,7 +86,7 @@ outline: none;
 background-color: red;
 color: white;
 padding: 10px 30px;
-  border: 1px solid white;
+border: 1px solid white;
 font-size: 1em;
 margin-top: 10px;
 cursor: pointer;
