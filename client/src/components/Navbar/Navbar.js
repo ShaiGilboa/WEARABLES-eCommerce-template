@@ -30,10 +30,6 @@ const Navbar = () => {
     setCartModalOpenFlag(!cartModalOpenFlag)
   }
 
-  // if (userInfo.userInfo) {
-  //   console.log(userInfo.userInfo.picture)
-  // }
-
   return (
     <>
       <Wrapper

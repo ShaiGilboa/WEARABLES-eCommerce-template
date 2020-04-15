@@ -44,6 +44,7 @@ export const Auth0Provider = ({
     initAuth0();
   }, []);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     if(user){
     dispatch(addUserInfoLogin(user));
