@@ -22,14 +22,14 @@ const Feed = () => {
   }, [])
   return (
     <>
-    <Wrapper>
-    <WrapperSideBar>
-    <SideBar/>
-    </WrapperSideBar>
-    <WrapperItems>
-      {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
-    </WrapperItems>
-    </Wrapper>
+      <Wrapper>
+        <WrapperSideBar>
+          <SideBar />
+        </WrapperSideBar>
+        <WrapperItems>
+          {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
+        </WrapperItems>
+      </Wrapper>
     </>
   );
 }

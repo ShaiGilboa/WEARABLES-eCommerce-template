@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../../Redux/actions';
 
 const MockItem = ({ item }) => {
-
+ const dispatch = useDispatch();
  return (
   <Wrapper >
    <ProductName >{item.name}</ProductName>
@@ -19,7 +19,7 @@ const MockItem = ({ item }) => {
    </ModelDetail>
    <ItemContainer >
     <ImageWrapper >
-     <ItemImage src={item.imageSrc} /> 
+     <ItemImage src={item.imageSrc} />
      <ItemOverview>Overview</ItemOverview>
      <ItemDescription>Item Description</ItemDescription>
     </ImageWrapper>
@@ -55,7 +55,7 @@ font-size: 12px;
 margin: 0 16px 0 0;
 `;
 
-const Category = styled. div``;
+const Category = styled.div``;
 
 const ItemContainer = styled.div`
 box-sizing: border-box;
@@ -70,7 +70,9 @@ const ItemCart = styled.div``;
 
 const ItemDescription = styled.div``;
 const ItemImage = styled.img``;
-
+const AddToCartButton = styled.div``;
+const ItemStock = styled.div``;
+const ImageWrapper = styled.div``;
 const ItemOverview = styled.h2`
 font-size: 20px;
 font-weight: 600;

@@ -19,8 +19,10 @@ import { useAuth0 } from "../SignIn/react-auth0-spa";
 import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
-import BannerPromo from '../BannerPromo';
+import MockItem from '../Items/MockItem';
+
 import CompanyFeed from '../CompanyFeed';
+import FourOhFour from '../fourOhFour';
 
 function App() {
  
@@ -31,12 +33,12 @@ function App() {
     <Router history={history}>
       <GlobalStyles />
       <Navbar />
-      <Route path='/' exact>
-        <HomePage />
-      </Route>
-      <Route path="/profile" component={Profile} />
-      {/* <Cart /> */}
       <Switch>
+        <Route path='/' exact>
+          <HomePage />
+        </Route>
+        <Route path="/profile" component={Profile} />
+        {/* <Cart /> */}
         <Route path='/items' exact>
           <Feed />
         </Route>
@@ -47,15 +49,14 @@ function App() {
         <Route path='/companies/:companyId'>
           <CompanyFeed />
         </Route>
-<<<<<<< Updated upstream
         <Route path='/checkout'>
           <Checkout />
         </Route>
-        <BannerPromo />
-=======
->>>>>>> Stashed changes
+        <Route path='*'>
+          <FourOhFour />
+        </Route>
       </Switch>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }

@@ -30,6 +30,7 @@ express()
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
   .use('/', express.static(__dirname + '/'))
+
   // use the queries as values to filter the array with
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', handleQueries)

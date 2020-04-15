@@ -29,12 +29,12 @@ const SmallItem = ({
       </ImageWrapper>
       <InfoWrapper>
         <ItemInfo>
-          <div style={{height:'150px'}}>
-          <h2>{name}</h2>
-          <CategoryItem>{category}</CategoryItem>
+          <div style={{ height: '150px' }}>
+            <h2>{name}</h2>
+            <CategoryItem>{category}</CategoryItem>
           </div>
           <div>
-            <p style={{fontSize:'1.2em', paddingBottom: '7px'}}>{price}</p>
+            <p style={{ fontSize: '1.2em', paddingBottom: '7px' }}>{price}</p>
           </div>
 
           {/* <Link to={`/items/companyId=${companyId}`}>{companyId}</Link> */}
@@ -43,8 +43,8 @@ const SmallItem = ({
       </InfoWrapper>
       {/* <ButtonWrapper data-css='ButtonWrapper'> */}
       <AddToCartButton
-        onClick={() => dispatch(addItemToCart(item))}> 
-        <AddCircleOutlineIcon style={{ paddingRight: '20px'}}/>Add to cart 
+        onClick={() => dispatch(addItemToCart(item))}>
+        <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
       </AddToCartButton>
       {/* </ButtonWrapper> */}
     </Wrapper>

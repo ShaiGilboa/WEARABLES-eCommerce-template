@@ -22,6 +22,7 @@ const BigItem = ({
       .then(res => res.json())
       .then(payload => setItem(payload))
     // need to add the company info, doing to have to chain the ".then"s, because it is dependent on the company id in the item object
+    
   }, [itemId])
 
   let product;
