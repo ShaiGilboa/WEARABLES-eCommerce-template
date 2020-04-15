@@ -5,6 +5,8 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import CartModal from '../CartModal';
 import { useSelector } from 'react-redux';
@@ -46,7 +48,11 @@ const Navbar = () => {
             <p style={{ fontSize: '2em' }}>WEARABLES</p>
           </ContainerLeft>
         </Link>
-        <ContainerRigth data-css='ContainerRigth'>
+        <ContainerRight data-css='ContainerRigth'>
+          <SearchNav
+            // onClick={() => logout()}
+            data-css='SearchNav'><SearchOutlinedIcon />
+          </SearchNav>
           <div>
             <Typeahead />
           </div>
@@ -83,7 +89,11 @@ const Navbar = () => {
               <NumItemCart><p>{allQty}</p></NumItemCart>
             }
           </IconNav>
-        </ContainerRigth>
+          <MenuNav
+            // onClick={() => logout()}
+            data-css='MenuNav'><MenuIcon />
+          </MenuNav>
+        </ContainerRight>
       </Wrapper>
       <CartModal
         open={cartModalOpenFlag}
@@ -142,6 +152,53 @@ const IconNav = styled.div`
     &:hover{
       background-color: #F4F7F6;
     }
+    @media (max-width: 425px) {
+  display: none;
+}
+`;
+
+const MenuNav = styled.div`
+  padding: 0 30px;
+  border-left: 1px solid #e6ecf0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+  display: none;
+  transition: all .2s ease-in;
+    &:hover{
+      background-color: #F4F7F6;
+    }
+    @media (max-width: 425px) {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+`;
+
+const SearchNav = styled.div`
+  padding: 0 30px;
+  border-left: 1px solid #e6ecf0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer;
+  display: none;
+  transition: all .2s ease-in;
+    &:hover{
+      background-color: #F4F7F6;
+    }
+    @media (max-width: 768px) {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 425px) {
+  display: none;
+}
 `;
 
 const ContainerLeft = styled.div`
@@ -149,7 +206,7 @@ display: flex;
 align-items: center;
 cursor:pointer;
 `;
-const ContainerRigth = styled.div`
+const ContainerRight = styled.div`
 display: flex;
 align-items: center;
 justify-content: flex-end;

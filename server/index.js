@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 // const items = require('./data/items');
 const PORT = 4000;
-const { handleItemId, handleQueries, handleCompany } = require('./handlers');
+const { handleItemId, handleQueries, handleCompany, 
+  handleCheckout 
+} = require('./handlers');
 // 
 // const filterFunction = (array, property, value) => {
 //     let ret = [];
@@ -32,6 +34,10 @@ express()
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', handleQueries)
   .get('/items/:itemId', handleItemId)
-
   .get('/companies/:companyId', handleCompany)
+  .post('/checkout', handleCheckout)
+  //parse JSON object received with num of items purchased
+  //find with items ID all the items in the order
+  //modify the numInStock
+  //send confimation message 'order completed success'
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

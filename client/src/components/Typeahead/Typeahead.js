@@ -118,11 +118,14 @@ export default Typeahead;
 
 const Wrapper = styled.div`
  margin: 0 0 0 30px;
- padding: 0 20px 0 30PX;
+ padding: 0 20px 0 20px;
  height: 80px;
  border-left: 1px solid #e6ecf0;
  display: flex;
  align-items: center;
+ @media (max-width: 768px) {
+  display: none;
+}
 `;
 
 const InputField = styled.input`
@@ -142,11 +145,14 @@ const InputField = styled.input`
   color: #D3D3D3;
 }
 @media (max-width: 1425px) {
-  width: 400px;
+  width: 300px;
   margin-left: 6px;
   &:focus{
-    width: 400px;
+    width: 300px;
   }
+}
+@media (max-width: 768px) {
+  display: none;
 }
 `;
 
@@ -155,7 +161,9 @@ const Search = styled.form`
   flex-direction: column;
   justify-content:flex-start;
   position: relative;
-
+  @media (max-width: 768px) {
+  display: none;
+}
 `;
 
 const ContainerSearch = styled.div`
@@ -163,7 +171,7 @@ const ContainerSearch = styled.div`
   display: flex;
   /* justify-content: flex-end; */
   @media (max-width: 1425px) {
-  width: 400px;
+  width: 350px;
 }
 `;
 

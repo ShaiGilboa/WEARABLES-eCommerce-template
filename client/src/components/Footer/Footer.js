@@ -8,18 +8,18 @@ const Footer = () => {
                 <h2>WEARABLES</h2>
             </div>
             <div>
-                <ul>
+                <MenuList data-css='menu-list'>
                     <li>Disrupt</li>
                     <li>Pok pok</li>
                     <li>Flannel 3</li>
-                </ul>
+                </MenuList >
             </div>
             <div>
-                <ul>
+                <MenuList data-css='menu-list'>
                     <li>Franzen</li>
                     <li>Taxidermy </li>
                     <li>Gochujang</li>
-                </ul>
+                </MenuList>
             </div>
             <div style={{borderRight: 'none'}}>
                 <Social>
@@ -37,11 +37,13 @@ const Footer = () => {
 
 
 const FooterContainer = styled.div`
-
 display: flex;
 border: 1px solid #e6ecf0; 
 justify-content: space-around;
 width: 100vw;
+@media (max-width: 425px) {
+  flex-direction: column;
+}
 /* background-image: url('../assets/dot-grid.png'); */
 /* padding: 50px 0; */
   div{
@@ -50,6 +52,12 @@ width: 100vw;
     border-right: 1px solid #e6ecf0;
     padding: 50px 30px;
     width: 25%;
+    @media (max-width: 425px) {
+    width: 100%;
+    padding: 30px 30px;
+    border-bottom: 1px solid #e6ecf0;
+    align-items: center;
+}
     h2{
       font-size: 1.5em;
     }
@@ -76,13 +84,29 @@ width: 100vw;
         width: 200px;
     }    
 `
+const MenuList = styled.ul`
+  @media(max-width: 425px){
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+`
 
 const Social = styled.ul`
     display: flex;
     justify-content: flex-start;
     font-size: 2em;
+    @media(max-width: 425px){
+    margin-bottom: 0;
+  }
     li{
         padding: 20px;
+
+        @media (max-width: 768px) {
+          padding: 10px;
+          i{
+            font-size: .8em;
+          }
+        }
         
         .fa-twitter, .fa-facebook, .fa-share-alt-square  {
           transition: all .2s ease-in;

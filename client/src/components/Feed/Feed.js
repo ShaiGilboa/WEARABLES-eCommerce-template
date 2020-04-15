@@ -43,6 +43,7 @@ width: 100vw;
 `
 const WrapperSideBar = styled.div`
 width: 300px;
+/* margin-right: 4rem; */
 `
 
 const WrapperItems = styled.section`
@@ -51,4 +52,8 @@ const WrapperItems = styled.section`
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  @media(max-width: 1024px){
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
 `;

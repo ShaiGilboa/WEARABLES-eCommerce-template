@@ -71,7 +71,6 @@ const WrapperSideBar = styled.div`
   width: 300px;
   border-right: 1px solid #e6ecf0;
   height:calc(100vh - 80px);
-  /* padding: 20px 30px; */
 `
 const MenuCat = styled.div`
 

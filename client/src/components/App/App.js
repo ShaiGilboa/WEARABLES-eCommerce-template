@@ -47,10 +47,13 @@ function App() {
         <Route path='/companies/:companyId'>
           <CompanyFeed />
         </Route>
+<<<<<<< Updated upstream
         <Route path='/checkout'>
           <Checkout />
         </Route>
         <BannerPromo />
+=======
+>>>>>>> Stashed changes
       </Switch>
       <Footer/>
     </Router>
