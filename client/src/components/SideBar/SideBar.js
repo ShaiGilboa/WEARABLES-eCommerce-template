@@ -2,26 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { imgCategories } from '../../constants';
 // import {Link} from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Checkbox } from '@material-ui/core';
 
 
 const SideBar = () => {
-  let history = useHistory();
-
+  let history = useHistory(); 
+  const location = useLocation()
+  let active = location.search;
+  active = active.replace('?category=','');
+  
   const linkToCategory = (ev, title) => {
     ev.preventDefault();
     ev.stopPropagation();
     history.push(`/items?category=${title}`);
   }
 
+
   return (
     <WrapperSideBar>
       <MenuCat>
         <CatTitle>Categories</CatTitle>
         <WrapperCatList>
+
           {imgCategories.map(({ title }) =>
-            <CatList onClick={(ev) => linkToCategory(ev, title)}>{title}</CatList>
+            <CatList key={title} style={{ backgroundColor: active === title && "#F4F7F6" }} onClick={(ev) => linkToCategory(ev, title)}>{title}</CatList>
           )}
         </WrapperCatList>
       </MenuCat>
@@ -93,17 +98,16 @@ const WrapperFilterList = styled.div`
  border-bottom: 1px solid #e6ecf0;
 
 `
-
 const CatList = styled.li`
 padding: 20px 0;
 border-bottom: 1px solid #e6ecf0;
 cursor: pointer;
 padding: 15px 30px;
+transition: all .1s ease-in;
   &:hover{
     background-color: #F4F7F6;
   }
 `
-
 const FilterButton = styled.input`
 outline: none;
 background-color: red;

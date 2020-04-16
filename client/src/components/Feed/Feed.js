@@ -11,24 +11,27 @@ import SideBar from '../SideBar';
 const Feed = () => {
   const [items, setItems] = React.useState([]);
   const location = useLocation()
-
+  let title = location.search;
+  title = title.replace('?category=','');
   React.useEffect(() => {
     fetch(`/items${location.search}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
         setItems(res.filtered)
       })
-  }, [])
+  }, [location.search])
   return (
     <>
       <Wrapper>
         <WrapperSideBar>
           <SideBar />
         </WrapperSideBar>
+        <Content>
+        <Title>{title}</Title>
         <WrapperItems>
           {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
         </WrapperItems>
+        </Content>
       </Wrapper>
     </>
   );
@@ -45,9 +48,18 @@ const WrapperSideBar = styled.div`
 width: 300px;
 /* margin-right: 4rem; */
 `
+const Content = styled.div`
+display: flex;
+flex-direction: column;
+width:calc(100vw - 300px);
+`
+const Title = styled.h2`
+  padding: 60px 60px 0;
+  font-size: 3em;
+`
 
 const WrapperItems = styled.section`
-  margin: 60px;
+  padding: 60px;
   width: 100%;
   display: grid;
   gap: 2rem;

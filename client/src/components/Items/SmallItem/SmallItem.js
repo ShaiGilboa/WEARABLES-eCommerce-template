@@ -40,11 +40,7 @@ const SmallItem = ({
       </ImageWrapper>
       <InfoWrapper>
         <ItemInfo>
-<<<<<<< Updated upstream
-          <div style={{ height: '150px' }}>
-=======
           <div style={{ height: '126px' }}>
->>>>>>> Stashed changes
             <h2>{name}</h2>
             <CategoryItem>{category}</CategoryItem>
           </div>
