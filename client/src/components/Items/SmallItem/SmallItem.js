@@ -7,6 +7,8 @@ import {
   addItemToCart,
 } from '../../../Redux/actions';
 import { FormHelperText } from "@material-ui/core";
+import StarRating from '../../RatingStars';
+import { useHistory } from "react-router-dom";
 
 const SmallItem = ({
   item
@@ -22,14 +24,27 @@ const SmallItem = ({
     companyId,
   } = item;
   const dispatch = useDispatch();
+  let history = useHistory();
+
+  function handleClickBigItem(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    history.push(`/items/${id}`);
+  }
+
   return (
     <Wrapper>
+      <WrapperContent onClick={ev => {handleClickBigItem(ev)}}>
       <ImageWrapper>
         <ItemImage src={imageSrc} />
       </ImageWrapper>
       <InfoWrapper>
         <ItemInfo>
+<<<<<<< Updated upstream
           <div style={{ height: '150px' }}>
+=======
+          <div style={{ height: '126px' }}>
+>>>>>>> Stashed changes
             <h2>{name}</h2>
             <CategoryItem>{category}</CategoryItem>
           </div>
@@ -38,10 +53,12 @@ const SmallItem = ({
           </div>
 
           {/* <Link to={`/items/companyId=${companyId}`}>{companyId}</Link> */}
-          <p>amount in stock: {numInStock}</p>
+          <p style={{ paddingBottom: '7px' }}>amount in stock: {numInStock}</p>
+          <StarRating />
         </ItemInfo>
       </InfoWrapper>
       {/* <ButtonWrapper data-css='ButtonWrapper'> */}
+      </WrapperContent>
       <AddToCartButton
         onClick={() => dispatch(addItemToCart(item))}>
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
@@ -56,8 +73,19 @@ export default SmallItem;
 const Wrapper = styled.div`
 border: 1px solid #e6ecf0;
 height: 510px;
+cursor: pointer;
+transition: all .2s ease-in;
+  &:hover{
+    -webkit-box-shadow: 2px 3px 12px 2px rgba(0,0,0,0.12);
+    -moz-box-shadow: 2px 3px 12px 2px rgba(0,0,0,0.12);
+    box-shadow: 2px 3px 12px 2px rgba(0,0,0,0.12);
+  }
 /* padding: 30px; */
 `;
+
+const WrapperContent = styled.div`
+
+`
 
 const CategoryItem = styled.h3`
 padding: 4px;
@@ -99,6 +127,10 @@ cursor: pointer;
 display: flex;
 justify-content: space-between;
 align-items: center;
+transition: all .2s ease-in;
+  &:hover{
+    background-color: #e8e8e8;
+  }
 `
 
 // const ButtonWrapper = styled.div`

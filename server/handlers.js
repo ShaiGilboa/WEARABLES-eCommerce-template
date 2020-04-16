@@ -1,5 +1,5 @@
 /// HANDLER FILE
-const items = require('./data/items');
+let items = require('./data/items');
 // const itemsDev = require('./data/items-Dev');
 const companies = require('./data/companies');
 
@@ -34,11 +34,22 @@ const handleCompany = (req, res) => {
 }
 
 const handleCheckout = (req, res) => {
-  //data received from post
-  // let itemspurchased = items;
+  // console.log('1',items[0].numInStock)
+  // items[0].numInStock = 9
+  // console.log('2',items[0].numInStock)
+  // const orders = req.body.orders;
+  // orders.forEach((order) => {
+  //   if(order.itemId === items.numInStock){
+  //     items.numInStock =- order.numOrdered;
+  //   }
+  // })
+  // console.log(items[0].numInStock)
+
+  // data received from post
   const orders = req.body.orders;
-  //create a var. to store the result of the map over the items data
-  let modifieditems = items.map(item => {
+  console.log(orders)
+  // create a var. to store the result of the map over the items data
+  let modifiedItems = items.map(item => {
     //create a new version of the single item object
     let newItem = { ...item };
     //create a flag
@@ -47,7 +58,8 @@ const handleCheckout = (req, res) => {
     let savedOrder;
     //loop over the orders to match ids
     orders.forEach(order => {
-      if(order.itemId === newItem.id){
+    //  const orderedItem = items.find()
+      if(order.itemId === item.id){
         isThisItemOrdered = true;
     //store the matching ids
         savedOrder = order;
@@ -55,15 +67,16 @@ const handleCheckout = (req, res) => {
     })
     // use flag to either return the unchange items
     if(!isThisItemOrdered){
-      return item;
+      return newItem;
     // or return the modified items
     } else {
-      newItem.numInStock =- savedOrder.numOrdered;
+      newItem.numInStock -= savedOrder.numOrdered;
       return newItem
     }
   })
   //update the items array
-  items = modifieditems;
+  items = modifiedItems;
+  console.log(items[0])
   res.send("order complete with success");
 }
 

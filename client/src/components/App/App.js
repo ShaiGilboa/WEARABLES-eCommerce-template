@@ -34,11 +34,19 @@ function App() {
       <GlobalStyles />
       <Navbar />
       <Switch>
+<<<<<<< Updated upstream
         <Route path='/' exact>
           <HomePage />
         </Route>
         <Route path="/profile" component={Profile} />
         {/* <Cart /> */}
+=======
+      <Route path='/' exact>
+        <HomePage />
+      </Route>
+      <Route path="/profile" component={Profile} />
+      {/* <Cart /> */}
+>>>>>>> Stashed changes
         <Route path='/items' exact>
           <Feed />
         </Route>
@@ -52,9 +60,13 @@ function App() {
         <Route path='/checkout'>
           <Checkout />
         </Route>
+<<<<<<< Updated upstream
         <Route path='*'>
           <FourOhFour />
         </Route>
+=======
+        <BannerPromo />
+>>>>>>> Stashed changes
       </Switch>
       <Footer />
     </Router>
