@@ -45,3 +45,8 @@ export const updateUserInfo = (newUserInfo) => ({
   type: 'UPDATE_USER_INFO',
   newUserInfo,
 })
+
+export const changeStatus = (newStatus) => ({
+  type: 'CHANGE_STATUS',
+  newStatus,
+})

@@ -20,6 +20,7 @@ import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
 import MockItem from '../Items/MockItem';
+import OrderConfirmation from '../OrderConfirmation';
 
 import CompanyFeed from '../CompanyFeed';
 import FourOhFour from '../fourOhFour';
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path='/checkout'>
           <Checkout />
+        </Route>
+        <Route path='/order-confirmation'>
+          <OrderConfirmation />
         </Route>
         <Route path='*'>
           <FourOhFour />

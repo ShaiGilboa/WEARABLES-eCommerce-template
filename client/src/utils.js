@@ -70,7 +70,7 @@ export const validateAddress = (address) => {
 }
 
 export const validatePostalCode = (postalCode) => {
-  if(/^[A-Za-z][0-9][A-Za-z] ?[A-Za-z][0-9][A-Za-z]$/.test(postalCode)){
+  if(/^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/.test(postalCode)){
     return true;
   } else {
     return false;

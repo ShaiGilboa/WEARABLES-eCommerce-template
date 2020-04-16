@@ -1,5 +1,19 @@
-import React from 'react';
+import React, {
+  useState,
+} from 'react';
 import styled from 'styled-components';
+
+import {
+  useHistory,
+} from 'react-router-dom';
+
+import {
+  useDispatch,
+} from "react-redux";
+
+import {
+  changeStatus,
+} from '../../../Redux/actions';
 
 import Button from '../../UnstyledButton';
 
@@ -9,16 +23,19 @@ const Form = ({
   userInfo,
   validateForm,
   }) => {
-    const [fname, setFname] = React.useState('');
-    const [lname, setLname] = React.useState('');
-    const [address, setAddress] = React.useState('');
-    const [city, setCity] = React.useState('');
-    // const [province, setProvince] = React.useState('');
-    const [postalCode, setPostalCode] = React.useState('');
-    const [cardNumber, setCardNumber] = React.useState('');
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    // const [province, setProvince] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
+    const [inputProblem, setInputProblem] = useState(false);
     
     const handleSubmit = () => {
-      console.log('submit')
       const newUserInfo = {
         ...userInfo,
         billingInfo: {
@@ -31,8 +48,15 @@ const Form = ({
           cardNumber,
         }
       }
-      validateForm('Billing-info', newUserInfo);
-      setFormNumber(formNumber+1);
+      const validationResponse = validateForm('Billing-info', newUserInfo);
+      if (validationResponse){
+        const validationResponseString = validationResponse.join(', ')
+        setInputProblem('it seems that there is a problem with: ' + validationResponseString)
+      } else {
+        setInputProblem(false)
+        dispatch(changeStatus('order-confirmation'))
+        history.push('/order-confirmation')
+      }
     }
 
     const [btnDisplay, setBtnDisplay] = React.useState('block')
@@ -150,7 +174,10 @@ const Form = ({
               event.preventDefault();
               handleSubmit();
               }}
-          >Next</button>
+          >Confirm</button>
+          {inputProblem && (<div>
+              <h2>{inputProblem}</h2>
+              </div>)}
         </Wrapper>
     );
   } else {

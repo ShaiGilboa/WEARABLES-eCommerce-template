@@ -14,9 +14,12 @@ import {
   totalAmount,
 } from '../../utils';
 
+import {
+  changeStatus,
+} from '../../Redux/actions';
+
 const Checkout = () => {
   const dispatch = useDispatch();
-
   
   const userInfo = useSelector(state=>state.userInfo.userInfo);
 

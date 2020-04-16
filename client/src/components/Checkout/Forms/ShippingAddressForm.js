@@ -23,9 +23,13 @@ const Form = ({
 
     const inputPhoneNumber = (event) => {
       const phoneNumberString = event.target.value;
-      const RegexNumberExtractor = /\d+/g;
-      const justNumberFromString = phoneNumberString.match(RegexNumberExtractor).join('')
-      setPhoneNumber(justNumberFromString);
+      if(phoneNumberString){
+        const RegexNumberExtractor = /\d+/g;
+        const justNumberFromString = phoneNumberString.match(RegexNumberExtractor).join('')
+        setPhoneNumber(justNumberFromString);
+      } else {
+        setPhoneNumber('');
+      }
     }
 
     const handleSubmit = () => {
