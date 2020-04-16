@@ -9,17 +9,28 @@ import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
 
 const Feed = () => {
-  const [items, setItems] = React.useState([]);
+  console.log('feed')
   const location = useLocation()
+  const [items, setItems] = React.useState([]);
+  const {category} = useParams()
   let title = location.search;
   title = title.replace('?category=','');
   React.useEffect(() => {
-    fetch(`/items${location.search}`)
+    if (category) {
+      fetch(`/items/filter/${category}${location.search}`)
       .then(res => res.json())
       .then(res => {
-        setItems(res.filtered)
+        if(res.status===200)setItems(res.items)
       })
-  }, [location.search])
+    }else{
+      fetch(`/items${location.search}`)
+        .then(res => res.json())
+        .then(res => {
+          if(res.status===200)setItems(res.items)
+        })
+    }
+  }, [location])
+  console.log('items',items)
   return (
     <>
       <Wrapper>

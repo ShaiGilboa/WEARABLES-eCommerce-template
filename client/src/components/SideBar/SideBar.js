@@ -15,7 +15,12 @@ const SideBar = () => {
   const linkToCategory = (ev, title) => {
     ev.preventDefault();
     ev.stopPropagation();
-    history.push(`/items?category=${title}`);
+    history.push(`/items/filter/${title}`);
+  }
+
+  const handleSubmit = (event) => {
+    // event.preventDefault();
+    console.log(event)
   }
 
 
@@ -34,35 +39,38 @@ const SideBar = () => {
         <CatTitle>Filters</CatTitle>
         <h4 style={{padding:'20px 30px 0'}}>Price</h4>
         <WrapperFilterList>
-          <form>
+          <form
+            onSubmit={(event)=>handleSubmit(event)}
+          >
+            <input type='checkbox' name='category' value={location.search} style={{display:'none'}} />
           <CheckboxWrapper data-css='checkboxWrapper'>
             <input type="checkbox" name="low-price"/>
-            <label for="0to30">$0 to $30</label>
+            <label htmlFor="low-price">$0 to $30</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="med-price" />
-            <label for="30to60">$30 to $60</label>
+            <label htmlFor="30to60">$30 to $60</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="high-price" />
-            <label for="60to100">$60 to $100</label>
+            <label htmlFor="60to100">$60 to $100</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="highest" />
-            <label for="more100">$100 and more</label>
+            <label htmlFor="more100">$100 and more</label>
           </CheckboxWrapper>
           <h4 style={{padding:'20px 0 20px'}}>Body Location</h4>
           <CheckboxWrapper data-css='checkboxWrapper'>
-            <input type="checkbox" name="low-price"/>
-            <label for="0to30">Arms</label>
+            <input type="checkbox" name="body_location" value='Arms'/>
+            <label htmlFor="0to30">Arms</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
-            <input type="checkbox" name="med-price" />
-            <label for="30to60">Wrist</label>
+            <input type="checkbox" name="body_location" value='Wrist'/>
+            <label htmlFor="30to60">Wrist</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
-            <input type="checkbox" name="high-price" />
-            <label for="60to100">Head</label>
+            <input type="checkbox" name="body_location" value='Head' />
+            <label htmlFor="60to100">Head</label>
           </CheckboxWrapper>
           <FilterButton type="submit" value="Filter"/>
           </form>

@@ -9,22 +9,36 @@ const handleItemId = (req, res) => {
   const item = items.find(item => item.id === parsedId);
   return res.json({ item });
 }
+
+const filterByQueries = (queries, category) => {
+  let filteredItems = items;
+  let searchParameter = null;
+
+  if(category)filteredItems=filteredItems.filter(item=> item.category === category)
+  console.log('queries',queries)
+  if(queries){
+      for (let searchQuery in queries) {
+      searchParameter = queries[searchQuery];
+      if(typeof searchParameter === 'string'){
+        filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
+      } else {
+        searchParameter.forEach(parameter => filteredItems.concat(filteredItems.filter(item => item[searchQuery] === searchParameter)))
+      }
+    }
+  }
+  return filteredItems;
+}
 // use the queries as values to filter the array with
 // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
 const handleQueries = (req, res) => {
-  let filtered = items;
-  let value = null;
-  // this function does not allow to check for an item that is 
-  // BOTH: 'Wrist' and 'Arms'
-  // TO DO: run over the req,query to check the filter values before 
-  // filtering, then have a function that checks for item[key]===key||key2||key3
-  for (let key in req.query) {
-    value = req.query[key];
-    filtered = filtered.filter(item => item[key] === value);
-    // filtered = filtered.filter(item=>key==='id'? parseInt(item[key])===value : item[key]===value);
+  let filtered = filterByQueries(req.query);
+  if (filtered.length) {
+    res.status(200).send({status: 200, items: filtered})
+  } else {
+    res.status(404).send({status: 404, message: 'no items in category'})
   }
-  return res.json({ filtered });
 }
+
 const handleCompany = (req, res) => {
   const { companyId } = req.params;
   const parsedId = parseInt(companyId);
@@ -80,10 +94,20 @@ const handleCheckout = (req, res) => {
   res.send("order complete with success");
 }
 
+const handleCategoryFilter = (req, res) => {
+  const { category } = req.params;
+  const itemsInCategory = filterByQueries(req.query, category)
+  if (itemsInCategory.length) {
+    res.status(200).send({status: 200, items: itemsInCategory})
+  } else {
+    res.status(404).send({status: 404, message: 'no items in category'})
+  }
+}
 //
 module.exports = {
   handleItemId,
   handleQueries,
   handleCompany,
-  handleCheckout
+  handleCheckout,
+  handleCategoryFilter,
 }

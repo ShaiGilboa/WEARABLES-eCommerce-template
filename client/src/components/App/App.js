@@ -43,9 +43,13 @@ function App() {
         <Route path='/items' exact>
           <Feed />
         </Route>
-        <Route path='/items/:itemId' >
+        <Route path='/items/:itemId' exact>
           {/*render the page component*/}
           <BigItem />
+        </Route>
+        <Route path='/items/filter/:category' exact>
+          {/*render the page component*/}
+          <Feed />
         </Route>
         <Route path='/companies/:companyId'>
           <CompanyFeed />

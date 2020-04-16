@@ -4,8 +4,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 // const items = require('./data/items');
 const PORT = 4000;
-const { handleItemId, handleQueries, handleCompany, 
-  handleCheckout 
+const { 
+  handleItemId,
+  handleQueries,
+  handleCompany, 
+  handleCheckout,
+  handleCategoryFilter,
 } = require('./handlers');
 // 
 // const filterFunction = (array, property, value) => {
@@ -34,6 +38,7 @@ express()
   // use the queries as values to filter the array with
   // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
   .get('/items', handleQueries)
+  .get('/items/filter/:category', handleCategoryFilter)
   .get('/items/:itemId', handleItemId)
   .get('/companies/:companyId', handleCompany)
   .post('/checkout', handleCheckout)

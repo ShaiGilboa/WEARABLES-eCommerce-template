@@ -33,7 +33,6 @@ const Form = ({
     }
 
     const handleSubmit = () => {
-      console.log('submit')
       const newUserInfo = {
         ...userInfo,
         shippingAddress: {
@@ -48,7 +47,6 @@ const Form = ({
       }
       const validationResponse = validateForm('Shipping-Address', newUserInfo)
       if (validationResponse){
-        console.log('resp',validationResponse)
         const validationResponseString = validationResponse.join(', ')
         setInputProblem('it seems that there is a problem with: ' + validationResponseString)
       } else {

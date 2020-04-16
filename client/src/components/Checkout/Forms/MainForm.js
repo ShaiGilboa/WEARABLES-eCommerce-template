@@ -32,9 +32,7 @@ const Form = ({
 
 
   const validateForm = (type, data) => {
-    console.log('validateForm', data)
     let newUserInfo = JSON.parse(JSON.stringify(userInfo));
-    console.log('newUserInfo', newUserInfo);
     let inputProblems = []
     switch (type) {
       case 'Personal-Information':
