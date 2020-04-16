@@ -61,9 +61,9 @@ const Form = ({
         if(data.shippingAddress.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
         if(!validateAddress(data.shippingAddress.address))inputProblems = inputProblems.concat(['Address'])
         if(!validateOnlyLetters(data.shippingAddress.city) && data.shippingAddress.city.length===0)inputProblems = inputProblems.concat(['City'])
-        if(data.shippingAddress.province.length!=='on' || data.shippingAddress.province.length!=='qc')inputProblems = inputProblems.concat(['Email'])
+        if(data.shippingAddress.province !=='on' && data.shippingAddress.province !=='qc')inputProblems = inputProblems.concat(['Province'])
         if(!validatePostalCode(data.shippingAddress.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
-        if(!validateOnlyDigits(data.shippingAddress.phoneNumber) && data.shippingAddress.phoneNumber.length!==10)inputProblems = inputProblems.concat(['Phone Number'])
+        if(!validateOnlyDigits(data.shippingAddress.phoneNumber) || data.shippingAddress.phoneNumber.length!==10)inputProblems = inputProblems.concat(['Phone Number'])
         if(inputProblems.length){
           return inputProblems;
         } else {

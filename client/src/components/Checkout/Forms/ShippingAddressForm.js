@@ -18,8 +18,15 @@ const Form = ({
     const [province, setProvince] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-
+    // const [phoneNumberString, setPhoneNumberString] = useState('+1 ')
     const [inputProblem, setInputProblem] = useState(false);
+
+    const inputPhoneNumber = (event) => {
+      const phoneNumberString = event.target.value;
+      const RegexNumberExtractor = /\d+/g;
+      const justNumberFromString = phoneNumberString.match(RegexNumberExtractor).join('')
+      setPhoneNumber(justNumberFromString);
+    }
 
     const handleSubmit = () => {
       console.log('submit')
@@ -89,12 +96,8 @@ const Form = ({
                 id='phoneNumber'
                 name='phone-number'
                 placeholder='+1(XXX) XXX-XXXX'
-                // value={`+1(${phoneNumber.substring(0,2)}) ${phoneNumber.substring(3,5)} ${phoneNumber.substring(6,9)}`}
-                value={`+1 ${phoneNumber}`}
-                onChange={(event)=>{
-                  // const strValue=
-                  setPhoneNumber(event.target.value.slice(3))
-                }}
+                value={phoneNumber}
+                onChange={(event)=>inputPhoneNumber(event)}
               ></input>
           </div>
           <label htmlFor='address'>Address:</label>
