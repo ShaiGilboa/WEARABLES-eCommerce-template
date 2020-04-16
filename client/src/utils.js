@@ -51,8 +51,60 @@ export const validateString = (string) => {
   }
 }
 
-export const validateEmail = (email) => {
-  if(email.includes('@',1) && email.includes('.',3)) return true;
-  return false;
+export const  validateEmail = (email) => {
+  // taken from: https://www.w3resource.com/javascript/form/email-validation.php
+  // checks: 'LL..LL@LL..LL.LLL.LLLL.LL
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)){
+      return true;
+    } else {
+      return false;
+    }
+} 
+
+export const validateAddress = (address) => {
+  if(/[^A-Za-z]+\b[0-9]+/.test(address)){
+    return true;
+  } else {
+    return false;
+  }
 }
 
+export const validatePostalCode = (postalCode) => {
+  if(/^[A-Za-z][0-9][A-Za-z] ?[A-Za-z][0-9][A-Za-z]$/.test(postalCode)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const validateOnlyDigits = (string) => {
+  if(/^[0-9]+$/.test(string)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const validateOnlyLetters = (string) => {
+  if(/^[A-Za-z]+$/.test(string)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const validateCreditCard = (string) => {
+  //card info taken from https://www.w3resource.com/javascript/form/credit-card-validation.php
+  if(/^[0-9]+$/.test(string)){
+    // if(/^(?:3[47][0-9]{13})$/.test(string) || // american Express
+    // /^(?:4[0-9]{12}(?:[0-9]{3})?)$/.test(string) || // Visa
+    // /^(?:5[1-5][0-9]{14})$/.test(string) || //MasterCard
+    // /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/.test(string) || //discover
+    // /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/.test(string) || //diners Club
+    // /^(?:(?:2131|1800|35\d{3})\d{11})$/.test(string) // JCB Card // what is this?
+    // )
+    return true;
+  } else {
+    return false;
+  }
+}

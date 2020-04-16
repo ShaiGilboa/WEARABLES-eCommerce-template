@@ -10,6 +10,11 @@ import {
 
 import {
   validateEmail,
+  validateAddress,
+  validatePostalCode,
+  validateOnlyDigits,
+  validateOnlyLetters,
+  validateCreditCard,
 } from '../../../utils';
 
 import UserInfoForm from './UserInfoForm';
@@ -31,31 +36,61 @@ const Form = ({
     console.log('validateForm', data)
     let newUserInfo = JSON.parse(JSON.stringify(userInfo));
     console.log('newUserInfo', newUserInfo);
+    let inputProblems = []
     switch (type) {
       case 'Personal-Information':
-        console.log('email?',validateEmail(data.email))
-        newUserInfo = {
-          ...newUserInfo,
-          fname: data.fname,
-          lname: data.lname,
-          email: data.email,
-        };
-        console.log('newUserInfo',newUserInfo)
-        dispatch(updateUserInfo(newUserInfo))
+        if(data.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
+        if(data.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
+        if(!validateEmail(data.email))inputProblems = inputProblems.concat(['Email'])
+          
+        if(inputProblems.length){
+          return inputProblems
+        } else {
+          newUserInfo = {
+            ...newUserInfo,
+            fname: data.fname,
+            lname: data.lname,
+            email: data.email,
+          };
+          dispatch(updateUserInfo(newUserInfo))
+          return false;
+        }
       break;
       case 'Shipping-Address':
-        newUserInfo = {
-          ...newUserInfo,
-          shippingAddress: data.shippingAddress,
+        if(data.shippingAddress.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
+        if(data.shippingAddress.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
+        if(!validateAddress(data.shippingAddress.address))inputProblems = inputProblems.concat(['Address'])
+        if(!validateOnlyLetters(data.shippingAddress.city) && data.shippingAddress.city.length===0)inputProblems = inputProblems.concat(['City'])
+        if(data.shippingAddress.province.length!=='on' || data.shippingAddress.province.length!=='qc')inputProblems = inputProblems.concat(['Email'])
+        if(!validatePostalCode(data.shippingAddress.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
+        if(!validateOnlyDigits(data.shippingAddress.phoneNumber) && data.shippingAddress.phoneNumber.length!==10)inputProblems = inputProblems.concat(['Phone Number'])
+        if(inputProblems.length){
+          return inputProblems;
+        } else {
+          newUserInfo = {
+            ...newUserInfo,
+            shippingAddress: data.shippingAddress,
+          }
+          dispatch(updateUserInfo(newUserInfo))
         }
-        dispatch(updateUserInfo(newUserInfo))
       break;
       case 'Billing-info':
+        if(data.billingInfo.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
+        if(data.billingInfo.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
+        if(!validateAddress(data.billingInfo.address))inputProblems = inputProblems.concat(['Address'])
+        if(!validateOnlyLetters(data.billingInfo.city) && data.billingInfo.city.length===0)inputProblems = inputProblems.concat(['City'])
+        // if(data.billingInfo.province.length!=='on' || data.shippingAddress.province.length!=='qc')inputProblems = inputProblems.concat(['Email'])
+        if(!validatePostalCode(data.billingInfo.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
+        if(!validateCreditCard(data.billingInfo.cardNumber))inputProblems = inputProblems.concat(['Phone Number'])
+        if(inputProblems.length){
+          return inputProblems;
+        } else {
         newUserInfo = {
           ...newUserInfo,
           billingInfo: data.billingInfo,
         }
         dispatch(updateUserInfo(newUserInfo))
+        }
       break;
       default:
       break;

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 
@@ -11,9 +13,11 @@ const Form = ({
   userInfo,
   validateForm,
   }) => {
-    const [fname, setFname] = React.useState('');
-    const [lname, setLname] = React.useState('');
-    const [email, setEmail] = React.useState('');
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
+    const [email, setEmail] = useState('');
+
+    const [inputProblem, setInputProblem] = useState(false);
 
     const handleSubmit = () => {
       console.log('submit')
@@ -23,8 +27,15 @@ const Form = ({
         lname,
         email,
       }
-      validateForm('Personal-Information', newUserInfo);
-      setFormNumber(formNumber+1)
+      const validationResponse = validateForm('Personal-Information', newUserInfo)
+      if (validationResponse){
+        console.log('resp',validationResponse)
+        const validationResponseString = validationResponse.join(', ')
+        setInputProblem('it seems that there is a problem with: ' + validationResponseString)
+      } else {
+        setInputProblem(false)
+        setFormNumber(formNumber+1)
+      }
     }
 
     React.useEffect(()=>{
@@ -75,6 +86,9 @@ const Form = ({
               handleSubmit();
               }}
             >Next</button>
+            {inputProblem && (<div>
+              <h2>{inputProblem}</h2>
+              </div>)}
         </Wrapper>
       );
     }else {

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 import Button from '../../UnstyledButton';
@@ -9,13 +11,15 @@ const Form = ({
   userInfo,
   validateForm,
   }) => {
-    const [fname, setFname] = React.useState('');
-    const [lname, setLname] = React.useState('');
-    const [address, setAddress] = React.useState('');
-    const [city, setCity] = React.useState('');
-    const [province, setProvince] = React.useState('');
-    const [postalCode, setPostalCode] = React.useState('');
-    const [phoneNumber, setPhoneNumber] = React.useState('');
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [province, setProvince] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const [inputProblem, setInputProblem] = useState(false);
 
     const handleSubmit = () => {
       console.log('submit')
@@ -31,8 +35,15 @@ const Form = ({
           phoneNumber,
         }
       }
-      validateForm('Shipping-Address', newUserInfo);
-      setFormNumber(formNumber+1)
+      const validationResponse = validateForm('Shipping-Address', newUserInfo)
+      if (validationResponse){
+        console.log('resp',validationResponse)
+        const validationResponseString = validationResponse.join(', ')
+        setInputProblem('it seems that there is a problem with: ' + validationResponseString)
+      } else {
+        setInputProblem(false)
+        setFormNumber(formNumber+1)
+      }
     }
 
     React.useEffect(()=>{
@@ -63,7 +74,7 @@ const Form = ({
               value={fname}
               onChange={(event)=>setFname(event.target.value)}
               ></input>
-              <label htmlFor='lname'>Last Name:</label>
+            <label htmlFor='lname'>Last Name:</label>
             <input
               type='text'
               id='lname'
@@ -71,6 +82,19 @@ const Form = ({
               placeholder='Last Name'
               value={lname}
               onChange={(event)=>setLname(event.target.value)}
+              ></input>
+              <label htmlFor='phone-number'>Phone Number:</label>
+              <input
+                type='number'
+                id='phoneNumber'
+                name='phone-number'
+                placeholder='+1(XXX) XXX-XXXX'
+                // value={`+1(${phoneNumber.substring(0,2)}) ${phoneNumber.substring(3,5)} ${phoneNumber.substring(6,9)}`}
+                value={`+1 ${phoneNumber}`}
+                onChange={(event)=>{
+                  // const strValue=
+                  setPhoneNumber(event.target.value.slice(3))
+                }}
               ></input>
           </div>
           <label htmlFor='address'>Address:</label>
@@ -124,6 +148,9 @@ const Form = ({
               handleSubmit();
               }}
           >Next</button>
+          {inputProblem && (<div>
+              <h2>{inputProblem}</h2>
+              </div>)}
         </Wrapper>
       );
     }else {
