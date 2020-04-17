@@ -43,7 +43,7 @@ display: flex;
 border: 1px solid #e6ecf0; 
 justify-content: space-around;
 width: 100vw;
-@media (max-width: 425px) {
+@media (max-width: 700px) {
   flex-direction: column;
 }
 /* background-image: url('../assets/dot-grid.png'); */
@@ -54,7 +54,7 @@ width: 100vw;
     border-right: 1px solid #e6ecf0;
     padding: 50px 30px;
     width: 25%;
-    @media (max-width: 425px) {
+    @media (max-width: 700px) {
     width: 100%;
     padding: 30px 30px;
     border-bottom: 1px solid #e6ecf0;
@@ -87,7 +87,7 @@ width: 100vw;
     }    
 `
 const MenuList = styled.ul`
-  @media(max-width: 425px){
+  @media(max-width: 700px){
     padding-bottom: 0;
     margin-bottom: 0;
   }
@@ -97,7 +97,7 @@ const Social = styled.ul`
     display: flex;
     justify-content: flex-start;
     font-size: 2em;
-    @media(max-width: 425px){
+    @media(max-width: 700px){
     margin-bottom: 0;
   }
     li{

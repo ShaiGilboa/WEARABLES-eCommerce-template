@@ -151,7 +151,7 @@ const IconNav = styled.div`
     &:hover{
       background-color: #F4F7F6;
     }
-    @media (max-width: 425px) {
+    @media (max-width: 700px) {
   display: none;
 }
 `;
@@ -168,7 +168,7 @@ const MenuNav = styled.div`
     &:hover{
       background-color: #F4F7F6;
     }
-    @media (max-width: 425px) {
+    @media (max-width: 700px) {
   display: block;
   display: flex;
   align-items: center;
@@ -189,13 +189,13 @@ const SearchNav = styled.div`
     &:hover{
       background-color: #F4F7F6;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 990px) {
   display: block;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-@media (max-width: 425px) {
+@media (max-width: 700px) {
   display: none;
 }
 `;

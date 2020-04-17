@@ -34,13 +34,8 @@ const OrderPage = () => {
       email,
       id,
     } = userInfo.userInfo;
-<<<<<<< Updated upstream
     const orders = cartIds.map(itemId => ({ itemId: parseInt(itemId), numOrdered: cartById[itemId].quantity }))
     const body = {
-=======
-    const orders = cartIds.map(itemId=> ({itemId:parseInt(itemId), numOrdered: cartById[itemId].quantity}))
-    const body ={
->>>>>>> Stashed changes
       orders, //array of objects{'itemId', 'numOrdered'}
       orderInfo: {
         userInfo: {
