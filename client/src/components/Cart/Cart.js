@@ -34,7 +34,7 @@ const Cart = ({toggle}) => {
         {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]} toggle={toggle}/>)}
       </ItemsContainer>
       <Footer>
-        <p>Total: ${total}</p>
+        {total===-1?null:(<p>Total: ${total}</p>)}
         <CheckoutBtn
           onClick={()=>{
             toggle();

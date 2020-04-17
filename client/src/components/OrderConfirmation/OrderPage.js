@@ -32,13 +32,8 @@ const OrderPage = () => {
       email,
       id,
     } = userInfo.userInfo;
-<<<<<<< Updated upstream
     const orders = cartIds.map(itemId=> ({itemId:parseInt(itemId), numOrdered: cartById[itemId].quantity}))
     const body ={
-=======
-    const orders = cartIds.map(itemId => ({ itemId, numOrdered: cartById[itemId].quantity }))
-    const body = {
->>>>>>> Stashed changes
       orders, //array of objects{'itemId', 'numOrdered'}
       orderInfo: {
         userInfo: {
@@ -51,12 +46,10 @@ const OrderPage = () => {
         billingInfo,
       }
     }
-    console.log(body)
     fetch('/checkout', {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
-<<<<<<< Updated upstream
             "Content-Type": "application/json",
             "Accept" : "application/json"
         },
@@ -67,16 +60,7 @@ const OrderPage = () => {
       //send to order confirmed with ID
       //keep id in user info
       console.log('res',res)
-=======
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
->>>>>>> Stashed changes
     })
-      .then(res => res.json())
-      .then(res => {
-        console.log('res', res)
-      })
   }
 
 
