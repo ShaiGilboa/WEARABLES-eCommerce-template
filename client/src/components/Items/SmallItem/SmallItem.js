@@ -34,12 +34,12 @@ const SmallItem = ({
     ev.stopPropagation();
     history.push(`/items/${id}`);
   }
-  const handleAddItem = () => {
-     if(itemInCart){
-       itemInCart.quantity >= numInStock
-     }
-   dispatch(addItemToCart(item))
-  }
+  // const handleAddItem = () => {
+  //    if(itemInCart){
+  //      itemInCart.quantity >= numInStock
+  //    }
+  //  dispatch(addItemToCart(item))
+  // }
 
   return (
     <Wrapper>
@@ -66,7 +66,7 @@ const SmallItem = ({
       </WrapperContent>
       <AddToCartButton
         onClick={() => dispatch(addItemToCart(item))}>
-        // onClick={() => handleAddItem()}>
+        {/* // onClick={() => handleAddItem()}> */}
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
       </AddToCartButton>
       {/* </ButtonWrapper> */}

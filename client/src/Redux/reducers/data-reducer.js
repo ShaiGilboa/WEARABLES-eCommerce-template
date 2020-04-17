@@ -38,6 +38,11 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...newState,
       }
+    case 'CLEAR_QUERIES':
+      newState.queries = [];
+      return {
+        ...newState,
+      }
     default:
       return newState;
   };

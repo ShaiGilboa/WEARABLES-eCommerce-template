@@ -69,3 +69,7 @@ export const changeQueries = (value, checked) => ({
   value,
   checked,
 })
+
+export const clearQueries = () => ({
+  type: 'CLEAR_QUERIES',
+})

@@ -40,8 +40,6 @@ const SideBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(event)
-    console.log('location',location)
     let queriesString = ''
     if(queriesArr.length)queriesString = '?body_location='+queriesArr.join('&body_location=')
     history.push(location.pathname+queriesString)

@@ -4,26 +4,36 @@ import {
   useParams,
   useLocation,
 } from 'react-router-dom';
-
+import {
+  useSelector,
+  useDispatch,
+  } from 'react-redux';
+import {
+  clearQueries,
+} from '../../Redux/actions';
 import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
 const SearchFeed = () =>{
   const location = useLocation();
+  const dispatch = useDispatch();
   // creates an array for all the values of the query 'body_location'
   // if there aren't any, it will return an empty array
   const queriesBodyLocation = new URLSearchParams(location.search).getAll('body_location');
   const {searchQuery} = useParams();
-  const [items, setItems] = React.useState(null);
+  const [items, setItems] = React.useState([]);
+  React.useEffect(()=>{
+    dispatch(clearQueries())
+  },[])
 
   React.useEffect(() => {
-    fetch(`/search/${searchQuery}`)
+    fetch(`/search/${searchQuery}${location.search}`)
       .then(res=>res.json())
       .then(res=>{
         if (res.status === 200) {
-          if(res.searchResults.length)setItems(res.searchResults)
+          setItems(res.searchResults)
         }
       })
-  },[searchQuery])
+  },[location])
   return (
     <Wrapper>
         <WrapperSideBar>
@@ -31,7 +41,7 @@ const SearchFeed = () =>{
         </WrapperSideBar>
         <Content>
           <Header>
-            {items ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
+            {items.length ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
             {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
           </Header>
           {items && (

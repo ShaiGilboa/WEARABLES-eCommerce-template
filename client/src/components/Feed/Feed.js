@@ -15,7 +15,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCompleted,
-  fetchResetStatus
+  fetchResetStatus,
+  clearQueries,
 } from '../../Redux/actions';
 
 const Feed = () => {
@@ -29,7 +30,9 @@ const Feed = () => {
   const { category } = useParams()
   let title = location.search;
   // title = title.replace('?category=', '');
-
+  React.useEffect(()=>{
+    dispatch(clearQueries())
+  },[])
   React.useEffect(() => {
     if (category) {
       fetch(`/items/filter/${category}${location.search}`)
@@ -65,7 +68,7 @@ const Feed = () => {
         </WrapperSideBar>
         <Content>
           <Header>
-          {!category ? <Title>All items</Title> : <Title>{category}</Title>}
+          {items.length?(!category ? <Title>All items</Title> : <Title>{category}</Title>):<Title>No items found in: {category}</Title>}
           {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
           </Header>
           <WrapperItems>

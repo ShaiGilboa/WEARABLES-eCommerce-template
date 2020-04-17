@@ -49,7 +49,7 @@ function App() {
           {/*render the page component*/}
           <BigItem />
         </Route>
-        <Route path='/items/filter/:category' exact>
+        <Route path='/items/filter/:category'>
           {/*render the page component*/}
           <Feed />
         </Route>

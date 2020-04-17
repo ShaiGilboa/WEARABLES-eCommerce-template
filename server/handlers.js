@@ -18,14 +18,19 @@ const filterByQueries = (queries, category) => {
   let searchParameter = null;
 
   if(category)filteredItems=filteredItems.filter(item=> item.category === category)
-  // console.log('queries',queries)
+  
   if(queries){
       for (let searchQuery in queries) {
       searchParameter = queries[searchQuery];
       if(typeof searchParameter === 'string'){
         filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
       } else {
-        searchParameter.forEach(parameter => filteredItems.concat(filteredItems.filter(item => item[searchQuery] === searchParameter)))
+        searchParameter.forEach(parameter => {
+          const aPartOfFiltering = filteredItems.filter(item => {
+            return (item[searchQuery] === parameter)
+            })
+          filteredItems.concat(aPartOfFiltering)
+          })
       }
     }
   }
@@ -35,11 +40,11 @@ const filterByQueries = (queries, category) => {
 // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
 const handleQueries = (req, res) => {
   let filtered = filterByQueries(req.query);
-  if (filtered.length) {
+  // if (filtered.length) {
     res.status(200).send({status: 200, items: filtered})
-  } else {
-    res.status(404).send({status: 404, message: 'no items in category'})
-  }
+  // } else {
+    // res.status(404).send({status: 404, message: 'no items in category'})
+  // }
 }
 
 const handleCompany = (req, res) => {
@@ -74,22 +79,38 @@ const handleCheckout = (req, res) => {
 
 const handleCategoryFilter = (req, res) => {
   const { category } = req.params;
+  console.log('hi')
   const itemsInCategory = filterByQueries(req.query, category)
-  if (itemsInCategory.length) {
+  // if (itemsInCategory.length) {
     res.status(200).send({status: 200, items: itemsInCategory})
-  } else {
-    res.status(404).send({status: 404, message: 'no items in category'})
-  }
+  // } else {
+    // res.status(404).send({status: 404, message: 'no items in category'})
+  // }
 }
 
-const filterBySearchQuery = (query) => {
-  const filtered = items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-  return filtered;
+const filterBySearchQuery = (query, queries) => {
+  let filteredItems = items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+  if(queries){
+      for (let searchQuery in queries) {
+      searchParameter = queries[searchQuery];
+      if(typeof searchParameter === 'string'){
+        filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
+      } else {
+        searchParameter.forEach(parameter => {
+          const aPartOfFiltering = filteredItems.filter(item => {
+            return (item[searchQuery] === parameter)
+            })
+          filteredItems.concat(aPartOfFiltering)
+          })
+      }
+    }
+  return filteredItems;
+}
 }
 
 const handleSearchQuery = (req, res) => {
   const { searchQuery } = req.params;
-  const searchResults = filterBySearchQuery(searchQuery);
+  const searchResults = filterBySearchQuery(searchQuery, req.query);
   res.status(200).send({status: 200, searchResults})
 }
 
@@ -102,4 +123,3 @@ module.exports = {
   handleCategoryFilter,
   handleSearchQuery,
 }
-// 
