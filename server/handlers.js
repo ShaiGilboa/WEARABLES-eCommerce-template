@@ -51,8 +51,13 @@ const handleCompany = (req, res) => {
 }
 
 const handleCheckout = (req, res) => {
+<<<<<<< Updated upstream
 
   const {orders, orderInfo}= req.body;
+=======
+  console.log(req.body)
+  const orders = req.body.orders;
+>>>>>>> Stashed changes
   orders.forEach((order) => {
     const item = items.find(anItem =>anItem.id === order.itemId)
     item.numInStock -= order.numOrdered;
@@ -65,11 +70,16 @@ const handleCheckout = (req, res) => {
   // });
 
   let uniqueId = new Date().valueOf().toString();
+<<<<<<< Updated upstream
   // console.log('id',uniqueId)
   // console.log('orderInfo',orderInfo)
   ordersMade[uniqueId] = {orders, orderInfo}
   // console.log('ordersMade',ordersMade[uniqueId])
   res.status(200).send({status: 200, orderId: uniqueId});
+=======
+  res.json({uniqueId});
+  console.log(res)
+>>>>>>> Stashed changes
 }
 
 const handleCategoryFilter = (req, res) => {

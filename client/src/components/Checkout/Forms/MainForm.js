@@ -124,7 +124,7 @@ export default Form;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 280px);
+  height: calc(100vh - 230px);
   /* background-color:#e6ecf0; */
   padding: 60px;
   display: flex;
