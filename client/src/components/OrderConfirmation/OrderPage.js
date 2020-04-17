@@ -12,6 +12,8 @@ import {
 
 import {
   changeStatus,
+  removeItemFromCart,
+  addtoPuschaseHistory
 } from '../../Redux/actions';
 
 const OrderPage = () => {
@@ -32,8 +34,13 @@ const OrderPage = () => {
       email,
       id,
     } = userInfo.userInfo;
+<<<<<<< Updated upstream
     const orders = cartIds.map(itemId=> ({itemId:parseInt(itemId), numOrdered: cartById[itemId].quantity}))
     const body ={
+=======
+    const orders = cartIds.map(itemId => ({ itemId: parseInt(itemId), numOrdered: cartById[itemId].quantity }))
+    const body = {
+>>>>>>> Stashed changes
       orders, //array of objects{'itemId', 'numOrdered'}
       orderInfo: {
         userInfo: {
@@ -50,6 +57,7 @@ const OrderPage = () => {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
+<<<<<<< Updated upstream
             "Content-Type": "application/json",
             "Accept" : "application/json"
         },
@@ -61,6 +69,21 @@ const OrderPage = () => {
       //keep id in user info
       console.log('res',res)
     })
+=======
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+    })
+      .then(res => res.json())
+      .then(payload => {
+        dispatch(addtoPuschaseHistory(payload.orderId))
+        history.push(`/order-success/${payload.orderId}`)
+        //create action clear cart
+        //send to order confirmed with ID
+        //keep id in user info
+        console.log('res', payload)
+      })
+>>>>>>> Stashed changes
   }
 
 

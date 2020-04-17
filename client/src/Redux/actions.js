@@ -58,3 +58,10 @@ export const fetchCompleted = () => ({
 export const fetchResetStatus = () => ({
   type: 'FETCH_ITEMS_RESET',
 })
+
+export const addtoPuschaseHistory = (payload) => ({
+  type: 'ADD_TO_PURSHASE_HISTORY',
+  payload,
+})
+
+

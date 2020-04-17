@@ -29,6 +29,7 @@ const initialState = {
   cart: getFromLocalStorage('cart') || {}, /*an object of item objects.
                 we will add to each object a 'quantity' key.
               */
+  purschaseHistory: [],
 }
 
 export default function cartReducer(state = initialState, action) {
@@ -101,6 +102,12 @@ export default function cartReducer(state = initialState, action) {
       }
     case 'CHANGE_STATUS':
       newState.status = action.newStatus;
+      return {
+        ...newState
+      }
+      case 'ADD_TO_PURSHASE_HISTORY':
+      newState.purschaseHistory.push(action.payload.id);
+      newState.status = 'order-success';
       return {
         ...newState
       }

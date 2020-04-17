@@ -68,7 +68,7 @@ const handleCheckout = (req, res) => {
   // console.log('id',uniqueId)
   // console.log('orderInfo',orderInfo)
   ordersMade[uniqueId] = {orders, orderInfo}
-  // console.log('ordersMade',ordersMade[uniqueId])
+  console.log('ordersMade',ordersMade[uniqueId])
   res.status(200).send({status: 200, orderId: uniqueId});
 }
 
