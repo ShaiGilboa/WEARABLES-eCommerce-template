@@ -1,9 +1,17 @@
 
+// const modifyString = (part, whole) => {
+//   const indexOfPart = whole.toLowerCase().indexOf(part);
+//   const part1 = whole.slice(0,indexOfPart)
+//   const part2 = whole.slice(indexOfPart+part.length)
+//   const modification = [part1, part2]
+//   return modification;
+// }
 const modifyString = (part, whole) => {
-  const indexOfPart = whole.toLowerCase().indexOf(part);
-  const part1 = whole.slice(0,indexOfPart)
-  const part2 = whole.slice(indexOfPart+part.length)
-  const modification = [part1, part2]
+  const indexOfPart = whole.toLowerCase().indexOf(part.toLowerCase());
+  const part1 = whole.substring(0,indexOfPart)
+  const part2 = whole.substring(indexOfPart,indexOfPart+part.length)
+  const part3 = whole.substring(indexOfPart+part.length)
+  const modification = [part1, part2, part3]
   return modification;
 }
 // need to add the image tp be sent back
@@ -39,7 +47,7 @@ export const totalAmount = (items, itemsId) => {
   if (priceArr.length) {
     const modifiedPriceArr = modifyPriceArr(priceArr);
     const totalSum = modifiedPriceArr.reduce((temporarySum, priceItem) => temporarySum + (priceItem.priceNumber*priceItem.quantity), 0) // calculates the sum, multiplying each price in the quantity
-    return totalSum/100; // need to divide by 100, because we multiplied by 100
+    return (totalSum/100).toFixed(2); // need to divide by 100, because we multiplied by 100
   } else return -1; // if there is a problem, returns -1
 }
 
@@ -70,7 +78,7 @@ export const validateAddress = (address) => {
 }
 
 export const validatePostalCode = (postalCode) => {
-  if(/^[A-Za-z][0-9][A-Za-z] ?[A-Za-z][0-9][A-Za-z]$/.test(postalCode)){
+  if(/^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/.test(postalCode)){
     return true;
   } else {
     return false;

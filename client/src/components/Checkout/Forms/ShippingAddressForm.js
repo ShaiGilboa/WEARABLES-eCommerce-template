@@ -23,13 +23,16 @@ const Form = ({
 
     const inputPhoneNumber = (event) => {
       const phoneNumberString = event.target.value;
-      const RegexNumberExtractor = /\d+/g;
-      const justNumberFromString = phoneNumberString.match(RegexNumberExtractor).join('')
-      setPhoneNumber(justNumberFromString);
+      if(phoneNumberString){
+        const RegexNumberExtractor = /\d+/g;
+        const justNumberFromString = phoneNumberString.match(RegexNumberExtractor).join('')
+        setPhoneNumber(justNumberFromString);
+      } else {
+        setPhoneNumber('');
+      }
     }
 
     const handleSubmit = () => {
-      console.log('submit')
       const newUserInfo = {
         ...userInfo,
         shippingAddress: {
@@ -44,7 +47,6 @@ const Form = ({
       }
       const validationResponse = validateForm('Shipping-Address', newUserInfo)
       if (validationResponse){
-        console.log('resp',validationResponse)
         const validationResponseString = validationResponse.join(', ')
         setInputProblem('it seems that there is a problem with: ' + validationResponseString)
       } else {

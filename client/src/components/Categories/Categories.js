@@ -59,7 +59,7 @@ const Categories = () => {
 
           <CatContainer onClick={(ev) => {
             ev.preventDefault();
-            categories.push(`/items?category=${title}`);
+            categories.push(`/items/filter/${title}`);
           }}
             key={id}>
             {/* <Link to={`/items?category=${title}`}> */}

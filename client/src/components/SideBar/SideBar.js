@@ -2,17 +2,36 @@ import React from 'react';
 import styled from 'styled-components';
 import { imgCategories } from '../../constants';
 // import {Link} from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Checkbox } from '@material-ui/core';
-
+import { useSelector } from 'react-redux';
 
 const SideBar = () => {
   let history = useHistory();
+  const location = useLocation()
+  let active = location.search;
+  active = active.replace('?category=', '');
 
   const linkToCategory = (ev, title) => {
     ev.preventDefault();
     ev.stopPropagation();
-    history.push(`/items?category=${title}`);
+    history.push(`/items/filter/${title}`);
+  }
+
+  const handleSubmit = (event) => {
+    // event.preventDefault();
+    console.log(event)
+  }
+
+ const filterMenu = useSelector(state => state.data.typeaheadItems);
+
+//UseEffect to console.log
+ if(filterMenu){
+   console.log(filterMenu)
+ }
+
+  const handleFilter = () => {
+
   }
 
   return (
@@ -20,44 +39,48 @@ const SideBar = () => {
       <MenuCat>
         <CatTitle>Categories</CatTitle>
         <WrapperCatList>
+
           {imgCategories.map(({ title }) =>
-            <CatList onClick={(ev) => linkToCategory(ev, title)}>{title}</CatList>
+            <CatList key={title} style={{ backgroundColor: active === title && "#F4F7F6" }} onClick={(ev) => linkToCategory(ev, title)}>{title}</CatList>
           )}
         </WrapperCatList>
       </MenuCat>
       <MenuCat>
         <CatTitle>Filters</CatTitle>
-        <h4 style={{padding:'20px 30px 0'}}>Price</h4>
+        <h4 style={{ padding: '20px 30px 0' }}>Price</h4>
         <WrapperFilterList>
-          <form>
+          <form
+            onSubmit={(event)=>handleSubmit(event)}
+          >
+            <input type='checkbox' name='category' value={location.search} style={{display:'none'}} />
           <CheckboxWrapper data-css='checkboxWrapper'>
             <input type="checkbox" name="low-price"/>
-            <label for="0to30">$0 to $30</label>
+            <label htmlFor="low-price">$0 to $30</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="med-price" />
-            <label for="30to60">$30 to $60</label>
+            <label htmlFor="30to60">$30 to $60</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="high-price" />
-            <label for="60to100">$60 to $100</label>
+            <label htmlFor="60to100">$60 to $100</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
             <input type="checkbox" name="highest" />
-            <label for="more100">$100 and more</label>
+            <label htmlFor="more100">$100 and more</label>
           </CheckboxWrapper>
           <h4 style={{padding:'20px 0 20px'}}>Body Location</h4>
           <CheckboxWrapper data-css='checkboxWrapper'>
-            <input type="checkbox" name="low-price"/>
-            <label for="0to30">Arms</label>
+            <input type="checkbox" name="body_location" value='Arms'/>
+            <label htmlFor="0to30">Arms</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
-            <input type="checkbox" name="med-price" />
-            <label for="30to60">Wrist</label>
+            <input type="checkbox" name="body_location" value='Wrist'/>
+            <label htmlFor="30to60">Wrist</label>
           </CheckboxWrapper>
           <CheckboxWrapper>
-            <input type="checkbox" name="high-price" />
-            <label for="60to100">Head</label>
+            <input type="checkbox" name="body_location" value='Head' />
+            <label htmlFor="60to100">Head</label>
           </CheckboxWrapper>
           <FilterButton type="submit" value="Filter"/>
           </form>
@@ -93,17 +116,16 @@ const WrapperFilterList = styled.div`
  border-bottom: 1px solid #e6ecf0;
 
 `
-
 const CatList = styled.li`
 padding: 20px 0;
 border-bottom: 1px solid #e6ecf0;
 cursor: pointer;
 padding: 15px 30px;
+transition: all .1s ease-in;
   &:hover{
     background-color: #F4F7F6;
   }
 `
-
 const FilterButton = styled.input`
 outline: none;
 background-color: red;

@@ -23,6 +23,7 @@ const initialState = {
                               -'purchasing'
                               -'error'
                               -'fetching'
+                              -'order-confirmation'
                               -?
                             */
   cart: getFromLocalStorage('cart') || {}, /*an object of item objects.
@@ -97,6 +98,11 @@ export default function cartReducer(state = initialState, action) {
       newState.userInfo = action.newUserInfo;
       return {
         ...newState,
+      }
+    case 'CHANGE_STATUS':
+      newState.status = action.newStatus;
+      return {
+        ...newState
       }
     default:
       return newState;

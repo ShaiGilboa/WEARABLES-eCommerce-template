@@ -20,7 +20,8 @@ import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
 import MockItem from '../Items/MockItem';
-
+import OrderConfirmation from '../OrderConfirmation';
+import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';
 import FourOhFour from '../fourOhFour';
 
@@ -32,19 +33,24 @@ function App() {
   return (
     <Router history={history}>
       <GlobalStyles />
+      <ScrollToTop />
       <Navbar />
       <Switch>
-        <Route path='/' exact>
-          <HomePage />
-        </Route>
-        <Route path="/profile" component={Profile} />
-        {/* <Cart /> */}
+      <Route path='/' exact>
+        <HomePage />
+      </Route>
+      <Route path="/profile" component={Profile} />
+      {/* <Cart /> */}
         <Route path='/items' exact>
           <Feed />
         </Route>
-        <Route path='/items/:itemId' >
+        <Route path='/items/:itemId' exact>
           {/*render the page component*/}
           <BigItem />
+        </Route>
+        <Route path='/items/filter/:category' exact>
+          {/*render the page component*/}
+          <Feed />
         </Route>
         <Route path='/companies/:companyId'>
           <CompanyFeed />
@@ -52,6 +58,12 @@ function App() {
         <Route path='/checkout'>
           <Checkout />
         </Route>
+<<<<<<< HEAD
+=======
+        <Route path='/order-confirmation'>
+          <OrderConfirmation />
+        </Route>
+>>>>>>> 0d196bf94a64f3778f57d9c1510399397c026f54
         <Route path='*'>
           <FourOhFour />
         </Route>

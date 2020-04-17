@@ -27,7 +27,13 @@ const Typeahead = (
   useEffect(() => {
     fetch('/items')
       .then(res => res.json())
-      .then(res => dispatch(addItemsToTypeahead(res.filtered)))
+      .then(res => {
+        if(res.status===200){
+          dispatch(addItemsToTypeahead(res.items))
+        } else {
+          //problem loading the items from the server
+        }
+        })
   }, [])
 
   // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
@@ -37,7 +43,8 @@ const Typeahead = (
 
   // when ever there is a change in the input search, the state get updated and we look for suggestions
   useEffect(() => {
-    (searchInputVal && typaheadItems) ? setSuggestions(typeaheadSuggestion(searchInputVal, typaheadItems)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
+    // receives an object that has the structure of the suggested strings, and the id of each suggestion
+    (searchInputVal && typaheadItems) ? setSuggestions(typeaheadSuggestion(searchInputVal, typaheadItems)) : setSuggestions([])
   }, [searchInputVal])
 
   // on mousedown outside of the search, close the results using the wrapperRef / event.target
@@ -89,7 +96,7 @@ const Typeahead = (
           </SearchButton>
         </ContainerSearch>
         {/*this is an ul*/}
-        <TypeaheadSuggestions>
+        <TypeaheadSuggestions data-css='typeaheadDropDown'>
           {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
           {/*there is a maximum number of results shown, it is set in `constants.js`*/}
           {suggestions.map((suggestion, index) => (index < MAX_NUMBER_OF_SUGGESTIONS) &&
@@ -102,8 +109,8 @@ const Typeahead = (
               >
                 <img src={suggestion.imageSrc} />
                 <span>{suggestion.parts[0]}</span>
-                <Bold>{searchInputVal}</Bold>
-                <span>{suggestion.parts[1]}</span>
+                <Bold>{suggestion.parts[1]}</Bold>
+                <span>{suggestion.parts[2]}</span>
               </li>
             </DropDownItem>
           )}
@@ -189,12 +196,19 @@ const TypeaheadSuggestions = styled.ul`
   top:50px;
   left:0;
   width: 100%;
-  background-color:rgba(255, 255, 255, 0.99);
+  background-color:rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
+  -webkit-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+-moz-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
   @media (max-width: 1425px) {
   margin-left: 6px;
   width: 411px;
+  -webkit-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+-moz-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+  
 }
     li{
       padding: 20px 10px  20px 10px;

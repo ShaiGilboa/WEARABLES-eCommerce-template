@@ -20,7 +20,6 @@ const Form = ({
     const [inputProblem, setInputProblem] = useState(false);
 
     const handleSubmit = () => {
-      console.log('submit')
       const newUserInfo = {
         ...userInfo,
         fname,
@@ -29,7 +28,6 @@ const Form = ({
       }
       const validationResponse = validateForm('Personal-Information', newUserInfo)
       if (validationResponse){
-        console.log('resp',validationResponse)
         const validationResponseString = validationResponse.join(', ')
         setInputProblem('it seems that there is a problem with: ' + validationResponseString)
       } else {

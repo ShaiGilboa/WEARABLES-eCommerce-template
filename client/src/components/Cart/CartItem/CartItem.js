@@ -14,7 +14,7 @@ import {
   removeOneItemFromCart,
 } from '../../../Redux/actions';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, toggle }) => {
   const {
     id,
     name,
@@ -34,6 +34,8 @@ const CartItem = ({ item }) => {
   const handleClickOnItem = (ev, id) => {
     ev.preventDefault();
     ev.stopPropagation();
+    // toggle only comes form the cart modal, so if we have it, and the name was clicked, we should toggle the cart modal
+    if(toggle)toggle();
     history.push(`/items/${id}`);
   }
 

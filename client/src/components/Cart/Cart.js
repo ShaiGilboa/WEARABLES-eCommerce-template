@@ -31,7 +31,7 @@ const Cart = ({toggle}) => {
     <Wrapper>
       <Header>Your shopping cart </Header>
       <ItemsContainer>
-        {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]}/>)}
+        {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]} toggle={toggle}/>)}
       </ItemsContainer>
       <Footer>
         <p>Total: ${total}</p>
