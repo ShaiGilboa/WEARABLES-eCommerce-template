@@ -34,12 +34,6 @@ const SmallItem = ({
     ev.stopPropagation();
     history.push(`/items/${id}`);
   }
-  // const handleAddItem = () => {
-  //    if(itemInCart){
-  //      itemInCart.quantity >= numInStock
-  //    }
-  //  dispatch(addItemToCart(item))
-  // }
 
   return (
     <Wrapper>
@@ -66,11 +60,7 @@ const SmallItem = ({
       </WrapperContent>
       <AddToCartButton
         onClick={() => dispatch(addItemToCart(item))}>
-<<<<<<< Updated upstream
-        {/* // onClick={() => handleAddItem()}> */}
-=======
         {/* onClick={() => handleAddItem()}> */}
->>>>>>> Stashed changes
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
       </AddToCartButton>
       {/* </ButtonWrapper> */}
@@ -143,9 +133,3 @@ transition: all .2s ease-in;
     background-color: #e8e8e8;
   }
 `
-
-// const ButtonWrapper = styled.div`
-// display: flex;
-// justify-content: space-between;
-
-// `

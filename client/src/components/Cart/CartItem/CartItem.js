@@ -79,8 +79,8 @@ const CartItem = ({ item, toggle }) => {
 
             <AddCircleOutlineIcon
               style={{ fontSize: 15, cursor: 'pointer' }}
-              // onClick={() => dispatch(addItemToCart(item))}
-              onClick={() => handleAddItem()}
+              onClick={() => dispatch(addItemToCart(item))}
+              // onClick={() => handleAddItem()}
             />
 
         </ItemQuantityWrapper>
