@@ -109,6 +109,8 @@ export default function cartReducer(state = initialState, action) {
       case 'ADD_TO_PURSHASE_HISTORY':
       newState.purschaseHistory.push(action.payload.id);
       newState.status = 'order-success';
+      newState.cart = {};
+      saveToLocalStorage('cart', newState.cart);
       return {
         ...newState
       }

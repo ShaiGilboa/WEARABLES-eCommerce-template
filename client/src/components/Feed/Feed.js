@@ -68,7 +68,7 @@ const Feed = () => {
         </WrapperSideBar>
         <Content>
           <Header>
-          {items.length?(!category ? <Title>All items</Title> : <Title>{category}</Title>):<Title>No items found in: {category}</Title>}
+          {items.length?(!category ? <Title>All items</Title> : <Title>{category}</Title>):/*<Title>No items found in: {category}</Title>*/null}
           {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
           </Header>
           <WrapperItems>
