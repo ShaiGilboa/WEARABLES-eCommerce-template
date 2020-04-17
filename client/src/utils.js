@@ -69,13 +69,13 @@ export const  validateEmail = (email) => {
     }
 } 
 
-// export const validateAddress = (address) => {
-//   if(/[^A-Za-z]+\b[0-9]+/.test(address)){
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
+export const validateAddress = (address) => {
+  if(/^(\w+ ?\b(\w+)?\b[0-9]+)|(^[0-9]+ ?\b\w+ ?\b(\w+)?)/.test(address)){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export const validatePostalCode = (postalCode) => {
   if(/^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/.test(postalCode)){
