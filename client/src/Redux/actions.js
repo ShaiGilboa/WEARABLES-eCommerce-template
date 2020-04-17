@@ -50,3 +50,11 @@ export const changeStatus = (newStatus) => ({
   type: 'CHANGE_STATUS',
   newStatus,
 })
+
+export const fetchCompleted = () => ({
+  type: 'FETCH_ITEMS_COMPLETED',
+})
+
+export const fetchResetStatus = () => ({
+  type: 'FETCH_ITEMS_RESET',
+})

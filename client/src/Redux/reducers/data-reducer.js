@@ -1,6 +1,7 @@
 const initialState = {
   id: null,
-  status: 'loading', /* -'loading'
+  status: 'idle',
+  isLoaded: true, /* -'loading'
                         -'request'
                         -'idle'
                         -'error'
@@ -16,6 +17,14 @@ export default function dataReducer(state = initialState, action) {
       newState.typaheadItems = action.items;
       return {
         ...newState,
+      };
+      case 'FETCH_ITEMS_COMPLETED':
+      return {
+        ...state, isLoaded: false
+      };
+      case 'FETCH_ITEMS_RESET':
+      return {
+        ...state, isLoaded: true
       };
     default:
       return newState;
