@@ -6,6 +6,7 @@ import {
   Link,
   useParams,
 } from 'react-router-dom';
+
 import {addItemToCart} from '../../../Redux/actions';
 
 const BigItem = ({
@@ -72,7 +73,7 @@ const BigItem = ({
             <ItemCart style={{ display: 'block', }}>
               <h2>Price:{product.price}</h2>
               <h3>Item stock: {product.numInStock}</h3>
-              <AddToCartButton onClick={() => dispatch(addItemToCart(item))}> 
+              <AddToCartButton onClick={() => dispatch(addItemToCart(product))}> 
                 <span>Add to Cart</span>
               </AddToCartButton>
             </ItemCart>

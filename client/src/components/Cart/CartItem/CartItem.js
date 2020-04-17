@@ -21,6 +21,7 @@ const CartItem = ({ item, toggle }) => {
     price,
     quantity,
     imageSrc,
+    numInStock,
   } = item;
   const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false)
 

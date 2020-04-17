@@ -58,12 +58,9 @@ function App() {
         <Route path='/checkout'>
           <Checkout />
         </Route>
-<<<<<<< HEAD
-=======
         <Route path='/order-confirmation'>
           <OrderConfirmation />
         </Route>
->>>>>>> 0d196bf94a64f3778f57d9c1510399397c026f54
         <Route path='*'>
           <FourOhFour />
         </Route>

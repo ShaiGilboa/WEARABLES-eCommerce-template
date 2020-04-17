@@ -43,11 +43,11 @@ const Feed = () => {
             <WrapperSideBar>
               <SideBar />
             </WrapperSideBar>
-            {!loaded ? (
+            {/* {!loaded ? (
         <LoaderWrapper>
           <CircularProgress color='primary' style={{ width: "30px", height: "30px", }} />
         </LoaderWrapper>
-      ) : (
+      ) : ( */}
             <Content>
               <Title>{title}</Title>
               <WrapperItems>
@@ -55,8 +55,8 @@ const Feed = () => {
               </WrapperItems>
             </Content>
          
-          )
-        }
+          {/* )
+        } */}
          </Wrapper>
     </>
 
