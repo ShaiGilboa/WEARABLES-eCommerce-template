@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
+import {useDispatch} from 'react-redux';
+
 import {
   Link,
   useParams,
 } from 'react-router-dom';
+import {addItemToCart} from '../../../Redux/actions';
 
 const BigItem = ({
   // id,
@@ -19,68 +22,62 @@ const BigItem = ({
   const [item, setItem] = useState(null);
   const [company, setCompany] = useState(null);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetch(`/items/${itemId}`)
       .then(res => res.json())
-      .then(payload => { setItem(payload) })
-      // need to add the company info, doing to have to chain the ".then"s, because it is dependent on the company id in the item object
-      .then(data => {
-        console.log(data)
-        fetch(`/companies/${data.companyId}`)
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-            setCompany(data)
-          })
-      }
-      )
+      .then(payload => {
+        setItem(payload)
+        fetch(`/companies/${payload.item.companyId}`)
+          .then(res => res.json()
+            .then(data => {
+              setCompany(data)
+            }))
+      })
+
+
   }, [itemId]);
 
-  let product;
-  if (item && item.item && company) {
+  let product, manufacturer;
+
+  if (item && item.item && company && company.company) {
     product = item.item;
-    console.log(company);
+    manufacturer = company.company;
   }
 
   return (
     <>
-      {item && item.item && company ? (
-        // <Wrapper>
-        //   <ItemImage src={product.imageSrc} />
-        //   <ItemInfo>
-        //     <h2>{product.name}</h2>
-        //     <div style={{ display: 'flex', flexDirection: 'row' }}>
-        //       <p>{product.price}</p>
-        //       <p>{product.category}</p>
-        //     </div>
-        //     <Link to={`/items/companyId=${product.companyId}`}>{product.companyId}</Link>
-        //     <p>amount in stock: {product.numInStock}</p>
-        //   </ItemInfo>
-        // </Wrapper>
-        <Wrapper >
-          <ProductName >{product.name}</ProductName>
-          <ModelDetail>
-            <ModelInfo>
-              <Category>{product.category}</Category>
-              <strong>Model Id:</strong>
-              <span >{product.id}</span>
+      {item && item.item && company && company.company ? (
+        <Wrapper>
 
-            </ModelInfo>
-          </ModelDetail>
-          <ItemContainer >
-            <ImageWrapper >
-              <ItemImage src={product.imageSrc} />
-              <ItemOverview>Overview</ItemOverview>
-              <ItemDescription>Item Description</ItemDescription>
-            </ImageWrapper>
-            <ItemCart>
-              <ItemPrice>Price:{product.price}</ItemPrice>
-              <ItemStock>Item stock: {product.numInStock}</ItemStock>
-              {/* <AddToCartButton onClick={() => dispatch(addItemToCart(item))}> 
+          <ImageWrapper >
+            <ItemImage src={product.imageSrc} />
+          </ImageWrapper>
+
+          <InfoWrapper>
+            <ProductName>{product.name}</ProductName>
+            <ModelDetail>
+              <ModelInfo>
+                <div style={{ display: 'flex' }}>
+                  <h2>Model Id: </h2>
+                  <span> {product.id}</span>
+                  <h2>Manufacturer: </h2>
+                  <a href={manufacturer.url} target="_blank"> {manufacturer.name}</a>
+                </div>
+              </ModelInfo>
+              <Category>{product.category}</Category>
+            </ModelDetail>
+
+            <ItemCart style={{ display: 'block', }}>
+              <h2>Price:{product.price}</h2>
+              <h3>Item stock: {product.numInStock}</h3>
+              <AddToCartButton onClick={() => dispatch(addItemToCart(item))}> 
                 <span>Add to Cart</span>
-              </AddToCartButton> */}
+              </AddToCartButton>
             </ItemCart>
-          </ItemContainer>
+
+          </InfoWrapper>
         </Wrapper>
       ) : (
           <div>Hello</div>
@@ -92,70 +89,61 @@ const BigItem = ({
 
 export default BigItem;
 
-// const Wrapper = styled.div`
-//     display: flex;
-
-// `;
-
-// const ItemImage = styled.img`
-
-// `;
-
-// const ItemInfo = styled.div`
-
-// `;
 const Wrapper = styled.div`
-/* display: block;
-height: 500px;
-border: 1px solid #e6ecf0; */
+border: 1px solid red;
+display: flex;
+justify-content: center;
+width: 100%;
 `;
 
 const ProductName = styled.h1`
-/* font-size: 24px;
-font-weight: 400;
-line-height:32px; */
+font-size: 25px;
 `;
 
 const ModelDetail = styled.div`
+font-size: 20px;
 `;
 
 const ModelInfo = styled.div`
-/* font-size: 12px;
-margin: 0 16px 0 0; */
+padding: 10px 0;
 `;
 
-const Category = styled.div``;
-
-const ItemContainer = styled.div`
-/* box-sizing: border-box;
-display:flex;
-flex: 0 1 auto;
-flex-wrap: wrap;
-margin-right: 0;
-margin-left: 0; */
+const Category = styled.div`
+display: inline-block;
+font-size: 20px;
+padding: 5px ;
+margin: 15px 0;
+border-radius: 4px;
+background: red;
+color: white;
 `;
 
-const ItemCart = styled.div``;
+const ItemCart = styled.div`
+font-size: 24px;
+margin-top: 50px;
+h2{
+  margin-bottom: 5px;
+}
+h3 {
+}
+`;
+const InfoWrapper = styled.div`
+padding: 60px;
+`;
 
-const ItemDescription = styled.div``;
 const ItemImage = styled.img`
-/* width: 150px;
-height: 150px; */
+padding: 60px;
+width: 500px;
+height: 500px;
 `;
-const AddToCartButton = styled.div``;
 
-const ItemStock = styled.div``;
+const AddToCartButton = styled.button`
+outline: none;
+`;
+
+
 
 const ImageWrapper = styled.div`
-/* display: flex;
-justify-content: center;
-padding: 30px; */
+
 `;
 
-const ItemOverview = styled.h2`
-/* font-size: 20px;
-font-weight: 600;
-line-height: 24px;
-margin: 0 0 16px; */
-`;
-const ItemPrice = styled.div``;
