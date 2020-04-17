@@ -51,9 +51,9 @@ const handleCompany = (req, res) => {
 
 const handleCheckout = (req, res) => {
 
-  const orders = req.body.orderInfo;
+  const orders = req.body.orders;
   orders.forEach((order) => {
-    const item = items.find(anItem => anItem.id === orderInfo.itemId)
+    const item = items.find(anItem => anItem.id === order.itemId)
     item.numInStock -= order.numOrdered;
   });
 
@@ -67,36 +67,6 @@ const handleCheckout = (req, res) => {
   console.log(uniqueId)
   res.send(uniqueId);
 }
-
-  // create a var. to store the result of the map over the items data
-  // let modifiedItems = items.map(item => {
-  //create a new version of the single item object
-  // let newItem = { ...item };
-  //create a flag
-  // let isThisItemOrdered = false;
-  //declare a variable to store the order matching the ids
-  // let savedOrder;
-  //loop over the orders to match ids
-  // orders.forEach(order => {
-  //  const orderedItem = items.find()
-  // if(order.itemId === item.id){
-  // isThisItemOrdered = true;
-  //store the matching ids
-  // savedOrder = order;
-  // }
-  // })
-  // use flag to either return the unchange items
-  // if(!isThisItemOrdered){
-  // return newItem;
-  // or return the modified items
-  // } else {
-  // newItem.numInStock -= savedOrder.numOrdered;
-  // return newItem
-  // }
-  // })
-  //update the items array
-  // items = modifiedItems;
-  // console.log(items[0])
 
 const handleCategoryFilter = (req, res) => {
   const { category } = req.params;
@@ -115,3 +85,4 @@ module.exports = {
   handleCheckout,
   handleCategoryFilter,
 }
+// 
