@@ -66,7 +66,11 @@ const SmallItem = ({
       </WrapperContent>
       <AddToCartButton
         onClick={() => dispatch(addItemToCart(item))}>
+<<<<<<< Updated upstream
         {/* // onClick={() => handleAddItem()}> */}
+=======
+        {/* onClick={() => handleAddItem()}> */}
+>>>>>>> Stashed changes
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
       </AddToCartButton>
       {/* </ButtonWrapper> */}
