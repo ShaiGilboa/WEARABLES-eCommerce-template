@@ -21,7 +21,7 @@ import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
 import MockItem from '../Items/MockItem';
 import OrderConfirmation from '../OrderConfirmation';
-
+import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';
 import FourOhFour from '../fourOhFour';
 
@@ -33,6 +33,7 @@ function App() {
   return (
     <Router history={history}>
       <GlobalStyles />
+      <ScrollToTop />
       <Navbar />
       <Switch>
       <Route path='/' exact>

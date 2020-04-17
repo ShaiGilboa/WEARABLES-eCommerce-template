@@ -89,7 +89,7 @@ const Typeahead = (
           </SearchButton>
         </ContainerSearch>
         {/*this is an ul*/}
-        <TypeaheadSuggestions>
+        <TypeaheadSuggestions data-css='typeaheadDropDown'>
           {/*for each suggestion we will create a li in a Link - the Link is to that item's page*/}
           {/*there is a maximum number of results shown, it is set in `constants.js`*/}
           {suggestions.map((suggestion, index) => (index < MAX_NUMBER_OF_SUGGESTIONS) &&
@@ -189,12 +189,19 @@ const TypeaheadSuggestions = styled.ul`
   top:50px;
   left:0;
   width: 100%;
-  background-color:rgba(255, 255, 255, 0.99);
+  background-color:rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
+  -webkit-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+-moz-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
   @media (max-width: 1425px) {
   margin-left: 6px;
   width: 411px;
+  -webkit-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+-moz-box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+box-shadow: 0px 19px 25px -12px rgba(0,0,0,0.15);
+  
 }
     li{
       padding: 20px 10px  20px 10px;

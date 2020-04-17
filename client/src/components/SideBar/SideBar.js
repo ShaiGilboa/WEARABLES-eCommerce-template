@@ -4,14 +4,14 @@ import { imgCategories } from '../../constants';
 // import {Link} from 'react-router-dom';
 import { useHistory, useLocation } from "react-router-dom";
 import { Checkbox } from '@material-ui/core';
-
+import { useSelector } from 'react-redux';
 
 const SideBar = () => {
-  let history = useHistory(); 
+  let history = useHistory();
   const location = useLocation()
   let active = location.search;
-  active = active.replace('?category=','');
-  
+  active = active.replace('?category=', '');
+
   const linkToCategory = (ev, title) => {
     ev.preventDefault();
     ev.stopPropagation();
@@ -23,6 +23,16 @@ const SideBar = () => {
     console.log(event)
   }
 
+ const filterMenu = useSelector(state => state.data.typeaheadItems);
+
+//UseEffect to console.log
+ if(filterMenu){
+   console.log(filterMenu)
+ }
+
+  const handleFilter = () => {
+
+  }
 
   return (
     <WrapperSideBar>
@@ -37,7 +47,7 @@ const SideBar = () => {
       </MenuCat>
       <MenuCat>
         <CatTitle>Filters</CatTitle>
-        <h4 style={{padding:'20px 30px 0'}}>Price</h4>
+        <h4 style={{ padding: '20px 30px 0' }}>Price</h4>
         <WrapperFilterList>
           <form
             onSubmit={(event)=>handleSubmit(event)}

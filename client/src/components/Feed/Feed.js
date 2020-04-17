@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from 'styled-components';
 import {
-  useParams,
   useLocation,
 } from 'react-router-dom';
 
 import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useSelector } from 'react-redux';
+
 
 const Feed = () => {
   console.log('feed')
+
+  const loaded = useSelector(state => state.data.typeaheadItems);
+
   const location = useLocation()
   const [items, setItems] = React.useState([]);
   const {category} = useParams()
   let title = location.search;
-  title = title.replace('?category=','');
+  title = title.replace('?category=', '');
   React.useEffect(() => {
     if (category) {
       fetch(`/items/filter/${category}${location.search}`)
@@ -30,21 +35,30 @@ const Feed = () => {
         })
     }
   }, [location])
-  console.log('items',items)
+
   return (
     <>
-      <Wrapper>
-        <WrapperSideBar>
-          <SideBar />
-        </WrapperSideBar>
-        <Content>
-        <Title>{title}</Title>
-        <WrapperItems>
-          {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
-        </WrapperItems>
-        </Content>
-      </Wrapper>
+          <Wrapper>
+            <WrapperSideBar>
+              <SideBar />
+            </WrapperSideBar>
+            {!loaded ? (
+        <LoaderWrapper>
+          <CircularProgress color='primary' style={{ width: "30px", height: "30px", }} />
+        </LoaderWrapper>
+      ) : (
+            <Content>
+              <Title>{title}</Title>
+              <WrapperItems>
+                {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
+              </WrapperItems>
+            </Content>
+         
+          )
+        }
+         </Wrapper>
     </>
+
   );
 }
 
@@ -79,4 +93,11 @@ const WrapperItems = styled.section`
   @media(max-width: 1024px){
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
+`;
+
+const LoaderWrapper = styled.div`
+  margin: 100px auto;
+  color: #FFF;
+  display:flex;
+  justify-content: center;
 `;
