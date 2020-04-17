@@ -19,7 +19,6 @@ import { useAuth0 } from "../SignIn/react-auth0-spa";
 import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
 import PrivateRoute from '../SignIn/PrivateRoute';
-import MockItem from '../Items/MockItem';
 import OrderConfirmation from '../OrderConfirmation';
 import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';

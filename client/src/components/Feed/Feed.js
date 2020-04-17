@@ -26,7 +26,7 @@ const Feed = () => {
   const [items, setItems] = React.useState([]);
   const { category } = useParams()
   let title = location.search;
-  title = title.replace('?category=', '');
+  // title = title.replace('?category=', '');
 
   React.useEffect(() => {
     if (category) {
@@ -41,20 +41,19 @@ const Feed = () => {
         .then(res => {
           if (res.status === 200) setItems(res.items)
         }).then(dispatch(fetchCompleted()))
-
     }
   }, [location])
 
 
-  const showCircular = () => {
-    if (items === []) {
-      return (
-        <LoaderWrapper>
-          <CircularProgress color='primary' style={{ width: "30px", height: "30px", }} />
-        </LoaderWrapper>
-      )
-    }
-  }
+  // const showCircular = () => {
+  //   if (loaded ) {
+  //     return (
+  //       <LoaderWrapper>
+  //         <CircularProgress color='primary' style={{ width: "30px", height: "30px", }} />
+  //       </LoaderWrapper>
+  //     )
+  //   }
+  // }
 
   return (
     <>
@@ -63,8 +62,7 @@ const Feed = () => {
           <SideBar />
         </WrapperSideBar>
         <Content>
-          {showCircular()}
-          <Title>{title}</Title>
+          {!category ? <Title>All items</Title> : <Title>{category}</Title>}
           <WrapperItems>
             {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
           </WrapperItems>
