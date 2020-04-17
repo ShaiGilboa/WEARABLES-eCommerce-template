@@ -10,6 +10,7 @@ const {
   handleCompany, 
   handleCheckout,
   handleCategoryFilter,
+  handleSearchQuery,
 } = require('./handlers');
 // 
 // const filterFunction = (array, property, value) => {
@@ -42,6 +43,7 @@ express()
   .get('/items/:itemId', handleItemId)
   .get('/companies/:companyId', handleCompany)
   .post('/checkout', handleCheckout)
+  .get('/search/:searchQuery', handleSearchQuery)
   //parse JSON object received with num of items purchased
   //find with items ID all the items in the order
   //modify the numInStock

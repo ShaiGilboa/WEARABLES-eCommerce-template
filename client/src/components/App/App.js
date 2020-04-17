@@ -23,6 +23,7 @@ import OrderConfirmation from '../OrderConfirmation';
 import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';
 import FourOhFour from '../fourOhFour';
+import SearchFeed from '../SearchFeed'
 
 function App() {
 
@@ -56,6 +57,9 @@ function App() {
         </Route>
         <Route path='/checkout'>
           <Checkout />
+        </Route>
+        <Route path='/search/:searchQuery'>
+          <SearchFeed />
         </Route>
         <Route path='/order-confirmation'>
           <OrderConfirmation />

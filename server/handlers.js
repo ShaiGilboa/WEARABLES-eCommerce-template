@@ -81,6 +81,18 @@ const handleCategoryFilter = (req, res) => {
     res.status(404).send({status: 404, message: 'no items in category'})
   }
 }
+
+const filterBySearchQuery = (query) => {
+  const filtered = items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+  return filtered;
+}
+
+const handleSearchQuery = (req, res) => {
+  const { searchQuery } = req.params;
+  const searchResults = filterBySearchQuery(searchQuery);
+  res.status(200).send({status: 200, searchResults})
+}
+
 //
 module.exports = {
   handleItemId,
@@ -88,5 +100,6 @@ module.exports = {
   handleCompany,
   handleCheckout,
   handleCategoryFilter,
+  handleSearchQuery,
 }
 // 

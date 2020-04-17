@@ -39,6 +39,8 @@ const Typeahead = (
   // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
   const submitHandler = (event) => {
     event.preventDefault();
+    setSuggestions([]);
+    history.push(`/search/${searchInputVal}`)
   }
 
   // when ever there is a change in the input search, the state get updated and we look for suggestions
