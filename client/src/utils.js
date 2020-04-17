@@ -47,7 +47,7 @@ export const totalAmount = (items, itemsId) => {
   if (priceArr.length) {
     const modifiedPriceArr = modifyPriceArr(priceArr);
     const totalSum = modifiedPriceArr.reduce((temporarySum, priceItem) => temporarySum + (priceItem.priceNumber*priceItem.quantity), 0) // calculates the sum, multiplying each price in the quantity
-    return totalSum/100; // need to divide by 100, because we multiplied by 100
+    return (totalSum/100).toFixed(2); // need to divide by 100, because we multiplied by 100
   } else return -1; // if there is a problem, returns -1
 }
 
