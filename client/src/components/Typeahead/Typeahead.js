@@ -27,7 +27,13 @@ const Typeahead = (
   useEffect(() => {
     fetch('/items')
       .then(res => res.json())
-      .then(res => dispatch(addItemsToTypeahead(res.filtered)))
+      .then(res => {
+        if(res.status===200){
+          dispatch(addItemsToTypeahead(res.items))
+        } else {
+          //problem loading the items from the server
+        }
+        })
   }, [])
 
   // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
@@ -37,7 +43,8 @@ const Typeahead = (
 
   // when ever there is a change in the input search, the state get updated and we look for suggestions
   useEffect(() => {
-    (searchInputVal && typaheadItems) ? setSuggestions(typeaheadSuggestion(searchInputVal, typaheadItems)) : setSuggestions([])// receives an object that has the structure of the suggested strings, and the id of each suggestion
+    // receives an object that has the structure of the suggested strings, and the id of each suggestion
+    (searchInputVal && typaheadItems) ? setSuggestions(typeaheadSuggestion(searchInputVal, typaheadItems)) : setSuggestions([])
   }, [searchInputVal])
 
   // on mousedown outside of the search, close the results using the wrapperRef / event.target
@@ -102,8 +109,8 @@ const Typeahead = (
               >
                 <img src={suggestion.imageSrc} />
                 <span>{suggestion.parts[0]}</span>
-                <Bold>{searchInputVal}</Bold>
-                <span>{suggestion.parts[1]}</span>
+                <Bold>{suggestion.parts[1]}</Bold>
+                <span>{suggestion.parts[2]}</span>
               </li>
             </DropDownItem>
           )}

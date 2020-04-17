@@ -17,7 +17,7 @@ const filterByQueries = (queries, category) => {
   let searchParameter = null;
 
   if(category)filteredItems=filteredItems.filter(item=> item.category === category)
-  console.log('queries',queries)
+  // console.log('queries',queries)
   if(queries){
       for (let searchQuery in queries) {
       searchParameter = queries[searchQuery];

@@ -1,9 +1,17 @@
 
+// const modifyString = (part, whole) => {
+//   const indexOfPart = whole.toLowerCase().indexOf(part);
+//   const part1 = whole.slice(0,indexOfPart)
+//   const part2 = whole.slice(indexOfPart+part.length)
+//   const modification = [part1, part2]
+//   return modification;
+// }
 const modifyString = (part, whole) => {
-  const indexOfPart = whole.toLowerCase().indexOf(part);
-  const part1 = whole.slice(0,indexOfPart)
-  const part2 = whole.slice(indexOfPart+part.length)
-  const modification = [part1, part2]
+  const indexOfPart = whole.toLowerCase().indexOf(part.toLowerCase());
+  const part1 = whole.substring(0,indexOfPart)
+  const part2 = whole.substring(indexOfPart,indexOfPart+part.length)
+  const part3 = whole.substring(indexOfPart+part.length)
+  const modification = [part1, part2, part3]
   return modification;
 }
 // need to add the image tp be sent back
