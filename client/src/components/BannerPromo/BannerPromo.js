@@ -35,6 +35,7 @@ const Wrapper = styled.div`
       color: white;
       font-size: 3em;
       padding-bottom: 20px;
+      text-align: center;
     }
 `;
 

@@ -132,7 +132,7 @@ const Wrapper = styled.div`
  border-left: 1px solid #e6ecf0;
  display: flex;
  align-items: center;
- @media (max-width: 768px) {
+ @media (max-width: 990px) {
   display: none;
 }
 `;
@@ -170,7 +170,7 @@ const Search = styled.form`
   flex-direction: column;
   justify-content:flex-start;
   position: relative;
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
   display: none;
 }
 `;

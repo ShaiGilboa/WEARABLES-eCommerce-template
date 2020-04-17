@@ -121,6 +121,7 @@ font-size: 1em;
 border: none;
 cursor: pointer;
 display: flex;
+background-color: transparent;
 justify-content: space-between;
 align-items: center;
 transition: all .2s ease-in;
