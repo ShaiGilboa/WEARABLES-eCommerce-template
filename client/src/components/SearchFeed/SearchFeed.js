@@ -17,7 +17,7 @@ const SearchFeed = () =>{
       .then(res=>res.json())
       .then(res=>{
         if (res.status === 200) {
-          setItems(res.searchResults)
+          if(res.searchResults.length)setItems(res.searchResults)
         }
       })
   },[searchQuery])
@@ -27,7 +27,7 @@ const SearchFeed = () =>{
           <SideBar />
         </WrapperSideBar>
         <Content>
-          {items ? <Title>Search results for: "{searchQuery}"</Title> : <Title>no results found for: {searchQuery}</Title>}
+          {items ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
           {items && (
           <WrapperItems>
             {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
