@@ -18,7 +18,6 @@ const Navbar = () => {
   // Authentification
   const { isAuthenticated, loginWithRedirect, logout, loginWithPopup } = useAuth0();
 
-
   // adding quantity display in the shopping cart 
   const cart = useSelector(state => state.userInfo.cart);
   const userInfo = useSelector(state => state.userInfo);
