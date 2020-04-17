@@ -4,6 +4,7 @@ const items = require('./data/items');
 // const itemsDev = require('./data/items-Dev');
 const companies = require('./data/companies');
 const fs = require('fs');
+const ordersMade = require('./data/order-info')
 
 const handleItemId = (req, res) => {
   const { itemId } = req.params;
@@ -51,21 +52,24 @@ const handleCompany = (req, res) => {
 
 const handleCheckout = (req, res) => {
 
-  const orders = req.body.orders;
+  const {orders, orderInfo}= req.body;
   orders.forEach((order) => {
-    const item = items.find(anItem => anItem.id === order.itemId)
+    const item = items.find(anItem =>anItem.id === order.itemId)
     item.numInStock -= order.numOrdered;
   });
 
-  let orderInfo = JSON.stringify(req.body.orderInfo, null, 2);
-  console.log(orderInfo)
-  fs.writeFileSync('./data/order-Info.json', orderInfo, (err) => {
-    if (err) throw err;
-  });
+  // let orderInfo = JSON.stringify(req.body.orderInfo, null, 2);
+  // console.log(orderInfo)
+  // fs.writeFileSync('./data/order-Info.json', orderInfo, (err) => {
+  //   if (err) throw err;
+  // });
 
   let uniqueId = new Date().valueOf().toString();
-  console.log(uniqueId)
-  res.send(uniqueId);
+  // console.log('id',uniqueId)
+  // console.log('orderInfo',orderInfo)
+  ordersMade[uniqueId] = {orders, orderInfo}
+  // console.log('ordersMade',ordersMade[uniqueId])
+  res.status(200).send({status: 200, orderId: uniqueId});
 }
 
 const handleCategoryFilter = (req, res) => {

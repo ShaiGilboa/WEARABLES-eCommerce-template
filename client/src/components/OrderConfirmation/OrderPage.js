@@ -32,7 +32,7 @@ const OrderPage = () => {
       email,
       id,
     } = userInfo.userInfo;
-    const orders = cartIds.map(itemId=> ({itemId, numOrdered: cartById[itemId].quantity}))
+    const orders = cartIds.map(itemId=> ({itemId:parseInt(itemId), numOrdered: cartById[itemId].quantity}))
     const body ={
       orders, //array of objects{'itemId', 'numOrdered'}
       orderInfo: {
@@ -56,6 +56,9 @@ const OrderPage = () => {
     })
     .then(res=>res.json())
     .then(res=>{
+      //clear cart
+      //send to order confirmed with ID
+      //keep id in user info
       console.log('res',res)
     })
   }
