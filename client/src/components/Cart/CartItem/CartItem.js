@@ -23,54 +23,68 @@ const CartItem = ({ item, toggle }) => {
     imageSrc,
     numInStock,
   } = item;
-  const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false)
+  const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let history = useHistory();
 
+  const handleAddItem = () => {
+    if (quantity < numInStock) dispatch(addItemToCart(item))
+  }
+  const handleRemoveItem = () => {
+    if (quantity > 0) dispatch(removeOneItemFromCart(item))
+  }
   const handleInput = (event) => {
-    if (event.target.value >= 0) dispatch(changeQuantityOfItem(id, Number(event.target.value)));
+    if (event.target.value >= 0 && event.target.value <= numInStock) {
+      dispatch(changeQuantityOfItem(id, Number(event.target.value)));
+    }
+    else {
+      dispatch(changeQuantityOfItem(id, Number(numInStock)));
+    }
   }
 
   const handleClickOnItem = (ev, id) => {
     ev.preventDefault();
     ev.stopPropagation();
     // toggle only comes form the cart modal, so if we have it, and the name was clicked, we should toggle the cart modal
-    if(toggle)toggle();
+    if (toggle) toggle();
     history.push(`/items/${id}`);
   }
 
   return (
     <Wrapper
-      // onClick={() => setLongFormOfNameFlag(!longFormOfNameFlag)}
+    // onClick={() => setLongFormOfNameFlag(!longFormOfNameFlag)}
     >
       <WrapperImg data-css='WrapperImage'>
         <ThumbCart src={imageSrc} alt={name} />
       </WrapperImg>
       <WrapperInfo data-css='WrapperInfo'>
-      <Name
-        onClick={(event) => handleClickOnItem(event, id)}
-        long={longFormOfNameFlag ? true : false}
-      >
-      
-      <h2>{name}</h2>
-      </Name>
-      <p>{price}</p>
-      <ItemQuantityWrapper data-css='ItemQuantityWrapper'>
-      <RemoveCircleOutlineIcon 
-        style={{ fontSize: 15, cursor:'pointer' }}
-        onClick={() => dispatch(removeOneItemFromCart(item))}
-        />
-      <ItemQuantityInput
-        value={quantity}
-        onChange={(event) => handleInput(event)}
-      />
-      <AddCircleOutlineIcon 
-        style={{ fontSize: 15, cursor:'pointer' }}
-        onClick={() => dispatch(addItemToCart(item))}
-      />
-      </ItemQuantityWrapper>
-        <RemoveButton  onClick={() => dispatch(removeItemFromCart(id))}/>
+        <Name
+          onClick={(event) => handleClickOnItem(event, id)}
+          long={longFormOfNameFlag ? true : false}
+        >
+          <h2>{name}</h2>
+        </Name>
+        <p>{price}</p>
+        <ItemQuantityWrapper data-css='ItemQuantityWrapper'>
+          <RemoveCircleOutlineIcon
+            style={{ fontSize: 15, cursor: 'pointer' }}
+            onClick={() => handleRemoveItem()}
+          />
+
+          <ItemQuantityInput
+            value={quantity}
+            onChange={(event) => handleInput(event)}
+          />
+
+            <AddCircleOutlineIcon
+              style={{ fontSize: 15, cursor: 'pointer' }}
+              // onClick={() => dispatch(addItemToCart(item))}
+              onClick={() => handleAddItem()}
+            />
+
+        </ItemQuantityWrapper>
+        <RemoveButton onClick={() => dispatch(removeItemFromCart(id))} />
       </WrapperInfo>
     </Wrapper>
   );

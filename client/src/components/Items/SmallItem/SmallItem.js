@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {
   addItemToCart,
@@ -22,14 +22,23 @@ const SmallItem = ({
     imageSrc,
     numInStock,
     companyId,
+    quantity,
   } = item;
   const dispatch = useDispatch();
   let history = useHistory();
+
+  const itemInCart = useSelector(state => state.userInfo.cart[id]);
 
   function handleClickBigItem(ev) {
     ev.preventDefault();
     ev.stopPropagation();
     history.push(`/items/${id}`);
+  }
+  const handleAddItem = () => {
+     if(itemInCart){
+       itemInCart.quantity >= numInStock
+     }
+   dispatch(addItemToCart(item))
   }
 
   return (
@@ -57,6 +66,7 @@ const SmallItem = ({
       </WrapperContent>
       <AddToCartButton
         onClick={() => dispatch(addItemToCart(item))}>
+        // onClick={() => handleAddItem()}>
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
       </AddToCartButton>
       {/* </ButtonWrapper> */}
