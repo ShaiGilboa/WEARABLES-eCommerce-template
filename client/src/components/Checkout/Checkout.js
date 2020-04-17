@@ -37,9 +37,12 @@ const Checkout = () => {
     {/*check to see if signed in, if not we render a 'sign in' or 'continue as guest' page*/}
   return (
     <Wrapper>
+      <FormContainer>
       <Forms
         userInfo={userInfo}
       />
+      </FormContainer>
+      {/* <FormContainer/> */}
       <SummaryContainer>
         <h2>Order Summary</h2>
         <Details>
@@ -59,10 +62,10 @@ const Checkout = () => {
             <p>Estimated Taxes</p>
             <p>{prices.taxes}</p>
           </Line>
-          <Line>
-            <p>total</p>
-            <p>{total}</p>
-          </Line>
+          <LineTotal>
+            <p style={{fontWeight: '700'}}>Total</p>
+            <p style={{fontWeight: '700'}}>{total}</p>
+          </LineTotal>
           {/* <ContinueBtn
             disabled={formNumber<3}
             onClick={()=>console.log('hi')}
@@ -78,21 +81,33 @@ const Checkout = () => {
 export default Checkout;
 
 const Wrapper = styled.div`
-  display: flex;
+display: flex;
 `;
+const FormContainer = styled.div`
+width:100%;
+`
 
 const SummaryContainer = styled.div`
+width: 500px;
+padding: 60px;
+border-left: 1px solid #e6ecf0;
+  h2{
+    font-size: 1.5em;
+    padding-bottom: 30px;
+  }
 
-`;
-
-const FormsContainer = styled.div`
-  flex:1;
 `;
 
 const Line = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content:space-between;
+  margin-bottom: 15px;
+`;
+const LineTotal = styled.div`
+  display: flex;
+  justify-content:space-between;
+  border-top: 1px solid #e6ecf0;
+  padding-top: 15px;
 `;
 
 const Details = styled.div`

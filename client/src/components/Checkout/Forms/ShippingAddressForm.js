@@ -72,68 +72,77 @@ const Form = ({
     if(formNumber===2){
       return (
         <Wrapper onSubmit={(event)=>event.preventDefault()}>
-          <h2>Shipping Address:</h2>
           <div>
-            <label htmlFor='fname'>First Name:</label>
-            <input
+          <h2>Shipping Address:</h2>
+          </div>
+          <FieldWrapper>
+            <FieldName htmlFor='fname'>First Name:</FieldName>
+            <FieldInput
               type='text'
               id='fname'
               name='fname'
               placeholder='First Name'
               value={fname}
               onChange={(event)=>setFname(event.target.value)}
-              ></input>
-            <label htmlFor='lname'>Last Name:</label>
-            <input
+              />
+            </FieldWrapper>
+            <FieldWrapper>
+            <FieldName htmlFor='lname'>Last Name:</FieldName>
+            <FieldInput
               type='text'
               id='lname'
               name='lname'
               placeholder='Last Name'
               value={lname}
               onChange={(event)=>setLname(event.target.value)}
-              ></input>
-              <label htmlFor='phone-number'>Phone Number:</label>
-              <input
+              />
+              </FieldWrapper>
+              <FieldWrapper>
+              <FieldName htmlFor='phone-number'>Phone Number:</FieldName>
+              <FieldInput
                 type='number'
                 id='phoneNumber'
                 name='phone-number'
                 placeholder='+1(XXX) XXX-XXXX'
                 value={phoneNumber}
                 onChange={(event)=>inputPhoneNumber(event)}
-              ></input>
-          </div>
-          <label htmlFor='address'>Address:</label>
-          <input
+              />
+              </FieldWrapper>
+              <FieldWrapper>
+          <FieldName htmlFor='address'>Address:</FieldName>
+          <FieldInput
           type="text"
           placeholder="street-name house-number"
           id="address"
           name="address"
           value={address}
           onChange={(event)=>setAddress(event.target.value)}
-          >
-          </input>
-          <div>
-            <label htmlFor='city'>City:</label>
-            <input
+          />
+          </FieldWrapper>
+          <FieldWrapper>
+            <FieldName htmlFor='city'>City:</FieldName>
+            <FieldInput
             type="text"
             placeholder="city"
             id="city"
             name="city"
             value={city}
             onChange={(event)=>setCity(event.target.value)}
-            >
-            </input>
-            <label htmlFor='postal-code'>Postal Code:</label>
-            <input
+            />
+            </FieldWrapper>
+            <FieldWrapper>
+            <FieldName htmlFor='postal-code'>Postal Code:</FieldName>
+            <FieldInput
             type="text"
             placeholder="XXX XXX"
             id="postalCode"
             name="postal-code"
             value={postalCode}
             onChange={(event)=>setPostalCode(event.target.value)}
-            >
-            </input>
-            <label htmlFor='province'>Province:</label>
+            />
+            </FieldWrapper>
+            <FieldWrapper>
+            <FieldName htmlFor='province'>Province:</FieldName>
             <select
               defaultValue={province}
               onChange={(event)=>setProvince(event.target.value)}
@@ -142,19 +151,21 @@ const Form = ({
               <option value="qc">QC</option>
               <option value="on">ON</option>
             </select>
-          </div>
-          <button
+            </FieldWrapper>
+            <WrapperButton>
+          <FormButton
             type="button"
             onClick={()=>setFormNumber(formNumber-1)}
-          >previous</button>
-          <button type="submit" id="submit-form"
+          >previous</FormButton>
+          <FormButton type="submit" id="submit-form"
             onClick={(event)=>{
               event.preventDefault();
               handleSubmit();
               }}
-          >Next</button>
+          >Next</FormButton>
+           </WrapperButton>
           {inputProblem && (<div>
-              <h2>{inputProblem}</h2>
+              <Problem>{inputProblem}</Problem>
               </div>)}
         </Wrapper>
       );
@@ -166,19 +177,53 @@ const Form = ({
 export default Form;
 
 const Wrapper = styled.form`
+ display: flex;
+ flex-direction: column;
+ border: 1px solid #e6ecf0;
+ padding: 30px;
+ h2{
+   padding-bottom: 30px;
+   font-size: 1.2em;
+ }
+`;
+
+const FieldWrapper = styled.div`
+display: flex;
+align-items: center;
+margin-bottom: 15px;
+`
+const FieldName = styled.label`
+width: 100px;
+`;
+
+const FieldInput = styled.input`
+  width: 200px;
+  border: none;
+  outline: none;
+  background-color: #F4F7F6;
+  border-radius: 4px;
+  padding: 10px;
 
 `;
 
-const NextBtn = styled(Button)`
-  position: relative;
-  background-color:green;
-  right: 40px;
-  bottom: 40px;
+const WrapperButton = styled.div`
+display: flex;
+justify-content: space-between;
 `;
 
-const PreviousBtn = styled(Button)`
-  position: relative;
-  background-color:blue;
-  left: 40px;
-  bottom: 40px;
+const FormButton = styled.button`
+outline: none;
+background-color: red;
+color: white;
+padding: 10px 30px;
+border: 1px solid white;
+font-size: 1em;
+margin-top: 30px;
+cursor: pointer;
+border-radius: 4px;
+`;
+const Problem = styled.h4`
+font-weight: 400;
+font-size: .8em;
+margin-top: 20px;
 `;

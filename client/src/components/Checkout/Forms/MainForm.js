@@ -10,7 +10,7 @@ import {
 
 import {
   validateEmail,
-  validateAddress,
+  // validateAddress,
   validatePostalCode,
   validateOnlyDigits,
   validateOnlyLetters,
@@ -56,7 +56,7 @@ const Form = ({
       case 'Shipping-Address':
         if(data.shippingAddress.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
         if(data.shippingAddress.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
-        if(!validateAddress(data.shippingAddress.address))inputProblems = inputProblems.concat(['Address'])
+        // if(!validateAddress(data.shippingAddress.address))inputProblems = inputProblems.concat(['Address'])
         if(!validateOnlyLetters(data.shippingAddress.city) || data.shippingAddress.city.length===0)inputProblems = inputProblems.concat(['City'])
         if(data.shippingAddress.province !=='on' && data.shippingAddress.province !=='qc')inputProblems = inputProblems.concat(['Province'])
         if(!validatePostalCode(data.shippingAddress.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
@@ -74,7 +74,7 @@ const Form = ({
       case 'Billing-info':
         if(data.billingInfo.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
         if(data.billingInfo.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
-        if(!validateAddress(data.billingInfo.address))inputProblems = inputProblems.concat(['Address'])
+        // if(!validateAddress(data.billingInfo.address))inputProblems = inputProblems.concat(['Address'])
         if(!validateOnlyLetters(data.billingInfo.city) || data.billingInfo.city.length===0)inputProblems = inputProblems.concat(['City'])
         // if(data.billingInfo.province.length!=='on' || data.shippingAddress.province.length!=='qc')inputProblems = inputProblems.concat(['Email'])
         if(!validatePostalCode(data.billingInfo.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
@@ -124,9 +124,9 @@ export default Form;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 80px);
-  background-color:#e6ecf0;
-  padding: 15%;
+  height: calc(100vh - 280px);
+  /* background-color:#e6ecf0; */
+  padding: 60px;
   display: flex;
   flex-direction:column;
   justify-content:space-between;

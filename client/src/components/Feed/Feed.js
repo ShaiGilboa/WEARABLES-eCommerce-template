@@ -14,11 +14,7 @@ import {
 } from '../../Redux/actions';
 
 const Feed = () => {
-<<<<<<< Updated upstream
   const loaded = useSelector(state => state.data.isLoaded)
-=======
-  const loaded = useSelector(state => state.data.typeaheadItems);
->>>>>>> Stashed changes
 
   console.log(loaded)
   const dispatch = useDispatch();
