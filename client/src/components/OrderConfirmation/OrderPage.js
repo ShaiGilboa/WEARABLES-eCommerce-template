@@ -24,6 +24,43 @@ const OrderPage = () => {
     billingInfo,
   } = userInfo.userInfo
 
+  const sendOrder =() => {
+    dispatch(changeStatus('purchasing'));
+    const {
+      fname,
+      lname,
+      email,
+      id,
+    } = userInfo.userInfo;
+    const orders = cartIds.map(itemId=> ({itemId, numOrdered: cartById[itemId].quantity}))
+    const body ={
+      orders, //array of objects{'itemId', 'numOrdered'}
+      orderInfo: {
+        userInfo: {
+          fname,
+          lname,
+          email,
+          id,
+        },
+        shippingAddress,
+        billingInfo,
+      }
+    }
+    fetch('/checkout', {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+            "Content-Type": "application/json",
+            "Accept" : "application/json"
+        },
+    })
+    .then(res=>res.json())
+    .then(res=>{
+      console.log('res',res)
+    })
+  }
+
+
   const lastThreeDigitsOfCardNumber = billingInfo.cardNumber.substr(billingInfo.cardNumber.length - 3);
   const cartById = userInfo.cart;
   const cartIds = Object.keys(cartById);
@@ -48,6 +85,9 @@ const OrderPage = () => {
         history.push('/checkout');
         }}
     > would you like to make a change? </button>
+    <button
+      onClick={()=>sendOrder()}
+    > confirm purchase </button>
     </Wrapper>
   );
 }
