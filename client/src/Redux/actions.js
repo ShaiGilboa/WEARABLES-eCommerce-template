@@ -64,4 +64,8 @@ export const addtoPuschaseHistory = (payload) => ({
   payload,
 })
 
-
+export const changeQueries = (value, checked) => ({
+  type: 'CHANGE_QUERIES',
+  value,
+  checked,
+})

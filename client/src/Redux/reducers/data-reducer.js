@@ -8,6 +8,7 @@ const initialState = {
                         -ANY MORE?
                       */
   typaheadItems: null, /*the items array brought back form the server for the typeahead*/
+  queries: [],
 }
 
 export default function dataReducer(state = initialState, action) {
@@ -18,14 +19,25 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...newState,
       };
-      case 'FETCH_ITEMS_COMPLETED':
+    case 'FETCH_ITEMS_COMPLETED':
       return {
         ...state, isLoaded: false
       };
-      case 'FETCH_ITEMS_RESET':
+    case 'FETCH_ITEMS_RESET':
       return {
         ...state, isLoaded: true
       };
+    case 'CHANGE_QUERIES':
+      let queries = newState.queries;
+      if(action.checked===true){
+        queries.push(action.value);
+      } else {
+        queries = queries.filter(query => query !== action.value)
+      }
+      newState.queries = queries;
+      return {
+        ...newState,
+      }
     default:
       return newState;
   };
