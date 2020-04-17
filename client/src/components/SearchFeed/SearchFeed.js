@@ -9,6 +9,9 @@ import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
 const SearchFeed = () =>{
   const location = useLocation();
+  // creates an array for all the values of the query 'body_location'
+  // if there aren't any, it will return an empty array
+  const queriesBodyLocation = new URLSearchParams(location.search).getAll('body_location');
   const {searchQuery} = useParams();
   const [items, setItems] = React.useState(null);
 
@@ -27,7 +30,10 @@ const SearchFeed = () =>{
           <SideBar />
         </WrapperSideBar>
         <Content>
-          {items ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
+          <Header>
+            {items ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
+            {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
+          </Header>
           {items && (
           <WrapperItems>
             {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
@@ -55,6 +61,15 @@ const Content = styled.div`
 display: flex;
 flex-direction: column;
 width:calc(100vw - 300px);
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Query = styled.span`
+  margin: auto 5px 0 5px;
 `;
 
 const Title = styled.h2`

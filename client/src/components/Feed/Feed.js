@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import styled from 'styled-components';
 import {
-  useLocation, useParams
+  useLocation,
+  useParams,
 } from 'react-router-dom';
+import {
+  useQuery,
+} from 'react-router-dom';
+
 
 import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
@@ -15,10 +20,11 @@ import {
 
 const Feed = () => {
   const loaded = useSelector(state => state.data.isLoaded)
-
-  console.log(loaded)
   const dispatch = useDispatch();
   const location = useLocation()
+  // creates an array for all the values of the query 'body_location'
+  // if there aren't any, it will return an empty array
+  const queriesBodyLocation = new URLSearchParams(location.search).getAll('body_location');
   const [items, setItems] = React.useState([]);
   const { category } = useParams()
   let title = location.search;
@@ -58,7 +64,10 @@ const Feed = () => {
           <SideBar />
         </WrapperSideBar>
         <Content>
+          <Header>
           {!category ? <Title>All items</Title> : <Title>{category}</Title>}
+          {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
+          </Header>
           <WrapperItems>
             {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
           </WrapperItems>
@@ -85,6 +94,16 @@ display: flex;
 flex-direction: column;
 width:calc(100vw - 300px);
 `
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Query = styled.span`
+  margin: auto 5px 0 5px;
+`;
+
 const Title = styled.h2`
   padding: 60px 60px 0;
   font-size: 3em;

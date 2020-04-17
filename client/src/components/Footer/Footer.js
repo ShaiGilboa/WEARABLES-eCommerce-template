@@ -37,6 +37,8 @@ const Footer = () => {
 
 
 const FooterContainer = styled.div`
+position: relative;
+/* top: 0; */
 display: flex;
 border: 1px solid #e6ecf0; 
 justify-content: space-around;

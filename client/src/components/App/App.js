@@ -23,11 +23,8 @@ import OrderConfirmation from '../OrderConfirmation';
 import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';
 import FourOhFour from '../fourOhFour';
-<<<<<<< Updated upstream
 import SearchFeed from '../SearchFeed'
-=======
 import OrderSuccess from '../OrderSuccess';
->>>>>>> Stashed changes
 
 function App() {
 

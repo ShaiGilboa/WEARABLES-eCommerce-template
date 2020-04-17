@@ -82,6 +82,30 @@ const SideBar = () => {
             <input type="checkbox" name="body_location" value='Head' />
             <label htmlFor="60to100">Head</label>
           </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Hands' />
+            <label htmlFor="60to100">Hands</label>
+          </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Waist' />
+            <label htmlFor="60to100">Waist</label>
+          </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Chest' />
+            <label htmlFor="60to100">Chest</label>
+          </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Torso' />
+            <label htmlFor="60to100">Torso</label>
+          </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Neck' />
+            <label htmlFor="60to100">Neck</label>
+          </CheckboxWrapper>
+          <CheckboxWrapper>
+            <input type="checkbox" name="body_location" value='Feet' />
+            <label htmlFor="60to100">Feet</label>
+          </CheckboxWrapper>
           <FilterButton type="submit" value="Filter"/>
           </form>
         </WrapperFilterList>
@@ -93,7 +117,7 @@ const SideBar = () => {
 const WrapperSideBar = styled.div`
   width: 300px;
   border-right: 1px solid #e6ecf0;
-  height:calc(100vh - 80px);
+  height:fit-content;
 `
 const MenuCat = styled.div`
 
@@ -114,7 +138,9 @@ const WrapperCatList = styled.div`
 const WrapperFilterList = styled.div`
  padding: 20px 30px;
  border-bottom: 1px solid #e6ecf0;
-
+ /* height: calc((100vh - 80px)); */
+ height: 100%;
+  overflow: auto;
 `
 const CatList = styled.li`
 padding: 20px 0;
