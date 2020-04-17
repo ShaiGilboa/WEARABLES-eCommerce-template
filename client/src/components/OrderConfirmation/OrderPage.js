@@ -60,6 +60,7 @@ const OrderPage = () => {
       .then(payload => {
         dispatch(addtoPuschaseHistory(payload.orderId))
         history.push(`/order-success/${payload.orderId}`)
+        
         //create action clear cart
         //send to order confirmed with ID
         //keep id in user info

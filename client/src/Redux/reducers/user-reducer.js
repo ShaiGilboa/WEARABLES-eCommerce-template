@@ -76,6 +76,7 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...newState,
       }
+
     case 'ADD_TOTAL_TO_CART':
       newState.cart.total = action.total;
       saveToLocalStorage('cart', newState.cart);

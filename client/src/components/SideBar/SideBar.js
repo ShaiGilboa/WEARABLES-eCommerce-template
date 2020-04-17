@@ -26,9 +26,8 @@ const SideBar = () => {
   // // if there aren't any, it will return an empty array
   // const queriesBodyLocation = new URLSearchParams(location.search).getAll('body_location');
   // const [queries, setQueries] = React.useState('?');
-  let active = location.search;
-  active = active.replace('?category=', '');
-
+  let active = location.pathname;
+  active = active.replace('/items/filter/', '');
   const linkToCategory = (ev, title) => {
     ev.preventDefault();
     ev.stopPropagation();
@@ -54,10 +53,6 @@ const SideBar = () => {
  if(filterMenu){
    console.log(filterMenu)
  }
-
-  const handleFilter = () => {
-
-  }
 
   return (
     <WrapperSideBar>

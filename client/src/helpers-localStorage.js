@@ -7,6 +7,7 @@ export const saveToLocalStorage = (key, data) => {
   }
 }
 
+
 export const getFromLocalStorage = (key) => {
   try {
     const stringifyData = localStorage.getItem(key);
