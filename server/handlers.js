@@ -25,12 +25,12 @@ const filterByQueries = (queries, category) => {
       if(typeof searchParameter === 'string'){
         filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
       } else {
+        let subSearch = [];
         searchParameter.forEach(parameter => {
-          const aPartOfFiltering = filteredItems.filter(item => {
-            return (item[searchQuery] === parameter)
-            })
-          filteredItems.concat(aPartOfFiltering)
+          const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
+          subSearch = subSearch.concat(aPartOfFiltering)
           })
+        filteredItems = subSearch;
       }
     }
   }
@@ -96,16 +96,16 @@ const filterBySearchQuery = (query, queries) => {
       if(typeof searchParameter === 'string'){
         filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
       } else {
+        let subSearch = [];
         searchParameter.forEach(parameter => {
-          const aPartOfFiltering = filteredItems.filter(item => {
-            return (item[searchQuery] === parameter)
-            })
-          filteredItems.concat(aPartOfFiltering)
+          const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
+          subSearch = subSearch.concat(aPartOfFiltering)
           })
+        filteredItems = subSearch;
       }
     }
+  }
   return filteredItems;
-}
 }
 
 const handleSearchQuery = (req, res) => {
