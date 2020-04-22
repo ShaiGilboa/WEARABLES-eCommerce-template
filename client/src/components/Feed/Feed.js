@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import {
   useLocation,
   useParams,
 } from 'react-router-dom';
-import {
-  useQuery,
-} from 'react-router-dom';
+// import {
+//   useQuery,
+// } from 'react-router-dom';
 
 
 import { SmallItem } from '../Items';
 import SideBar from '../SideBar';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCompleted,
-  fetchResetStatus,
+  // fetchResetStatus,
   clearQueries,
 } from '../../Redux/actions';
 
 const Feed = () => {
-  const loaded = useSelector(state => state.data.isLoaded)
+  // const loaded = useSelector(state => state.data.isLoaded)
   const dispatch = useDispatch();
   const location = useLocation()
   // creates an array for all the values of the query 'body_location'
@@ -28,10 +28,11 @@ const Feed = () => {
   const queriesBodyLocation = new URLSearchParams(location.search).getAll('body_location');
   const [items, setItems] = React.useState([]);
   const { category } = useParams()
-  let title = location.search;
+  // let title = location.search;
   // title = title.replace('?category=', '');
   React.useEffect(()=>{
     dispatch(clearQueries())
+     // eslint-disable-next-line
   },[])
   React.useEffect(() => {
     if (category) {
@@ -124,9 +125,9 @@ const WrapperItems = styled.section`
 }
 `;
 
-const LoaderWrapper = styled.div`
-  margin: 100px auto;
-  color: #FFF;
-  display:flex;
-  justify-content: center;
-`;
+// const LoaderWrapper = styled.div`
+//   margin: 100px auto;
+//   color: #FFF;
+//   display:flex;
+//   justify-content: center;
+// `;

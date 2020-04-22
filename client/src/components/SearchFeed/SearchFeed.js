@@ -5,7 +5,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import {
-  useSelector,
+  // useSelector,
   useDispatch,
   } from 'react-redux';
 import {
@@ -23,6 +23,7 @@ const SearchFeed = () =>{
   const [items, setItems] = React.useState([]);
   React.useEffect(()=>{
     dispatch(clearQueries())
+    // eslint-disable-next-line
   },[])
 
   React.useEffect(() => {

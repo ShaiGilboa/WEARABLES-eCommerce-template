@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StarRateIcon from '@material-ui/icons/StarRate';
+// import StarRateIcon from '@material-ui/icons/StarRate';
 import { FaStar } from "react-icons/fa";
 
 const starArray = (length) => [...Array(length)];

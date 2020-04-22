@@ -52,7 +52,6 @@ const Form = ({
           dispatch(updateUserInfo(newUserInfo))
           return false;
         }
-      break;
       case 'Shipping-Address':
         if(data.shippingAddress.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
         if(data.shippingAddress.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
@@ -132,21 +131,21 @@ const Wrapper = styled.div`
   justify-content:space-between;
 `;
 
-const Buttons = styled.div`
-  position: relative;
-  /* display: flex;
-  justify-content:space-between; */
-`;
-const NextBtn = styled(Button)`
-  position: relative;
-  background-color:green;
-  right: 40px;
-  bottom: 40px;
-`;
+// const Buttons = styled.div`
+//   position: relative;
+//   /* display: flex;
+//   justify-content:space-between; */
+// `;
+// const NextBtn = styled(Button)`
+//   position: relative;
+//   background-color:green;
+//   right: 40px;
+//   bottom: 40px;
+// `;
 
-const PreviousBtn = styled(Button)`
-  position: relative;
-  background-color:blue;
-  left: 40px;
-  bottom: 40px;
-`;
+// const PreviousBtn = styled(Button)`
+//   position: relative;
+//   background-color:blue;
+//   left: 40px;
+//   bottom: 40px;
+// `;

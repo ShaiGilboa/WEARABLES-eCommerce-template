@@ -3,7 +3,7 @@ import React, {
   useEffect,
 } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
 } from 'react-router-dom';
@@ -13,12 +13,12 @@ import Navbar from '../Navbar';
 import Feed from '../Feed';
 import Checkout from '../Checkout';
 import { BigItem } from '../Items';
-import Cart from '../Cart';
+// import Cart from '../Cart';
 import HomePage from '../HomePage';
-import { useAuth0 } from "../SignIn/react-auth0-spa";
+// import { useAuth0 } from "../SignIn/react-auth0-spa";
 import Profile from "../SignIn/Profile";
 import history from "../../utils/history";
-import PrivateRoute from '../SignIn/PrivateRoute';
+// import PrivateRoute from '../SignIn/PrivateRoute';
 import OrderConfirmation from '../OrderConfirmation';
 import ScrollToTop from '../../ScrollToTop';
 import CompanyFeed from '../CompanyFeed';

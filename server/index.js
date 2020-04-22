@@ -2,7 +2,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// const items = require('./data/items');
+const {
+  createDb,
+} = require('./mongodb/db.js');
 const PORT = 4000;
 const { 
   handleItemId,
@@ -12,12 +14,9 @@ const {
   handleCategoryFilter,
   handleSearchQuery,
 } = require('./handlers');
-// 
-// const filterFunction = (array, property, value) => {
-//     let ret = [];
-//     ret = array.filter(item=>item.property===value);
-//     return ret;
-//   }
+
+// createDb();
+
 express()
   .use(function (req, res, next) {
     res.header(

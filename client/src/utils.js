@@ -62,7 +62,7 @@ export const validateString = (string) => {
 export const  validateEmail = (email) => {
   // taken from: https://www.w3resource.com/javascript/form/email-validation.php
   // checks: 'LL..LL@LL..LL.LLL.LLLL.LL
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)){
+  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(email)){
       return true;
     } else {
       return false;

@@ -1,12 +1,15 @@
 import React from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import {
+  useDispatch,
+  // useSelector,
+  } from 'react-redux';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {
   addItemToCart,
 } from '../../../Redux/actions';
-import { FormHelperText } from "@material-ui/core";
+// import { FormHelperText } from "@material-ui/core";
 import StarRating from '../../RatingStars';
 import { useHistory } from "react-router-dom";
 
@@ -17,17 +20,17 @@ const SmallItem = ({
     id,
     name,
     price,
-    body_location,
+    // body_location,
     category,
     imageSrc,
     numInStock,
-    companyId,
-    quantity,
+    // companyId,
+    // quantity,
   } = item;
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const itemInCart = useSelector(state => state.userInfo.cart[id]);
+  // const itemInCart = useSelector(state => state.userInfo.cart[id]);
 
   function handleClickBigItem(ev) {
     ev.preventDefault();

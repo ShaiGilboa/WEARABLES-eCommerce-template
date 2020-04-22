@@ -6,7 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RatingStars from '../../RatingStars';
 
 import {
-  Link,
+  // Link,
   useParams,
 } from 'react-router-dom';
 

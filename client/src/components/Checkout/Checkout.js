@@ -2,24 +2,24 @@ import React from "react";
 import styled from 'styled-components';
 import {
   useSelector,
-  useDispatch,
+  // useDispatch,
 } from 'react-redux';
 
 import Forms from './Forms';
-import CartItem from './CartItem';
-import Cart from '../Cart';
+// import CartItem from './CartItem';
+// import Cart from '../Cart';
 import Button from '../UnstyledButton';
 
 import {
   totalAmount,
 } from '../../utils';
 
-import {
-  changeStatus,
-} from '../../Redux/actions';
+// import {
+//   changeStatus,
+// } from '../../Redux/actions';
 
 const Checkout = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
   const userInfo = useSelector(state=>state.userInfo.userInfo);
 
@@ -116,8 +116,8 @@ const Details = styled.div`
   width: 20vw;
 `;
 
-const ContinueBtn = styled(Button)`
-  width: 100%;
-  padding: 5px 10px;
-  background-color: red;
-`;
+// const ContinueBtn = styled(Button)`
+//   width: 100%;
+//   padding: 5px 10px;
+//   background-color: red;
+// `;
