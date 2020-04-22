@@ -104,6 +104,7 @@ const filterBySearchQuery = (query, queries) => {
         filteredItems = subSearch;
       }
     }
+    
   }
   return filteredItems;
 }
