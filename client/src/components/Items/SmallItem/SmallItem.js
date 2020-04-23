@@ -167,9 +167,3 @@ justify-content: center;
     cursor: no-drop;
   }
 `;
-
-// const ButtonWrapper = styled.div`
-// display: flex;
-// justify-content: space-between;
-
-// `
