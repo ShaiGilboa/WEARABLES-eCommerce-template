@@ -29,9 +29,8 @@ const handleItemId = async (req, res) => {
 
 const filterByQueries = async (queries, category) => {
   try {
-    let filteredItems = upToDate() ? ITEMS_FROM_DB : await getAllItems()
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await getAllItems();
     let searchParameter = null;
-
     if(category)filteredItems=filteredItems.filter(item=> item.category === category)
     
     if(queries){
@@ -59,7 +58,7 @@ const filterByQueries = async (queries, category) => {
 const handleQueries = async (req, res) => {
   try {
     let filtered = await filterByQueries(req.query);
-    console.log('filtered',filtered.length)
+    console.log('filtered2',filtered.length)
     if (filtered.length) {
       res.status(200).send({status: 200, items: filtered})
     } else {
@@ -121,7 +120,7 @@ const handleCategoryFilter = async (req, res) => {
 
 const filterBySearchQuery = async (query, queries) => {
   try {
-    let filteredItems = upToDate() ? ITEMS_FROM_DB : await getAllItems()
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await getAllItems();
     if(queries){
         for (let searchQuery in queries) {
         searchParameter = queries[searchQuery];
@@ -146,7 +145,7 @@ const filterBySearchQuery = async (query, queries) => {
 
 const upToDate = () => {
   const now = new Date();
-  return now.getTime() - items.timestamp.getTime() > 300000
+  return now.getTime() - ITEMS_FROM_DB.timestamp.getTime() > 300000
     ? false
     : true
 }
