@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
-const fs = require('file-system')
+// const fs = require('file-system')
 
 const startClient = async () => {
   return new MongoClient('mongodb://localhost:27017', {
@@ -8,52 +8,104 @@ const startClient = async () => {
   })
 }
 
-const checkCollectionExists = async (dbName, collection) => {
+const getItemById = async (_id)=> {
   try {
-    const client = startClient();
-    await client.connect();
-    console.log('connected! - checkCollectionExists');  
-    const db = await client.db(dbName);
-    const finding = await db.collection(collection).find().toArray();
-    client.close();
-    console.log('disconnected! - checkCollectionExist');
-    return finding.length
-      ? true
-      : false;
-  } catch (err) {
-    console.log('err',err)
-  }
-}
-
-const createDb = async () => {
-  try {
-    console.log('creation');
-    batchImport()
-  } catch (err) {
-    console.log('err',err)
-  }
-}
-
-const batchImport = async () => {
-  const items = JSON.parse(fs.readFileSync('../data/fixedItems.json'));
-  const companies = JSON.parse(fs.readFileSync('../data/fixedCompanies.json'));
-  try {
-    const client = startClient();
-    await client.connect();
-    console.log('connected! - batchImport');
-
+    const client = await startClient()
+    await client.connect()
+    console.log('connected! - getItemById');
     const db = await client.db('S_A_D_Wearables');
-    await db.collection('items').insertMany(items);
-    await db.collection('companies').insertMany(companies);
-
-    client.close();
-    console.log('disconnected! - batchImport');
+    const finding = await db.collection('items').findOne({_id})
+    client.close()
+    console.log('disconnected! - getItemById');
+    return finding;
   } catch (err) {
-    console.log('err',err) 
+    console.log('err',err)
   }
 }
 
+const getCompanyById = async (_id)=> {
+  try {
+    const client = await startClient()
+    await client.connect()
+    console.log('connected! - getCompanyById');
+    const db = await client.db('S_A_D_Wearables');
+    const finding = await db.collection('companies').findOne({_id})
+    client.close()
+    console.log('disconnected! - getCompanyById');
+    return finding;
+  } catch (err) {
+    console.log('err',err)
+  }
+}
+
+const insertOrder = async (items, orderInfo, _id)=> {
+  try {
+    const client = await startClient()
+    await client.connect()
+    console.log('connected! - insertOrder');
+    const db = await client.db('S_A_D_Wearables')
+    const r = await db.collection('orders').insertOne({
+      _id,
+      items,
+      orderInfo,
+    });
+    assert.equal(1, r.insertedCount)
+    client.close()
+    console.log('disconnected! - insertOrder');
+    return true
+  } catch (err) {
+    console.log('err',err)
+    return false
+  }
+}
+
+  // items is an array of objects: {'itemId', 'numOrdered'}
+const updateStockByOrder = async (items)=> {
+  try {
+    const client = await startClient()
+    await client.connect()
+    console.log('connected! - updateStockByOrder');
+    const db = await client.db('S_A_D_Wearables');
+    for(let i = 0; i < items.length; i ++){
+      console.log('items[i].itemId',items[i].itemId)
+      let r = await db.collection('items').updateOne({_id:items[i].itemId}, {
+        $inc: {
+          numInStock: -items[i].numOrdered,
+        }
+      })
+      assert.equal(1, r.matchedCount)
+      assert.equal(1, r.modifiedCount)
+    }
+    // await db.collection('items').updateMany()
+    client.close()
+    console.log('disconnected! - updateStockByOrder');
+    return true
+  } catch (err) {
+    console.log('err',err)
+    return false
+  }
+}
+
+const getAllItems = async ()=> {
+  try {
+    const client = await startClient()
+    await client.connect()
+    console.log('connected! - getAllItems');
+    const db = await client.db('S_A_D_Wearables');
+    const allItems = await db.collection('items').find().toArray();
+    client.close()
+    console.log('disconnected! - getAllItems');
+    return allItems;
+  } catch (err) {
+    console.log('err',err)
+    return false;
+  }
+}
 
 module.exports = {
-  createDb,
+  getItemById,
+  insertOrder,
+  getCompanyById,
+  updateStockByOrder,
+  getAllItems,
 }

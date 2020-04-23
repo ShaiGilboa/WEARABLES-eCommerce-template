@@ -2,9 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const {
-  createDb,
-} = require('./mongodb/db.js');
+
 const PORT = 4000;
 const { 
   handleItemId,

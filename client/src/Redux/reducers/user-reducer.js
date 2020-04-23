@@ -36,10 +36,10 @@ export default function cartReducer(state = initialState, action) {
   const newState = JSON.parse(JSON.stringify(state)); // this creates a 'Deep Copy' of the state
   switch (action.type) {
     case 'ADD_ITEM_TO_CART':
-      if (newState.cart[action.item.id]) {
-        newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) + 1;
+      if (newState.cart[action.item._id]) {
+        newState.cart[action.item._id].quantity = Number(newState.cart[action.item._id].quantity) + 1;
       } else {
-        newState.cart[action.item.id] = {
+        newState.cart[action.item._id] = {
           ...action.item,
           quantity: 1,
         }
@@ -50,10 +50,10 @@ export default function cartReducer(state = initialState, action) {
       };
 
     case 'REMOVE_ONE_ITEM_FROM_CART':
-      if (newState.cart[action.item.id]) {
-        newState.cart[action.item.id].quantity = Number(newState.cart[action.item.id].quantity) - 1;
+      if (newState.cart[action.item._id]) {
+        newState.cart[action.item._id].quantity = Number(newState.cart[action.item._id].quantity) - 1;
       } else {
-        newState.cart[action.item.id] = {
+        newState.cart[action.item._id] = {
           ...action.item,
           quantity: 1,
         }

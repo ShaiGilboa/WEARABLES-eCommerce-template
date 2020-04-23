@@ -1,11 +1,4 @@
 
-// const modifyString = (part, whole) => {
-//   const indexOfPart = whole.toLowerCase().indexOf(part);
-//   const part1 = whole.slice(0,indexOfPart)
-//   const part2 = whole.slice(indexOfPart+part.length)
-//   const modification = [part1, part2]
-//   return modification;
-// }
 const modifyString = (part, whole) => {
   const indexOfPart = whole.toLowerCase().indexOf(part.toLowerCase());
   const part1 = whole.substring(0,indexOfPart)

@@ -73,7 +73,7 @@ const Feed = () => {
           {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
           </Header>
           <WrapperItems>
-            {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
+            {items.map((item, index) => <SmallItem key={item._id + index} item={item} />)}
           </WrapperItems>
         </Content>
       </Wrapper>

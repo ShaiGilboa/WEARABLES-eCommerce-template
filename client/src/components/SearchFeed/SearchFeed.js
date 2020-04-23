@@ -30,6 +30,7 @@ const SearchFeed = () =>{
     fetch(`/search/${searchQuery}${location.search}`)
       .then(res=>res.json())
       .then(res=>{
+        console.log('res',res)
         if (res.status === 200) {
           setItems(res.searchResults)
         }
@@ -47,7 +48,7 @@ const SearchFeed = () =>{
           </Header>
           {items && (
           <WrapperItems>
-            {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
+            {items.map((item, index) => <SmallItem key={item._id + index} item={item} />)}
           </WrapperItems>
           )}
         </Content>

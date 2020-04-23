@@ -3,9 +3,10 @@ import styled from 'styled-components';
 // import { Link } from 'react-router-dom';
 import {
   useDispatch,
-  // useSelector,
+  useSelector,
   } from 'react-redux';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import {
   addItemToCart,
 } from '../../../Redux/actions';
@@ -17,7 +18,7 @@ const SmallItem = ({
   item
 }) => {
   const {
-    id,
+    _id,
     name,
     price,
     // body_location,
@@ -29,20 +30,29 @@ const SmallItem = ({
   } = item;
   const dispatch = useDispatch();
   let history = useHistory();
-
-  // const itemInCart = useSelector(state => state.userInfo.cart[id]);
+  const [outOfStock, setOutOfStock] = React.useState(false)
+  const cart = useSelector(state => state.userInfo.cart);
 
   function handleClickBigItem(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-    history.push(`/items/${id}`);
+    history.push(`/items/${_id}`);
   }
-  // const handleAddItem = () => {
-  //    if(itemInCart){
-  //      itemInCart.quantity >= numInStock
-  //    }
-  //  dispatch(addItemToCart(item))
-  // }
+  const handleAddItem = () => {    
+    if(cart[_id]) {      
+      if(cart[_id].quantity){        
+        if(cart[_id].quantity >= numInStock){          
+          setOutOfStock(true)
+        } else {
+          dispatch(addItemToCart(item))
+        }
+      } else {
+        dispatch(addItemToCart(item))
+      }
+    } else {
+      dispatch(addItemToCart(item))
+    }
+  }
 
   return (
     <Wrapper>
@@ -67,11 +77,14 @@ const SmallItem = ({
       </InfoWrapper>
       {/* <ButtonWrapper data-css='ButtonWrapper'> */}
       </WrapperContent>
-      <AddToCartButton
-        onClick={() => dispatch(addItemToCart(item))}>
-        {/* // onClick={() => handleAddItem()}> */}
+      {outOfStock || numInStock===0?(<OutOfStockWrapper>
+      <NotInterestedIcon style={{ paddingRight: '20px' }} />Out of stock
+      </OutOfStockWrapper>)
+      :(<AddToCartButton
+        // onClick={() => dispatch(addItemToCart(item))}>
+        onClick={() => handleAddItem()}>
         <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
-      </AddToCartButton>
+      </AddToCartButton>)}
       {/* </ButtonWrapper> */}
     </Wrapper>
   );
@@ -141,7 +154,19 @@ transition: all .2s ease-in;
   &:hover{
     background-color: #e8e8e8;
   }
-`
+`;
+
+const OutOfStockWrapper = styled.div`
+width:50%;
+display: flex;
+background-color: transparent;
+justify-content: space-around;
+align-items: center;
+justify-content: center;
+  &:hover{
+    cursor: no-drop;
+  }
+`;
 
 // const ButtonWrapper = styled.div`
 // display: flex;

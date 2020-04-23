@@ -1,20 +1,30 @@
 /// HANDLER FILE
 const items = require('./data/items');
-// const userOrder = require('./data/user-Info')
-// const itemsDev = require('./data/items-Dev');
 const companies = require('./data/companies');
 const fs = require('fs');
 const ordersMade = require('./data/order-info');
 
-const handleItemId = (req, res) => {
+let ITEMS_FROM_DB = null;
+
+const {
+  getItemById,
+  insertOrder,
+  getCompanyById,
+  updateStockByOrder,
+  getAllItems,
+} = require('./mongodb/db.js');
+
+const handleItemId = async (req, res) => {
   const { itemId } = req.params;
   const parsedId = parseInt(itemId);
-  const item = items.find(item => item.id === parsedId);
-  return res.json({ item });
+  const item = await getItemById(parsedId);
+  item
+    ? res.status(200).json({status: 200, item})
+    : res.status(404).json({status: 404})
 }
 
-const filterByQueries = (queries, category) => {
-  let filteredItems = items;
+const filterByQueries = async (queries, category) => {
+  let filteredItems = await getAllItems();
   let searchParameter = null;
 
   if(category)filteredItems=filteredItems.filter(item=> item.category === category)
@@ -38,8 +48,9 @@ const filterByQueries = (queries, category) => {
 }
 // use the queries as values to filter the array with
 // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
-const handleQueries = (req, res) => {
-  let filtered = filterByQueries(req.query);
+const handleQueries = async (req, res) => {
+  let filtered = await filterByQueries(req.query);
+  console.log('filtered',filtered.length)
   // if (filtered.length) {
     res.status(200).send({status: 200, items: filtered})
   // } else {
@@ -47,49 +58,47 @@ const handleQueries = (req, res) => {
   // }
 }
 
-const handleCompany = (req, res) => {
+const handleCompany = async (req, res) => {
   const { companyId } = req.params;
   const parsedId = parseInt(companyId);
-  const company = companies.find(comp => comp.id === parsedId);
-  // console.log(company);
-  return res.json({ company });
+  const company = await getCompanyById(parsedId)
+
+  company
+    ? res.status(200).json({status: 200, company})
+    : res.status(404).json({status: 404})
 }
 
-const handleCheckout = (req, res) => {
-
-  const {orders, orderInfo}= req.body;
-  orders.forEach((order) => {
-    const item = items.find(anItem =>anItem.id === order.itemId)
-    item.numInStock -= order.numOrdered;
-  });
-
-  // let orderInfo = JSON.stringify(req.body.orderInfo, null, 2);
-  // console.log(orderInfo)
-  // fs.writeFileSync('./data/order-Info.json', orderInfo, (err) => {
-  //   if (err) throw err;
-  // });
-
+const handleCheckout = async (req, res) => {
+  // items is an array of objects: {'itemId', 'numOrdered'}
+  const {items, orderInfo}= req.body;
   let uniqueId = new Date().valueOf().toString();
-  // console.log('id',uniqueId)
-  // console.log('orderInfo',orderInfo)
-  ordersMade[uniqueId] = {orders, orderInfo}
-  console.log('ordersMade',ordersMade[uniqueId])
-  res.status(200).send({status: 200, orderId: uniqueId});
+  // console.log('items',items)
+  const responseUpdateItems = await updateStockByOrder(items);
+  if(!responseUpdateItems){
+    res.status(404).json({status: 404});
+    return
+  }
+  const responseInsertOrder = await insertOrder(items, orderInfo, uniqueId);
+  if(!responseInsertOrder) {
+    res.status(404).json({status:404});
+    return
+  }
+  res.status(200).json({status: 200, orderId: uniqueId});
 }
 
-const handleCategoryFilter = (req, res) => {
+const handleCategoryFilter = async (req, res) => {
   const { category } = req.params;
   console.log('hi')
-  const itemsInCategory = filterByQueries(req.query, category)
-  // if (itemsInCategory.length) {
+  const itemsInCategory = await filterByQueries(req.query, category)
+  if (itemsInCategory.length) {
     res.status(200).send({status: 200, items: itemsInCategory})
-  // } else {
-    // res.status(404).send({status: 404, message: 'no items in category'})
-  // }
+  } else {
+    res.status(404).send({status: 404, message: 'no items in category'})
+  }
 }
 
-const filterBySearchQuery = (query, queries) => {
-  let filteredItems = items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+const filterBySearchQuery = async (query, queries) => {
+  let filteredItems = await getAllItems()
   if(queries){
       for (let searchQuery in queries) {
       searchParameter = queries[searchQuery];
@@ -109,10 +118,18 @@ const filterBySearchQuery = (query, queries) => {
   return filteredItems;
 }
 
-const handleSearchQuery = (req, res) => {
+const updateITEMS_FROM_DB = async () => {
+
+}
+
+const handleSearchQuery = async (req, res) => {
   const { searchQuery } = req.params;
-  const searchResults = filterBySearchQuery(searchQuery, req.query);
-  res.status(200).send({status: 200, searchResults})
+  const searchResults = await filterBySearchQuery(searchQuery, req.query);
+  if (searchResults.length) {
+    res.status(200).send({status: 200, searchResults})
+  } else {
+    res.status(404).send({status: 404, message: 'no items in category'})
+  }
 }
 
 //

@@ -10,7 +10,7 @@ const startClient = async () => {
 
 const checkCollectionExists = async (dbName, collection) => {
   try {
-    const client = startClient();
+    const client = await startClient();
     await client.connect();
     console.log('connected! - checkCollectionExists');  
     const db = await client.db(dbName);
@@ -38,7 +38,7 @@ const batchImport = async () => {
   const items = JSON.parse(fs.readFileSync('../data/fixedItems.json'));
   const companies = JSON.parse(fs.readFileSync('../data/fixedCompanies.json'));
   try {
-    const client = startClient();
+    const client = await startClient();
     await client.connect();
     console.log('connected! - batchImport');
 

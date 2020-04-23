@@ -34,9 +34,9 @@ const OrderPage = () => {
       email,
       id,
     } = userInfo.userInfo;
-    const orders = cartIds.map(itemId => ({ itemId: parseInt(itemId), numOrdered: cartById[itemId].quantity }))
+    const items = cartIds.map(itemId => ({ itemId: parseInt(itemId), numOrdered: cartById[itemId].quantity }))
     const body = {
-      orders, //array of objects{'itemId', 'numOrdered'}
+      items, //array of objects{'itemId', 'numOrdered'}
       orderInfo: {
         userInfo: {
           fname,
@@ -57,20 +57,22 @@ const OrderPage = () => {
       },
     })
       .then(res => res.json())
-      .then(payload => {
-        dispatch(addtoPuschaseHistory(payload.orderId))
-        history.push(`/order-success/${payload.orderId}`)
+      .then(res => {
+        if(res.status===200){
+          dispatch(addtoPuschaseHistory(res.orderId))
+          history.push(`/order-success/${res.orderId}`)
+        }
         
         //create action clear cart
         //send to order confirmed with ID
         //keep id in user info
-        console.log('res', payload)
       })
   }
 
 
   const lastThreeDigitsOfCardNumber = billingInfo.cardNumber.substr(billingInfo.cardNumber.length - 3);
   const cartById = userInfo.cart;
+  console.log('cartById',cartById)
   const cartIds = Object.keys(cartById);
   return (
     <Wrapper data-css='form-wrapper'>
