@@ -29,7 +29,7 @@ const handleItemId = async (req, res) => {
 
 const filterByQueries = async (queries, category) => {
   try {
-    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await getAllItems();
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await updateITEMS_FROM_DB();
     let searchParameter = null;
     if(category)filteredItems=filteredItems.filter(item=> item.category === category)
     
@@ -58,7 +58,6 @@ const filterByQueries = async (queries, category) => {
 const handleQueries = async (req, res) => {
   try {
     let filtered = await filterByQueries(req.query);
-    console.log('filtered2',filtered.length)
     if (filtered.length) {
       res.status(200).send({status: 200, items: filtered})
     } else {
@@ -120,7 +119,10 @@ const handleCategoryFilter = async (req, res) => {
 
 const filterBySearchQuery = async (query, queries) => {
   try {
-    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await getAllItems();
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await updateITEMS_FROM_DB();
+    if(query){
+      filteredItems = filteredItems.filter(item=>item.name.toLowerCase().includes(query.toLowerCase()))
+    }
     if(queries){
         for (let searchQuery in queries) {
         searchParameter = queries[searchQuery];
@@ -135,7 +137,6 @@ const filterBySearchQuery = async (query, queries) => {
           filteredItems = subSearch;
         }
       }
-      
     }
     return filteredItems;
   } catch (err) {
@@ -157,6 +158,7 @@ const updateITEMS_FROM_DB = async () => {
       timestamp: new Date(),
       items,
     }
+    return items;
   } catch (err) {
     console.log('err',err)
   }

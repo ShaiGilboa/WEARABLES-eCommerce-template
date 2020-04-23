@@ -39,13 +39,21 @@ const Feed = () => {
       fetch(`/items/filter/${category}${location.search}`)
         .then(res => res.json())
         .then(res => {
-          if (res.status === 200) setItems(res.items)
+          if (res.status === 200){
+            setItems(res.items)
+          } else {
+            setItems(404)
+          }
         }).then(dispatch(fetchCompleted()))
     } else {
       fetch(`/items${location.search}`)
         .then(res => res.json())
         .then(res => {
-          if (res.status === 200) setItems(res.items)
+          if (res.status === 200){
+            setItems(res.items)
+          } else {
+            setItems(404)
+          }
         }).then(dispatch(fetchCompleted()))
     }
   }, [location])
@@ -68,13 +76,16 @@ const Feed = () => {
           <SideBar />
         </WrapperSideBar>
         <Content>
-          <Header>
-          {items.length?(!category ? <Title>All items</Title> : <Title>{category}</Title>):/*<Title>No items found in: {category}</Title>*/null}
-          {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
-          </Header>
-          <WrapperItems>
-            {items.map((item, index) => <SmallItem key={item._id + index} item={item} />)}
-          </WrapperItems>
+          {!items.length ? (items!==404 ? <div>waiting for information</div> : <Header><Title>Error</Title></Header>)
+            :(<>
+            <Header>
+                {/* <Title>Search results for: "{searchQuery}"</Title> */}
+                  {queriesBodyLocation.length > 0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
+              </Header>
+              <WrapperItems>
+                {items.map((item, index) => <SmallItem key={item._id + index} item={item} />)}
+              </WrapperItems>
+          </>)}
         </Content>
       </Wrapper>
     </>
