@@ -24,15 +24,27 @@ const CartItem = ({ item, toggle }) => {
     numInStock,
   } = item;
   const [longFormOfNameFlag, setLongFormOfNameFlag] = React.useState(false);
+  const [outOfStock, setOutOfStock] = React.useState(false);
+  const [zeroInCartFlag, setZeroInCartFlag] = React.useState(false);
 
   const dispatch = useDispatch();
   let history = useHistory();
 
+  React.useEffect(() => {
+    console.log('quantity',quantity)
+    console.log('numInStock',numInStock)
+    console.log('zeroInCartFlag',zeroInCartFlag)
+    if(quantity === numInStock) {setOutOfStock(true)}
+    else {setOutOfStock(false)}
+    if(quantity === 0) {setZeroInCartFlag(true)}
+    else {setZeroInCartFlag(false)}
+  },[quantity])
+
   const handleAddItem = () => {
-    if (quantity < numInStock) dispatch(addItemToCart(item))
+    if (quantity < numInStock){ dispatch(addItemToCart(item))}
   }
   const handleRemoveItem = () => {
-    if (quantity >= 0) dispatch(removeOneItemFromCart(item))
+    if (quantity >= 0) {dispatch(removeOneItemFromCart(item))}
   }
   const handleInput = (event) => {
     if (event.target.value >= 0 && event.target.value <= numInStock) {
@@ -52,12 +64,10 @@ const CartItem = ({ item, toggle }) => {
   }
 
   return (
-    <Wrapper
-    // onClick={() => setLongFormOfNameFlag(!longFormOfNameFlag)}
-    >
-      <WrapperImg data-css='WrapperImage'>
+    <Wrapper>
+      <div data-css='WrapperImage'>
         <ThumbCart src={imageSrc} alt={name} />
-      </WrapperImg>
+      </div>
       <WrapperInfo data-css='WrapperInfo'>
         <Name
           onClick={(event) => handleClickOnItem(event, _id)}
@@ -67,21 +77,23 @@ const CartItem = ({ item, toggle }) => {
         </Name>
         <p>{price}</p>
         <ItemQuantityWrapper data-css='ItemQuantityWrapper'>
-          <RemoveCircleOutlineIcon
+          {zeroInCartFlag 
+            ? <Gap/>
+            : <RemoveCircleOutlineIcon
             style={{ fontSize: 15, cursor: 'pointer' }}
             onClick={() => handleRemoveItem()}
-          />
+          />}
 
           <ItemQuantityInput
             value={quantity}
             onChange={(event) => handleInput(event)}
           />
 
-            <AddCircleOutlineIcon
+            {!outOfStock && <AddCircleOutlineIcon
               style={{ fontSize: 15, cursor: 'pointer' }}
               // onClick={() => dispatch(addItemToCart(item))}
               onClick={() => handleAddItem()}
-            />
+            />}
 
         </ItemQuantityWrapper>
         <RemoveButton onClick={() => {
@@ -127,7 +139,8 @@ margin-bottom: 7px;
   )}
   }
 `;
-const WrapperImg = styled.div`
+const Gap = styled.div`
+  width: 15px;
 `
 const WrapperInfo = styled.div`
   width: 430px;
