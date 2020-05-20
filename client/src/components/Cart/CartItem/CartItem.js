@@ -91,7 +91,6 @@ const CartItem = ({ item, toggle }) => {
 
             {!outOfStock && <AddCircleOutlineIcon
               style={{ fontSize: 15, cursor: 'pointer' }}
-              // onClick={() => dispatch(addItemToCart(item))}
               onClick={() => handleAddItem()}
             />}
 
