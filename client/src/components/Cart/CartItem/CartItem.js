@@ -31,9 +31,6 @@ const CartItem = ({ item, toggle }) => {
   let history = useHistory();
 
   React.useEffect(() => {
-    console.log('quantity',quantity)
-    console.log('numInStock',numInStock)
-    console.log('zeroInCartFlag',zeroInCartFlag)
     if(quantity === numInStock) {setOutOfStock(true)}
     else {setOutOfStock(false)}
     if(quantity === 0) {setZeroInCartFlag(true)}

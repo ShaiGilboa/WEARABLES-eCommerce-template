@@ -110,7 +110,6 @@ const Typeahead = (
               <li
                 key={`${index}`}
               >
-                <img src={suggestion.imageSrc} alt='product' />
                 <span>{suggestion.parts[0]}</span>
                 <Bold>{suggestion.parts[1]}</Bold>
                 <span>{suggestion.parts[2]}</span>

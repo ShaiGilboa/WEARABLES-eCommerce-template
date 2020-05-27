@@ -5,7 +5,10 @@ import {
   useSelector,
   } from 'react-redux';
 import MenuBigItem from '../../MenuBigItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
+
 import RatingStars from '../../RatingStars';
 
 import {
@@ -77,9 +80,13 @@ const BigItem = () => {
                 <div>
                 <h2>{item.price}</h2>
                 <h3>Item stock: {item.numInStock}</h3>
-                <AddToCartButton onClick={() => addItem()}>
-                  <AddCircleOutlineIcon style={{ paddingRight: '20px', margin: '0' }} />Add to Cart
-                </AddToCartButton>
+                {item.numInStock>0 && (cart[item._id] ? item.numInStock > cart[item._id].quantity : true)
+                  ? (<AddToCartButton onClick={() => addItem()}>
+                      <AddCircleOutlineIcon style={{ paddingRight: '20px', margin: '0' }} />Add to Cart
+                    </AddToCartButton>)
+                  : (<OutOfStockWrapper>
+                        <NotInterestedIcon style={{ paddingRight: '20px' }} />Out of stock
+                      </OutOfStockWrapper>)}
                 </div>
                 <div>
                 <RatingStars />
@@ -92,7 +99,9 @@ const BigItem = () => {
           </WrapperContent>
         </Wrapper>
       ) : (
-          <div>Hello</div>
+        <div style={{height:'70vh'}}>
+          <CircularProgress style={{position:'relative', left:'50%'}}/>
+        </div>
         )
       }
     </>
@@ -226,3 +235,14 @@ const ImageWrapper = styled.div`
 
 `;
 
+const OutOfStockWrapper = styled.div`
+width:50%;
+display: flex;
+background-color: transparent;
+justify-content: space-around;
+align-items: center;
+justify-content: center;
+  &:hover{
+    cursor: no-drop;
+  }
+`;

@@ -12,7 +12,7 @@ export const typeaheadSuggestion = (input, totalOptions) => {
   const suggestions1 = [];
   totalOptions.forEach(option => {
     if(option.name.toLowerCase().includes(input.toLowerCase())) suggestions1.push({
-      id: option.id,
+      id: option._id,
       name: option.name,
       });
   });

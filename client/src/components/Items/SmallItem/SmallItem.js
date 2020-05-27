@@ -75,17 +75,15 @@ const SmallItem = ({
           <StarRating />
         </ItemInfo>
       </InfoWrapper>
-      {/* <ButtonWrapper data-css='ButtonWrapper'> */}
       </WrapperContent>
-      {outOfStock || numInStock===0?(<OutOfStockWrapper>
-      <NotInterestedIcon style={{ paddingRight: '20px' }} />Out of stock
-      </OutOfStockWrapper>)
-      :(<AddToCartButton
-        // onClick={() => dispatch(addItemToCart(item))}>
-        onClick={() => handleAddItem()}>
-        <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
-      </AddToCartButton>)}
-      {/* </ButtonWrapper> */}
+      {outOfStock || numInStock===0
+        ? (<OutOfStockWrapper>
+            <NotInterestedIcon style={{ paddingRight: '20px' }} />Out of stock
+          </OutOfStockWrapper>)
+        : (<AddToCartButton
+            onClick={() => handleAddItem()}>
+              <AddCircleOutlineIcon style={{ paddingRight: '20px' }} />Add to cart
+            </AddToCartButton>)}
     </Wrapper>
   );
 }
