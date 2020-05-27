@@ -11,22 +11,22 @@ This app was created in one week, as a group project in Full-Stack Web Developme
 ---
 ## Screen Shots
 <div display='flex' flexDirection='row'>
-<img width='30%' src='./assets/homepage.jpg' alt='game image1'/>
-<img width='30%' src='./assets/categories1.jpg' alt='game image1'/>
-<img width='30%' src='./assets/typeahead.jpg' alt='game image1'/>
-<img width='30%' src='./assets/categories2.jpg' alt='game image1'/>
-<img width='30%' src='./assets/items1.jpg' alt='game image1'/>
-<img width='30%' src='./assets/cart1.jpg' alt='game image1'/>
-<img width='30%' src='./assets/cart2.jpg' alt='game image1'/>
-<img width='30%' src='./assets/items2.jpg' alt='game image1'/>
-<img width='30%' src='./assets/items3.jpg' alt='game image1'/>
-<img width='30%' src='./assets/Auth0.jpg' alt='game image1'/>
-<img width='30%' src='./assets/checkout1.jpg' alt='game image1'/>
-<img width='30%' src='./assets/checkout2.jpg' alt='game image1'/>
-<img width='30%' src='./assets/checkout3.jpg' alt='game image1'/>
-<img width='30%' src='./assets/checkout4.jpg' alt='game image1'/>
-<img width='30%' src='./assets/checkout5.jpg' alt='game image1'/>
-<img width='30%' src='./assets/confirmation.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/homepage.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/categories1.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/typeahead.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/categories2.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/items1.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/cart1.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/cart2.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/items2.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/items3.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/Auth0.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/checkout1.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/checkout2.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/checkout3.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/checkout4.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/checkout5.jpg' alt='game image1'/>
+<img width='30%' style="border:3px solid grey; margin: 5px; padding: 1px" src='./assets/confirmation.jpg' alt='game image1'/>
 <div>
 
 ---
