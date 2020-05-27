@@ -6,7 +6,7 @@ import {
   useHistory,
   useLocation,
   } from "react-router-dom";
-import { Checkbox } from '@material-ui/core';
+// import { Checkbox } from '@material-ui/core';
 import {
   useSelector,
   useDispatch,
@@ -45,12 +45,12 @@ const SideBar = () => {
     history.push(location.pathname+queriesString)
   }
 
- const filterMenu = useSelector(state => state.data.typeaheadItems);
+  const filterMenu = useSelector(state => state.data.typeaheadItems);
 
 //UseEffect to console.log
- if(filterMenu){
-   console.log(filterMenu)
- }
+  if(filterMenu){
+    console.log(filterMenu)
+  }
 
   return (
     <WrapperSideBar>

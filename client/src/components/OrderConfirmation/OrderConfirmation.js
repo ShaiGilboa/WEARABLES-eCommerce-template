@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import OrderSuccess from '../OrderSuccess';
-import {
-  useHistory,
-} from 'react-router-dom';
+// import styled from 'styled-components';
+// import OrderSuccess from '../OrderSuccess';
+// import {
+//   useHistory,
+// } from 'react-router-dom';
 
 import {
   useSelector,

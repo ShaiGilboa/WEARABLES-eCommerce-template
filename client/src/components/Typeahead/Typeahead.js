@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { typeaheadSuggestion } from '../../utils';
 import { MAX_NUMBER_OF_SUGGESTIONS } from '../../constants';
@@ -34,6 +34,7 @@ const Typeahead = (
           //problem loading the items from the server
         }
         })
+        // eslint-disable-next-line
   }, [])
 
   // the search is a form, so there is a submit handler - maybe later we can have a 'search page' and not just the suggestions
@@ -109,7 +110,6 @@ const Typeahead = (
               <li
                 key={`${index}`}
               >
-                <img src={suggestion.imageSrc} />
                 <span>{suggestion.parts[0]}</span>
                 <Bold>{suggestion.parts[1]}</Bold>
                 <span>{suggestion.parts[2]}</span>

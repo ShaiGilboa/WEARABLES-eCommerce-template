@@ -26,7 +26,6 @@ const Cart = ({toggle}) => {
   const cartIds = Object.keys(cart);
 
   const total = totalAmount(cart, cartIds);
-
   return (
     <Wrapper>
       <Header>Your shopping cart </Header>

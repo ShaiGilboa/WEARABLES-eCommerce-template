@@ -1,11 +1,4 @@
 
-// const modifyString = (part, whole) => {
-//   const indexOfPart = whole.toLowerCase().indexOf(part);
-//   const part1 = whole.slice(0,indexOfPart)
-//   const part2 = whole.slice(indexOfPart+part.length)
-//   const modification = [part1, part2]
-//   return modification;
-// }
 const modifyString = (part, whole) => {
   const indexOfPart = whole.toLowerCase().indexOf(part.toLowerCase());
   const part1 = whole.substring(0,indexOfPart)
@@ -19,7 +12,7 @@ export const typeaheadSuggestion = (input, totalOptions) => {
   const suggestions1 = [];
   totalOptions.forEach(option => {
     if(option.name.toLowerCase().includes(input.toLowerCase())) suggestions1.push({
-      id: option.id,
+      id: option._id,
       name: option.name,
       });
   });
@@ -62,7 +55,7 @@ export const validateString = (string) => {
 export const  validateEmail = (email) => {
   // taken from: https://www.w3resource.com/javascript/form/email-validation.php
   // checks: 'LL..LL@LL..LL.LLL.LLLL.LL
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)){
+  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(email)){
       return true;
     } else {
       return false;

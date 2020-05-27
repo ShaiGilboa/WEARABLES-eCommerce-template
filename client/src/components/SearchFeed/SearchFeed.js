@@ -5,7 +5,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import {
-  useSelector,
+  // useSelector,
   useDispatch,
   } from 'react-redux';
 import {
@@ -23,14 +23,19 @@ const SearchFeed = () =>{
   const [items, setItems] = React.useState([]);
   React.useEffect(()=>{
     dispatch(clearQueries())
+    // eslint-disable-next-line
   },[])
 
   React.useEffect(() => {
     fetch(`/search/${searchQuery}${location.search}`)
       .then(res=>res.json())
       .then(res=>{
+        console.log('res',res)
         if (res.status === 200) {
           setItems(res.searchResults)
+          // setItems(404)
+        } else {
+          setItems(404)
         }
       })
   },[location])
@@ -40,15 +45,16 @@ const SearchFeed = () =>{
           <SideBar />
         </WrapperSideBar>
         <Content>
-          <Header>
-            {items.length ? <Title>Search results for: "{searchQuery}"</Title> : <Title>No results found for: {searchQuery}</Title>}
-            {queriesBodyLocation.length>0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
-          </Header>
-          {items && (
-          <WrapperItems>
-            {items.map((item, index) => <SmallItem key={item.id + index} item={item} />)}
-          </WrapperItems>
-          )}
+            {!items.length ? (items!==404 ? <div>waiting for information</div> : <Header><Title>No results found for: {searchQuery}</Title></Header>)
+            :(<>
+            <Header>
+                <Title>Search results for: "{searchQuery}"</Title>
+                  {queriesBodyLocation.length > 0 && queriesBodyLocation.map(query=><Query key={query}>{query}</Query>)}
+              </Header>
+              <WrapperItems>
+                {items.map((item, index) => <SmallItem key={item._id + index} item={item} />)}
+              </WrapperItems>
+          </>)}
         </Content>
       </Wrapper>
   )

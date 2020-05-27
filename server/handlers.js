@@ -1,119 +1,196 @@
 /// HANDLER FILE
 const items = require('./data/items');
-// const userOrder = require('./data/user-Info')
-// const itemsDev = require('./data/items-Dev');
 const companies = require('./data/companies');
 const fs = require('fs');
 const ordersMade = require('./data/order-info');
 
-const handleItemId = (req, res) => {
+let ITEMS_FROM_DB = null;
+
+const {
+  getItemById,
+  insertOrder,
+  getCompanyById,
+  updateStockByOrder,
+  getAllItems,
+} = require('./mongodb/db.js');
+
+const handleItemId = async (req, res) => {
   const { itemId } = req.params;
   const parsedId = parseInt(itemId);
-  const item = items.find(item => item.id === parsedId);
-  return res.json({ item });
+  try {
+    const item = await getItemById(parsedId);
+    item
+      ? res.status(200).json({status: 200, item})
+      : res.status(404).json({status: 404})
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
-const filterByQueries = (queries, category) => {
-  let filteredItems = items;
-  let searchParameter = null;
-
-  if(category)filteredItems=filteredItems.filter(item=> item.category === category)
-  
-  if(queries){
-      for (let searchQuery in queries) {
-      searchParameter = queries[searchQuery];
-      if(typeof searchParameter === 'string'){
-        filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
-      } else {
-        let subSearch = [];
-        searchParameter.forEach(parameter => {
-          const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
-          subSearch = subSearch.concat(aPartOfFiltering)
-          })
-        filteredItems = subSearch;
+const filterByQueries = async (queries, category) => {
+  try {
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await updateITEMS_FROM_DB();
+    let searchParameter = null;
+    if(category)filteredItems=filteredItems.filter(item=> item.category === category)
+    
+    if(queries){
+        for (let searchQuery in queries) {
+        searchParameter = queries[searchQuery];
+        if(typeof searchParameter === 'string'){
+          filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
+        } else {
+          let subSearch = [];
+          searchParameter.forEach(parameter => {
+            const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
+            subSearch = subSearch.concat(aPartOfFiltering)
+            })
+          filteredItems = subSearch;
+        }
       }
     }
+    return filteredItems;
+  } catch (err) {
+    console.log('err',err)
   }
-  return filteredItems;
 }
 // use the queries as values to filter the array with
 // for example '/items?body_location=Arms&category=Fitness' will be all the items that are 'Arms' and 'Fitness'
-const handleQueries = (req, res) => {
-  let filtered = filterByQueries(req.query);
-  // if (filtered.length) {
-    res.status(200).send({status: 200, items: filtered})
-  // } else {
-    // res.status(404).send({status: 404, message: 'no items in category'})
-  // }
+const handleQueries = async (req, res) => {
+  try {
+    let filtered = await filterByQueries(req.query);
+    if (filtered.length) {
+      res.status(200).send({status: 200, items: filtered})
+    } else {
+      res.status(404).send({status: 404, message: 'no items in category'})
+    }
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
-const handleCompany = (req, res) => {
+const handleCompany = async (req, res) => {
   const { companyId } = req.params;
   const parsedId = parseInt(companyId);
-  const company = companies.find(comp => comp.id === parsedId);
-  // console.log(company);
-  return res.json({ company });
+  try {
+    const company = await getCompanyById(parsedId)
+
+    company
+      ? res.status(200).json({status: 200, company})
+      : res.status(404).json({status: 404})
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
-const handleCheckout = (req, res) => {
-
-  const {orders, orderInfo}= req.body;
-  orders.forEach((order) => {
-    const item = items.find(anItem =>anItem.id === order.itemId)
-    item.numInStock -= order.numOrdered;
-  });
-
-  // let orderInfo = JSON.stringify(req.body.orderInfo, null, 2);
-  // console.log(orderInfo)
-  // fs.writeFileSync('./data/order-Info.json', orderInfo, (err) => {
-  //   if (err) throw err;
-  // });
-
+const handleCheckout = async (req, res) => {
+  // items is an array of objects: {'itemId', 'numOrdered'}
+  const {items, orderInfo}= req.body;
   let uniqueId = new Date().valueOf().toString();
-  // console.log('id',uniqueId)
-  // console.log('orderInfo',orderInfo)
-  ordersMade[uniqueId] = {orders, orderInfo}
-  console.log('ordersMade',ordersMade[uniqueId])
-  res.status(200).send({status: 200, orderId: uniqueId});
+  try {
+    const responseUpdateItems = await updateStockByOrder(items);
+    if(!responseUpdateItems){
+      res.status(404).json({status: 404});
+      return
+    }
+    const responseInsertOrder = await insertOrder(items, orderInfo, uniqueId);
+    if(!responseInsertOrder) {
+      res.status(404).json({status:404});
+      return
+    }
+    res.status(200).json({status: 200, orderId: uniqueId});
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
-const handleCategoryFilter = (req, res) => {
+const handleCategoryFilter = async (req, res) => {
   const { category } = req.params;
-  console.log('hi')
-  const itemsInCategory = filterByQueries(req.query, category)
-  // if (itemsInCategory.length) {
-    res.status(200).send({status: 200, items: itemsInCategory})
-  // } else {
-    // res.status(404).send({status: 404, message: 'no items in category'})
-  // }
+  try {
+    const itemsInCategory = await filterByQueries(req.query, category)
+    if (itemsInCategory.length) {
+      res.status(200).send({status: 200, items: itemsInCategory})
+    } else {
+      res.status(404).send({status: 404, message: 'no items in category'})
+    }
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
-const filterBySearchQuery = (query, queries) => {
-  let filteredItems = items.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-  if(queries){
-      for (let searchQuery in queries) {
-      searchParameter = queries[searchQuery];
-      if(typeof searchParameter === 'string'){
-        filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
-      } else {
-        let subSearch = [];
-        searchParameter.forEach(parameter => {
-          const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
-          subSearch = subSearch.concat(aPartOfFiltering)
-          })
-        filteredItems = subSearch;
+const filterBySearchQuery = async (query, queries) => {
+  try {
+    let filteredItems = upToDate() ? ITEMS_FROM_DB.items : await updateITEMS_FROM_DB();
+    if(query){
+      filteredItems = filteredItems.filter(item=>item.name.toLowerCase().includes(query.toLowerCase()))
+    }
+    if(queries){
+        for (let searchQuery in queries) {
+        searchParameter = queries[searchQuery];
+        if(typeof searchParameter === 'string'){
+          filteredItems = filteredItems.filter(item => item[searchQuery] === searchParameter);
+        } else {
+          let subSearch = [];
+          searchParameter.forEach(parameter => {
+            const aPartOfFiltering = filteredItems.filter(item => (item[searchQuery] === parameter))
+            subSearch = subSearch.concat(aPartOfFiltering)
+            })
+          filteredItems = subSearch;
+        }
       }
     }
+    return filteredItems;
+  } catch (err) {
+    console.log('err',err)
   }
-  return filteredItems;
 }
 
-const handleSearchQuery = (req, res) => {
+const upToDate = () => {
+  const now = new Date();
+  return now.getTime() - ITEMS_FROM_DB.timestamp.getTime() > 300000
+    ? false
+    : true
+}
+
+const updateITEMS_FROM_DB = async () => {
+  try {
+    const items = await getAllItems()
+    ITEMS_FROM_DB = {
+      timestamp: new Date(),
+      items,
+    }
+    return items;
+  } catch (err) {
+    console.log('err',err)
+  }
+}
+
+const handleSearchQuery = async (req, res) => {
   const { searchQuery } = req.params;
-  const searchResults = filterBySearchQuery(searchQuery, req.query);
-  res.status(200).send({status: 200, searchResults})
+  try {
+    const searchResults = await filterBySearchQuery(searchQuery, req.query);
+    if (searchResults.length) {
+      res.status(200).send({status: 200, searchResults})
+    } else {
+      res.status(404).send({status: 404, message: 'no items in category'})
+    }
+  } catch (err) {
+    console.log('err',err)
+  }
+}
+const startServer = async () => {
+  const now = new Date();
+  try {
+    const items = await getAllItems();
+    ITEMS_FROM_DB = {
+      timestamp: now,
+      items,
+    }
+  } catch (err) {
+    console.log('err',err)
+  }
 }
 
+startServer();
 //
 module.exports = {
   handleItemId,

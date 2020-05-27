@@ -1,54 +1,62 @@
-# Wearables E-Commerce Project
+# WEARABLES
+<p>Welcome to WEARABLES e-commerce website! in this website you can browse, search, filter and checkout a variety of tech wearables products.
+This app was created in one week, as a group project in Full-Stack Web Development course with <a href='https://concordiabootcamps.ca/' alt='link to Concordia Bootcamps website'>Concordia Bootcamps</a>.</p>
 
-[See the list of TEAMS](__documentation/TEAMS.md)
+---
+## Info
+<p>Here is a <a href='https://www.youtube.com/watch?v=JE2BImwryZU'>short video</a> explanation.</p>
 
-You will make use of _everything_ that you have learned thus far in the bootcamp to build an e-commerce app that will showcase all of the provided _wearables_ items.
+<p>Using MongoDB, React, and Node as base, this app provides a real-like experience of online shopping. we tried to make it flow, intuitive and reliable.</p>
 
-The stack is React.Js, Redux, Node.Js, and styled-components.
+---
+## Screen Shots
+<div display='flex' flexDirection='row'>
+<img width='30%' src='./assets/homepage.jpg' alt='game image1'/>
+<img width='30%' src='./assets/categories1.jpg' alt='game image1'/>
+<img width='30%' src='./assets/typeahead.jpg' alt='game image1'/>
+<img width='30%' src='./assets/categories2.jpg' alt='game image1'/>
+<img width='30%' src='./assets/items1.jpg' alt='game image1'/>
+<img width='30%' src='./assets/cart1.jpg' alt='game image1'/>
+<img width='30%' src='./assets/cart2.jpg' alt='game image1'/>
+<img width='30%' src='./assets/items2.jpg' alt='game image1'/>
+<img width='30%' src='./assets/items3.jpg' alt='game image1'/>
+<img width='30%' src='./assets/Auth0.jpg' alt='game image1'/>
+<img width='30%' src='./assets/checkout1.jpg' alt='game image1'/>
+<img width='30%' src='./assets/checkout2.jpg' alt='game image1'/>
+<img width='30%' src='./assets/checkout3.jpg' alt='game image1'/>
+<img width='30%' src='./assets/checkout4.jpg' alt='game image1'/>
+<img width='30%' src='./assets/checkout5.jpg' alt='game image1'/>
+<img width='30%' src='./assets/confirmation.jpg' alt='game image1'/>
+<div>
 
-Your node server should be RESTful and follow REST principles, at least to the extent we learned during the bootcamp.
+---
+## Installing
+1. Clone the repo.
+2. In both client and server directory terminals, run commands ```$yarn install``` and  ```$yarn start```.
+3. Login using Google Login.
 
-## Getting Started
+------
+## Technologies
+Technologies utilized in this project include:
+### Front End:
+React, Redux, JavaScript, Styled Components 
+### Back End:
+Express.js, Node, MongoDB
 
-<img src="./server/assets/software-dev-path.jpg" style="width: 100%;" />
+---
+## Key points in the process
+- This was a group project, and in so, we had a lot of experience working with Git and GitHub.
+- Reading, understanding and debugging team member's code.
+- We were given the JSON files that would become our database, and had to make to most of them.
 
-You have your assignment and your team. What should you do first? This will vary for every team, and even every team member.
+### potential additions 
+Starting this project we had (like many before us) many unrealistic goals. for now, these will be my future stretch goals.
+ - Update user profile: image, name, preferred color, purchase history.
+ - admin access that allows to change the products, and quantities.
+ - "people that have bought this, also bought that" feature.
+ - reviews.
 
-**The important thing is to NOT just jump in and start coding!**
+---
+## Contact
 
-There probably shouldn't be any coding until very near the end of the first day.
-
-## Meet your Product Manager!
-
-Each team has been assigned a product manager. This person is in charge of answering questions, guiding you and basically preventing everything from falling apart!
-
-This person should be prevent for some of your team meetings but not all. PMs are super busy people and have multiple projects, people to manage.
-
-## Planning
-
-1. You will break into 3 groups (with your assigned PM.)
-2. Your PM will answer any initial questions, and give you more information, as required.
-3. Break into a separate meeting with just your team. \_Your PM will bounce from team to team to make sure you're on track.
-4. Time to use the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDA.md)
-
-### First team meeting
-
-It could also be a good/fun idea to give yourselves an original team name. :)
-
-Your first team meeting should start with the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDa.md).
-
-[Successful Software Project Delivery in 10 Steps](https://www.appnovation.com/blog/successful-software-project-delivery-10-steps).
-
-💡 How a project starts is indicative of how it will end.
-
-## Teamwork
-
-The most important aspect of this project is the ability to work in a team. No matter your contribution to the project, yuo should understand the _full_ codebase. This will require that you
-
-- **review** each other's code
-- **ask** questions when you don't understand
-- **comment** your code extensively. _Always go for clarity over brevity._
-
-## GitHub
-
-see the [GITHUB Document](__documentation/GITHUB.md)
+If you want to contact me you can reach me at <shizel@gmail.com>.

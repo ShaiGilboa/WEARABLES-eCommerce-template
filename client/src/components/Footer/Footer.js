@@ -38,6 +38,7 @@ const Footer = () => {
 
 const FooterContainer = styled.div`
 position: relative;
+bottom:0;
 /* top: 0; */
 display: flex;
 border: 1px solid #e6ecf0; 

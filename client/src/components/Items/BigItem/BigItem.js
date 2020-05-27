@@ -1,78 +1,97 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+  } from 'react-redux';
 import MenuBigItem from '../../MenuBigItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
+
 import RatingStars from '../../RatingStars';
 
 import {
-  Link,
+  // Link,
   useParams,
 } from 'react-router-dom';
 
 import { addItemToCart } from '../../../Redux/actions';
 
-const BigItem = ({
-  // id,
-  // name,
-  // price,
-  // body_location,
-  // category,
-  // imageSrc,
-  // numInStock,
-  // companyId,
-}) => {
+const BigItem = () => {
   const { itemId } = useParams();
   const [item, setItem] = useState(null);
   const [company, setCompany] = useState(null);
-
+  const cart = useSelector(state=> state.userInfo.cart)
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`/items/${itemId}`)
       .then(res => res.json())
-      .then(payload => {
-        setItem(payload)
-        fetch(`/companies/${payload.item.companyId}`)
-          .then(res => res.json()
-            .then(data => {
-              setCompany(data)
-            }))
+      .then(res => {
+        if(res.status===200){
+          setItem(res.item)
+          fetch(`/companies/${res.item.companyId}`)
+            .then(res => res.json())
+            .then(res => {
+              if(res.status===200) {
+                setCompany(res.company);
+              } else {
+                setCompany(404);
+              }
+              })
+        } else {
+          setItem(404)
+        }
       })
   }, [itemId]);
 
-  let product, manufacturer;
-
-  if (item && item.item && company && company.company) {
-    product = item.item;
-    manufacturer = company.company;
-  }
+  const addItem = () => {
+    console.log('item',item)
+    if(cart[item._id]){
+      if(cart[item._id].quantity) {
+        if(cart[item._id].quantity<item.numInStock){
+          dispatch(addItemToCart(item))
+        } else {
+          // UX indication
+        }
+      } else {
+        dispatch(addItemToCart(item))
+      }
+    } else {
+      dispatch(addItemToCart(item))
+    }
+  } 
 
   return (
     <>
-      {item && item.item && company && company.company ? (
+      {item && company ? (
         <Wrapper>
           <MenuBigItem />
           <WrapperContent>
             <ImageWrapper >
-              <ItemImage src={product.imageSrc} />
+              <ItemImage src={item.imageSrc} />
             </ImageWrapper>
             <InfoWrapper>
-              <ProductName>{product.name}</ProductName>
-              <h4>Model: <span> {product.id}</span></h4>
-              <Category>{product.category}</Category><br />
+              <ProductName>{item.name}</ProductName>
+              <h4>Model: <span> {item.id}</span></h4>
+              <Category>{item.category}</Category><br />
               <ItemCart>
                 <div>
-                <h2>{product.price}</h2>
-                <h3>Item stock: {product.numInStock}</h3>
-                <AddToCartButton onClick={() => dispatch(addItemToCart(product))}>
-                  <AddCircleOutlineIcon style={{ paddingRight: '20px', margin: '0' }} />Add to Cart
-                </AddToCartButton>
+                <h2>{item.price}</h2>
+                <h3>Item stock: {item.numInStock}</h3>
+                {item.numInStock>0 && (cart[item._id] ? item.numInStock > cart[item._id].quantity : true)
+                  ? (<AddToCartButton onClick={() => addItem()}>
+                      <AddCircleOutlineIcon style={{ paddingRight: '20px', margin: '0' }} />Add to Cart
+                    </AddToCartButton>)
+                  : (<OutOfStockWrapper>
+                        <NotInterestedIcon style={{ paddingRight: '20px' }} />Out of stock
+                      </OutOfStockWrapper>)}
                 </div>
                 <div>
                 <RatingStars />
-                <h5>Made by: {manufacturer.name}</h5>
-                <h4><a href={manufacturer.url} target="_blank">Visit the manufacturer site</a>
+                <h5>Made by: {company.name}</h5>
+                <h4><a href={company.url} target="_blank">Visit the manufacturer site</a>
                 </h4>
                 </div>
               </ItemCart>
@@ -80,7 +99,9 @@ const BigItem = ({
           </WrapperContent>
         </Wrapper>
       ) : (
-          <div>Hello</div>
+        <div style={{height:'70vh'}}>
+          <CircularProgress style={{position:'relative', left:'50%'}}/>
+        </div>
         )
       }
     </>
@@ -214,3 +235,14 @@ const ImageWrapper = styled.div`
 
 `;
 
+const OutOfStockWrapper = styled.div`
+width:50%;
+display: flex;
+background-color: transparent;
+justify-content: space-around;
+align-items: center;
+justify-content: center;
+  &:hover{
+    cursor: no-drop;
+  }
+`;
