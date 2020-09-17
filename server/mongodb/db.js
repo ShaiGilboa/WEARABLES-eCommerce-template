@@ -49,7 +49,7 @@ const insertOrder = async (items, orderInfo, _id)=> {
       items,
       orderInfo,
     });
-    assert.equal(1, r.insertedCount)
+    assert.strictEqual(1, r.insertedCount)
     client.close()
     console.log('disconnected! - insertOrder');
     return true
@@ -73,8 +73,8 @@ const updateStockByOrder = async (items)=> {
           numInStock: -items[i].numOrdered,
         }
       })
-      assert.equal(1, r.matchedCount)
-      assert.equal(1, r.modifiedCount)
+      assert.strictEqual(1, r.matchedCount)
+      assert.strictEqual(1, r.modifiedCount)
     }
     // await db.collection('items').updateMany()
     client.close()
